@@ -2,7 +2,7 @@ package com.herron.exchange.common.api.common.enums;
 
 public enum TopicEnum {
 
-    BITSTAMP_AUDIT_TRAIL("bitstamp-audit-trail");
+    HERRON_AUDIT_TRAIL("herron-audit-trail");
 
     private final String topicName;
 
