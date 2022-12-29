@@ -21,7 +21,7 @@ public record HerronOrderbookData(@JsonProperty("orderbookId") String orderbookI
 
     @Override
     public MessageTypesEnum messageType() {
-        return MessageTypesEnum.HERRON_ORDERBOOK;
+        return MessageTypesEnum.HERRON_ORDERBOOK_DATA;
     }
 
 }

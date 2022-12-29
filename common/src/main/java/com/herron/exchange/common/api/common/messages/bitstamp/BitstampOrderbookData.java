@@ -14,7 +14,7 @@ public record BitstampOrderbookData(@JsonProperty("orderbookId") String orderboo
 
     @Override
     public MessageTypesEnum messageType() {
-        return MessageTypesEnum.BITSTAMP_ORDERBOOK;
+        return MessageTypesEnum.BITSTAMP_ORDERBOOK_DATA;
     }
 
     @Override
