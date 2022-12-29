@@ -21,12 +21,8 @@ public record BitstampTrade(@JsonProperty("bidParticipant") Participant bidParti
 
 
     @Override
-    public MessageTypesEnum getMessageType() {
+    public MessageTypesEnum messageType() {
         return MessageTypesEnum.BITSTAMP_TRADE;
     }
 
-    @Override
-    public long getTimeStampMs() {
-        return timeStampInMs;
-    }
 }

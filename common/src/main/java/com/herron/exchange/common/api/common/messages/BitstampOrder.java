@@ -23,26 +23,25 @@ public record BitstampOrder(@JsonProperty("orderOperation") String orderOperatio
                             @JsonProperty("orderbookId") String orderbookId) implements Order {
 
 
-    public OrderOperationEnum getOrderOperationEnum() {
-        return OrderOperationEnum.fromValue(orderOperation);
-    }
-
-
+    @Override
     public Participant getParticipant() {
         return new Participant(new Member(participant.split(";")[0]), new User(participant.split(";")[0]));
     }
 
-    public OrderTypeEnum getOrderTypeEnum() {
+    @Override
+    public OrderTypeEnum orderTypeEnum() {
         return OrderTypeEnum.fromValue(orderType);
     }
 
     @Override
-    public MessageTypesEnum getMessageType() {
-        return MessageTypesEnum.BITSTAMP_ORDER;
+    public OrderOperationEnum orderOperationEnum() {
+        return OrderOperationEnum.fromValue(orderOperation);
     }
 
     @Override
-    public long getTimeStampMs() {
-        return timeStampInMs;
+    public MessageTypesEnum messageType() {
+        return MessageTypesEnum.BITSTAMP_ORDER;
     }
+
+
 }

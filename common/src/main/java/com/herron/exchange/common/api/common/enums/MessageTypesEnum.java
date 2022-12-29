@@ -16,9 +16,9 @@ public enum MessageTypesEnum {
     INVALID_MESSAGE_TYPE("INV", null),
     BITSTAMP_ORDER("BSOR", new HerronJsonDeserializer(BitstampOrder.class)::decodeMessage),
     BITSTAMP_TRADE("BSTR", new HerronJsonDeserializer(BitstampTrade.class)::decodeMessage),
-    BITSTAMP_ORDERBOOK("BSOB", new HerronJsonDeserializer(BitstampOrderbook.class)::decodeMessage),
-    BITSTAMP_STOCK_INSTRUMENT("BSST", new HerronJsonDeserializer(BitstampStockInstrument.class)::decodeMessage),
-    BITSTAMP_STATECHANGE("BSSC", new HerronJsonDeserializer(BitstampStateChange.class)::decodeMessage);
+    BITSTAMP_ORDERBOOK("BSOB", new HerronJsonDeserializer(BitstampOrderbookData.class)::decodeMessage),
+    BITSTAMP_STOCK_INSTRUMENT("BSSI", new HerronJsonDeserializer(BitstampStockInstrument.class)::decodeMessage),
+    BITSTAMP_STATE_CHANGE("BSSC", new HerronJsonDeserializer(BitstampStateChange.class)::decodeMessage);
 
     private final String messageTypeId;
     private final Function<String, Message> messageMapper;

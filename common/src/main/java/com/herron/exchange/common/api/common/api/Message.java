@@ -4,7 +4,7 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
 public interface Message {
 
-    MessageTypesEnum getMessageType();
-    long getTimeStampMs();
+    MessageTypesEnum messageType();
+    long timeStampInMs();
 
 }
