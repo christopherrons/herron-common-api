@@ -7,7 +7,7 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum MatchingAlgorithmEnum {
-    INVALID_MATCHING_ALGORITHM("invalid matching algorithm"),
+    INVALID_MATCHING_ALGORITHM(null),
     FIFO("fifo");
 
     private static final Map<String, MatchingAlgorithmEnum> VALUES_BY_IDENTIFIER = stream(MatchingAlgorithmEnum.values()).collect(toMap(MatchingAlgorithmEnum::getValue, identity()));

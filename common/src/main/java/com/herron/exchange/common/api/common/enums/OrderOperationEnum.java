@@ -7,7 +7,7 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum OrderOperationEnum {
-    INVALID_ORDER_OPERATION("Invalid Order Operation"),
+    INVALID_ORDER_OPERATION(null),
     CREATE("create"),
     UPDATE("update"),
     DELETE("delete");

@@ -7,7 +7,7 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum InstrumentTypeEnum {
-    INVALID_INSTRUMENT_TYPE("invalid"),
+    INVALID_INSTRUMENT_TYPE(null),
     STOCK("stock"),
     OPTION("option"),
     SPREAD("spread"),

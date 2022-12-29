@@ -7,7 +7,7 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum StateChangeTypeEnum {
-    INVALID_STATE_CHANGE("Invalid State Change"),
+    INVALID_STATE_CHANGE(null),
     CONTINUOUS_TRADING("continuous trading");
 
     private static final Map<String, StateChangeTypeEnum> VALUES_BY_IDENTIFIER = stream(StateChangeTypeEnum.values()).collect(toMap(StateChangeTypeEnum::getValue, identity()));
