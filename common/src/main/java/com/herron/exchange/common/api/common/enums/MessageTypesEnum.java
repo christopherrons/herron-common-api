@@ -39,6 +39,9 @@ public enum MessageTypesEnum {
     }
 
     public Message decodeMessage(String message) {
+        if (messageMapper == null) {
+            return null;
+        }
         return messageMapper.apply(message);
     }
 
