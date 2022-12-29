@@ -2,7 +2,8 @@ package com.herron.exchange.common.api.common.enums;
 
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.mapper.HerronJsonDeserializer;
-import com.herron.exchange.common.api.common.messages.*;
+import com.herron.exchange.common.api.common.messages.bitstamp.*;
+import com.herron.exchange.common.api.common.messages.herron.*;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -16,9 +17,14 @@ public enum MessageTypesEnum {
     INVALID_MESSAGE_TYPE("INV", null),
     BITSTAMP_ORDER("BSOR", new HerronJsonDeserializer(BitstampOrder.class)::decodeMessage),
     BITSTAMP_TRADE("BSTR", new HerronJsonDeserializer(BitstampTrade.class)::decodeMessage),
-    BITSTAMP_ORDERBOOK("BSOB", new HerronJsonDeserializer(BitstampOrderbookData.class)::decodeMessage),
+    BITSTAMP_ORDERBOOK_DATA("BSOB", new HerronJsonDeserializer(BitstampOrderbookData.class)::decodeMessage),
     BITSTAMP_STOCK_INSTRUMENT("BSSI", new HerronJsonDeserializer(BitstampStockInstrument.class)::decodeMessage),
-    BITSTAMP_STATE_CHANGE("BSSC", new HerronJsonDeserializer(BitstampStateChange.class)::decodeMessage);
+    BITSTAMP_STATE_CHANGE("BSSC", new HerronJsonDeserializer(BitstampStateChange.class)::decodeMessage),
+    HERRON_ORDER("HEOR", new HerronJsonDeserializer(HerronOrder.class)::decodeMessage),
+    HERRON_TRADE("HETR", new HerronJsonDeserializer(HerronTrade.class)::decodeMessage),
+    HERRON_ORDERBOOK_DATA("HEOB", new HerronJsonDeserializer(HerronOrderbookData.class)::decodeMessage),
+    HERRON_STOCK_INSTRUMENT("HESI", new HerronJsonDeserializer(HerronStockInstrument.class)::decodeMessage),
+    HERRON_STATE_CHANGE("HESC", new HerronJsonDeserializer(HerronStateChange.class)::decodeMessage);
 
     private final String messageTypeId;
     private final Function<String, Message> messageMapper;

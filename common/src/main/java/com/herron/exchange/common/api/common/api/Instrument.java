@@ -7,5 +7,5 @@ public interface Instrument extends Message {
     String instrumentId();
     String tradingCurrency();
 
-    InstrumentTypeEnum getInstrumentTypeEnum();
+    InstrumentTypeEnum instrumentType();
 }

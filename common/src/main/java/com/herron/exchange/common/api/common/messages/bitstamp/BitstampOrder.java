@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.messages;
+package com.herron.exchange.common.api.common.messages.bitstamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,10 +11,10 @@ import com.herron.exchange.common.api.common.model.Participant;
 import com.herron.exchange.common.api.common.model.User;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record BitstampOrder(@JsonProperty("orderOperation") String orderOperation,
-                            @JsonProperty("participant") String participant,
+public record BitstampOrder(@JsonProperty("orderOperation") String orderOperationString,
+                            @JsonProperty("participant") String participantString,
                             @JsonProperty("orderId") String orderId,
-                            @JsonProperty("orderType") int orderType,
+                            @JsonProperty("orderType") int orderTypeValue,
                             @JsonProperty("initialVolume") double initialVolume,
                             @JsonProperty("currentVolume") double currentVolume,
                             @JsonProperty("price") double price,
@@ -24,18 +24,18 @@ public record BitstampOrder(@JsonProperty("orderOperation") String orderOperatio
 
 
     @Override
-    public Participant getParticipant() {
-        return new Participant(new Member(participant.split(";")[0]), new User(participant.split(";")[0]));
+    public Participant participant() {
+        return new Participant(new Member(participantString.split(";")[0]), new User(participantString.split(";")[0]));
     }
 
     @Override
-    public OrderTypeEnum orderTypeEnum() {
-        return OrderTypeEnum.fromValue(orderType);
+    public OrderTypeEnum orderType() {
+        return OrderTypeEnum.fromValue(orderTypeValue);
     }
 
     @Override
-    public OrderOperationEnum orderOperationEnum() {
-        return OrderOperationEnum.fromValue(orderOperation);
+    public OrderOperationEnum orderOperation() {
+        return OrderOperationEnum.fromValue(orderOperationString);
     }
 
     @Override

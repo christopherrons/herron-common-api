@@ -12,10 +12,10 @@ public interface Order extends Message {
 
     String instrumentId();
 
-    Participant getParticipant();
+    Participant participant();
 
-    OrderTypeEnum orderTypeEnum();
-    OrderOperationEnum orderOperationEnum();
+    OrderTypeEnum orderType();
+    OrderOperationEnum orderOperation();
 
     double price();
 

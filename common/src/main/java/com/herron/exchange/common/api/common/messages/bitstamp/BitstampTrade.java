@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.messages;
+package com.herron.exchange.common.api.common.messages.bitstamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
