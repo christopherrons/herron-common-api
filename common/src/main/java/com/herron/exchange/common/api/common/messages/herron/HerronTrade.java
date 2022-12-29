@@ -9,7 +9,7 @@ import com.herron.exchange.common.api.common.model.Participant;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record HerronTrade(@JsonProperty("bidParticipant") Participant bidParticipant,
                           @JsonProperty("askParticipant") Participant askParticipant,
-                          @JsonProperty("tradeId") long tradeId,
+                          @JsonProperty("tradeId") String tradeId,
                           @JsonProperty("buyOrderId") String buyOrderId,
                           @JsonProperty("askOrderId") String askOrderId,
                           @JsonProperty("isBidSideAggressor") boolean isBidSideAggressor,

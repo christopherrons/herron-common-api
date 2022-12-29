@@ -9,7 +9,7 @@ public interface Trade extends Message {
 
     Participant askParticipant();
 
-    long tradeId();
+    String tradeId();
 
     String buyOrderId();
 
