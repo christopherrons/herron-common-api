@@ -7,22 +7,22 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum OrderTypeEnum {
-    INVALID_ORDER_TYPE(-1),
-    BUY(0),
-    ASK(1);
+    INVALID_ORDER_TYPE(null),
+    LIMIT("limit"),
+    MARKET("market");
 
-    private static final Map<Integer, OrderTypeEnum> VALUES_BY_IDENTIFIER = stream(OrderTypeEnum.values()).collect(toMap(OrderTypeEnum::getValue, identity()));
-    private final int value;
+    private static final Map<String, OrderTypeEnum> VALUES_BY_IDENTIFIER = stream(OrderTypeEnum.values()).collect(toMap(OrderTypeEnum::getValue, identity()));
+    private final String value;
 
-    OrderTypeEnum(int value) {
+    OrderTypeEnum(String value) {
         this.value = value;
     }
 
-    public static OrderTypeEnum fromValue(int value) {
+    public static OrderTypeEnum fromValue(String value) {
         return VALUES_BY_IDENTIFIER.getOrDefault(value, INVALID_ORDER_TYPE);
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 }

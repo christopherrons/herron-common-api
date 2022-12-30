@@ -8,6 +8,8 @@ import static java.util.stream.Collectors.toMap;
 
 public enum MatchingAlgorithmEnum {
     INVALID_MATCHING_ALGORITHM(null),
+
+    PRO_RATA("pro-rata"),
     FIFO("fifo");
 
     private static final Map<String, MatchingAlgorithmEnum> VALUES_BY_IDENTIFIER = stream(MatchingAlgorithmEnum.values()).collect(toMap(MatchingAlgorithmEnum::getValue, identity()));
