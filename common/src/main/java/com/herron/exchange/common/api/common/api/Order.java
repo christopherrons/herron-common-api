@@ -30,4 +30,19 @@ public interface Order extends Message {
 
     OrderTypeEnum orderType();
 
+    default boolean isActiveOrder() {
+        return !isNonActiveOrder();
+    }
+
+    default boolean isNonActiveOrder() {
+        if (this.orderType().equals(OrderTypeEnum.MARKET)) {
+            return true;
+        }
+
+        return switch (this.orderExecutionType()) {
+            case FAK, FOK -> true;
+            default -> false;
+        };
+    }
+
 }
