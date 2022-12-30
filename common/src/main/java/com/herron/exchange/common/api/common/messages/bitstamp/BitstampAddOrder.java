@@ -50,7 +50,7 @@ public record BitstampAddOrder(@JsonProperty("orderOperation") String orderOpera
 
     @Override
     public MessageTypesEnum messageType() {
-        return MessageTypesEnum.BITSTAMP_ORDER;
+        return MessageTypesEnum.BITSTAMP_ADD_ORDER;
     }
 
 

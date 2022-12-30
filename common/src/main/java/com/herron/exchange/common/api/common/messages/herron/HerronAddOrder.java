@@ -40,7 +40,7 @@ public record HerronAddOrder(@JsonProperty("orderOperation") OrderOperationEnum 
 
     @Override
     public MessageTypesEnum messageType() {
-        return MessageTypesEnum.HERRON_ORDER;
+        return MessageTypesEnum.HERRON_ADD_ORDER;
     }
 
 }
