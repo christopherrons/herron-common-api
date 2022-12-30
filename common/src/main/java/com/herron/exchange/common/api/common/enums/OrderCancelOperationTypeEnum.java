@@ -8,6 +8,7 @@ import static java.util.stream.Collectors.toMap;
 
 public enum OrderCancelOperationTypeEnum {
     INVALID_CANCEL_TYPE(null),
+    SELF_MATCH("self-match"),
     FILLED("filled"),
     KILLED("killed"),
     FAK("filled-and-killed");

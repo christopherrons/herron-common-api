@@ -8,7 +8,7 @@ import static java.util.stream.Collectors.toMap;
 
 public enum OrderSideEnum {
     INVALID_ORDER_SIDE(-1),
-    BUY(0),
+    BID(0),
     ASK(1);
 
     private static final Map<Integer, OrderSideEnum> VALUES_BY_IDENTIFIER = stream(OrderSideEnum.values()).collect(toMap(OrderSideEnum::getValue, identity()));

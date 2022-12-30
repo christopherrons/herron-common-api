@@ -8,6 +8,7 @@ import static java.util.stream.Collectors.toMap;
 
 public enum OrderUpdatedOperationTypeEnum {
     INVALID_UPDATE_TYPE(null),
+    SELF_MATCH("self-match"),
     PARTIAL_FILL("partial-fill"),
     EXTERNAL_UPDATE("external-update");
 
