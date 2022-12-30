@@ -25,7 +25,7 @@ public record BitstampOrder(@JsonProperty("orderOperation") String orderOperatio
 
     @Override
     public Participant participant() {
-        return new Participant(new Member(participantString.split(";")[0]), new User(participantString.split(";")[0]));
+        return new Participant(new Member(participantString.split(";")[0]), new User(participantString.split(";")[1]));
     }
 
     @Override
