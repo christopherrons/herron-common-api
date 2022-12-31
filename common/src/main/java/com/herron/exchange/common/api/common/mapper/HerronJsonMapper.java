@@ -15,7 +15,7 @@ public class HerronJsonMapper {
         this.classToBeDecoded = classToBeDecoded;
     }
 
-    public String encodeMessage(Message message) {
+    public String serializeMessage(Message message) {
         try {
             return objectMapper.writeValueAsString(message);
         } catch (JsonProcessingException e) {
@@ -24,7 +24,7 @@ public class HerronJsonMapper {
         return null;
     }
 
-    public Message decodeMessage(String message) {
+    public Message deserializeMessage(String message) {
         try {
             return objectMapper.readValue(message, classToBeDecoded);
         } catch (JsonProcessingException e) {
