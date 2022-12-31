@@ -8,6 +8,7 @@ dependencies {
     testImplementation(testlibs.junit.jupiter.api)
     testImplementation(testlibs.junit.jupiter.engine)
     testImplementation(testlibs.spring.boot.starter.test)
+    testImplementation(testlibs.podam.random)
 }
 
 tasks.test {

@@ -1,5 +1,6 @@
 package com.herron.exchange.common.api.common.api;
 
+import com.herron.exchange.common.api.common.model.MonetaryAmount;
 import com.herron.exchange.common.api.common.model.Participant;
 
 public interface Trade extends Message {
@@ -19,7 +20,7 @@ public interface Trade extends Message {
 
     double volume();
 
-    double price();
+    MonetaryAmount price();
 
     long timeStampInMs();
 

@@ -6,16 +6,25 @@ import com.herron.exchange.common.api.common.api.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HerronJsonDeserializer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HerronJsonDeserializer.class);
+public class HerronJsonMapper {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HerronJsonMapper.class);
     private final Class<? extends Message> classToBeDecoded;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public HerronJsonDeserializer(Class<? extends Message> classToBeDecoded) {
+    public HerronJsonMapper(Class<? extends Message> classToBeDecoded) {
         this.classToBeDecoded = classToBeDecoded;
     }
 
-    public Message decodeMessage(final String message) {
+    public String encodeMessage(Message message) {
+        try {
+            return objectMapper.writeValueAsString(message);
+        } catch (JsonProcessingException e) {
+            LOGGER.warn("Unable to map message {}: {}", message, e);
+        }
+        return null;
+    }
+
+    public Message decodeMessage(String message) {
         try {
             return objectMapper.readValue(message, classToBeDecoded);
         } catch (JsonProcessingException e) {

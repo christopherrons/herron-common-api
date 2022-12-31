@@ -5,7 +5,6 @@ import com.herron.exchange.common.api.common.enums.InstrumentTypeEnum;
 public interface Instrument extends Message {
 
     String instrumentId();
-    String tradingCurrency();
 
     InstrumentTypeEnum instrumentType();
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.herron.exchange.common.api.common.api.AddOrder;
 import com.herron.exchange.common.api.common.enums.*;
 import com.herron.exchange.common.api.common.model.Member;
+import com.herron.exchange.common.api.common.model.MonetaryAmount;
 import com.herron.exchange.common.api.common.model.Participant;
 import com.herron.exchange.common.api.common.model.User;
 
@@ -15,12 +16,28 @@ public record BitstampAddOrder(@JsonProperty("orderOperation") String orderOpera
                                @JsonProperty("orderSide") int orderSideValue,
                                @JsonProperty("initialVolume") double initialVolume,
                                @JsonProperty("currentVolume") double currentVolume,
-                               @JsonProperty("price") double price,
+                               @JsonProperty("price") double priceValue,
+                               @JsonProperty("currency") String currency,
                                @JsonProperty("timeStampInMs") long timeStampInMs,
                                @JsonProperty("instrumentId") String instrumentId,
                                @JsonProperty("orderbookId") String orderbookId,
                                @JsonProperty("orderExecutionType") String orderExecutionTypeString,
                                @JsonProperty("orderType") String orderTypeString) implements AddOrder {
+    public BitstampAddOrder(BitstampAddOrder order) {
+        this(order.orderOperationString(),
+                order.participantString(),
+                order.orderId(),
+                order.orderSideValue(),
+                order.initialVolume(),
+                order.currentVolume(),
+                order.priceValue(),
+                order.currency(),
+                order.timeStampInMs(),
+                order.instrumentId(),
+                order.orderbookId(),
+                order.orderExecutionTypeString(),
+                order.orderTypeString());
+    }
 
 
     @Override
@@ -39,6 +56,11 @@ public record BitstampAddOrder(@JsonProperty("orderOperation") String orderOpera
     }
 
     @Override
+    public MonetaryAmount price() {
+        return new MonetaryAmount(priceValue, currency);
+    }
+
+    @Override
     public OrderExecutionTypeEnum orderExecutionType() {
         return OrderExecutionTypeEnum.fromValue(orderExecutionTypeString);
     }
@@ -46,6 +68,11 @@ public record BitstampAddOrder(@JsonProperty("orderOperation") String orderOpera
     @Override
     public OrderTypeEnum orderType() {
         return OrderTypeEnum.fromValue(orderTypeString);
+    }
+
+    @Override
+    public BitstampAddOrder getCopy() {
+        return new BitstampAddOrder(this);
     }
 
     @Override

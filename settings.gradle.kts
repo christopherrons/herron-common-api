@@ -18,6 +18,7 @@ dependencyResolutionManagement {
             library("junit.jupiter.api", "org.junit.jupiter:junit-jupiter-api:5.8.1")
             library("junit.jupiter.engine", "org.junit.jupiter:junit-jupiter-engine:5.8.1")
             library("spring.kafka.test", "org.springframework.kafka:spring-kafka:3.0.1")
+            library("podam.random", "uk.co.jemos.podam:podam:7.1.0.RELEASE")
         }
     }
 }

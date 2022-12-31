@@ -12,6 +12,7 @@ This code base is used as an api for applications with the `Herron Exchange` eco
 * Java 17
 
 ## Applications
+
 * [Trading Engine](https://github.com/christopherrons/herron-trading-engine)
 
 

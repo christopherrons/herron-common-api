@@ -12,10 +12,9 @@ public class EventLogger {
     private static final int MESSAGE_UPDATE_INTERVAL = 1000;
     private final AtomicLong totalNrOfEvents = new AtomicLong();
     private final Instant startTime = Instant.now();
+    private final String eventLoggDescription;
     private Instant lastLogUpdateTime = Instant.now();
     private AtomicLong lastUpdateTimeNrOfEvents = new AtomicLong();
-
-    private final String eventLoggDescription;
 
     public EventLogger() {
         this("");

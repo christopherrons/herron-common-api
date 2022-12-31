@@ -9,8 +9,18 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record BitstampStockInstrument(@JsonProperty("instrumentId") String instrumentId,
                                       @JsonProperty("instrumentType") String instrumentTypeString,
-                                      @JsonProperty("tradingCurrency") String tradingCurrency,
                                       long timeStampInMs) implements Instrument {
+
+    public BitstampStockInstrument(BitstampStockInstrument instrument) {
+        this(instrument.instrumentId(),
+                instrument.instrumentTypeString(),
+                instrument.timeStampInMs());
+    }
+
+    @Override
+    public BitstampStockInstrument getCopy() {
+        return new BitstampStockInstrument(this);
+    }
 
     @Override
     public MessageTypesEnum messageType() {

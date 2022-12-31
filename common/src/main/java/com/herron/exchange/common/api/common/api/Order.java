@@ -4,6 +4,7 @@ import com.herron.exchange.common.api.common.enums.OrderExecutionTypeEnum;
 import com.herron.exchange.common.api.common.enums.OrderOperationEnum;
 import com.herron.exchange.common.api.common.enums.OrderSideEnum;
 import com.herron.exchange.common.api.common.enums.OrderTypeEnum;
+import com.herron.exchange.common.api.common.model.MonetaryAmount;
 import com.herron.exchange.common.api.common.model.Participant;
 
 public interface Order extends Message {
@@ -20,7 +21,7 @@ public interface Order extends Message {
 
     OrderOperationEnum orderOperation();
 
-    double price();
+    MonetaryAmount price();
 
     double initialVolume();
 

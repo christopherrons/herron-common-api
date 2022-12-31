@@ -1,10 +1,13 @@
 package com.herron.exchange.common.api.common.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public record Participant(Member member, User user) {
     public String getParticipantId() {
-        return member.getMemberId() + "-" + user.getUserId();
+        return member.memberId() + "-" + user.fullName();
     }
 
     @Override

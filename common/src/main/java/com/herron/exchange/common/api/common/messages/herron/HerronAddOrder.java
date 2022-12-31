@@ -1,25 +1,25 @@
 package com.herron.exchange.common.api.common.messages.herron;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.herron.exchange.common.api.common.api.AddOrder;
 import com.herron.exchange.common.api.common.enums.*;
+import com.herron.exchange.common.api.common.model.MonetaryAmount;
 import com.herron.exchange.common.api.common.model.Participant;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record HerronAddOrder(@JsonProperty("orderOperation") OrderOperationEnum orderOperation,
-                             @JsonProperty("participant") Participant participant,
-                             @JsonProperty("orderId") String orderId,
-                             @JsonProperty("orderSide") OrderSideEnum orderSide,
-                             @JsonProperty("initialVolume") double initialVolume,
-                             @JsonProperty("currentVolume") double currentVolume,
-                             @JsonProperty("price") double price,
-                             @JsonProperty("timeStampInMs") long timeStampInMs,
-                             @JsonProperty("instrumentId") String instrumentId,
-                             @JsonProperty("orderbookId") String orderbookId,
-                             @JsonProperty("orderExecutionType") OrderExecutionTypeEnum orderExecutionType,
-                             @JsonProperty("orderType") OrderTypeEnum orderType,
-                             @JsonProperty("addOperationType") OrderAddOperationTypeEnum addOperationType) implements AddOrder {
+public record HerronAddOrder(OrderOperationEnum orderOperation,
+                             Participant participant,
+                             String orderId,
+                             OrderSideEnum orderSide,
+                             double initialVolume,
+                             double currentVolume,
+                             MonetaryAmount price,
+                             long timeStampInMs,
+                             String instrumentId,
+                             String orderbookId,
+                             OrderExecutionTypeEnum orderExecutionType,
+                             OrderTypeEnum orderType,
+                             OrderAddOperationTypeEnum addOperationType) implements AddOrder {
 
 
     public HerronAddOrder(AddOrder order) {
@@ -36,6 +36,11 @@ public record HerronAddOrder(@JsonProperty("orderOperation") OrderOperationEnum 
                 order.orderExecutionType(),
                 order.orderType(),
                 order.addOperationType());
+    }
+
+    @Override
+    public HerronAddOrder getCopy() {
+        return new HerronAddOrder(this);
     }
 
     @Override

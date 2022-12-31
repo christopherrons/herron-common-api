@@ -1,11 +1,14 @@
 package com.herron.exchange.common.api.common.enums;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Map;
 
 import static java.util.Arrays.stream;
 import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public enum OrderAddOperationTypeEnum {
     INVALID_ADD_TYPE(null),
     NEW_ORDER("new-order");
