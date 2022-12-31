@@ -46,7 +46,7 @@ public record HerronCancelOrder(OrderOperationEnum orderOperation,
 
     @Override
     public MessageTypesEnum messageType() {
-        return MessageTypesEnum.HERRON_ADD_ORDER;
+        return MessageTypesEnum.HERRON_CANCEL_ORDER;
     }
 
     @Override
