@@ -21,11 +21,13 @@ public interface Order extends Message {
 
     OrderOperationEnum orderOperation();
 
-    MonetaryAmount price();
+    MonetaryAmount monetaryAmount();
 
     double initialVolume();
 
     double currentVolume();
+
+    double price();
 
     OrderExecutionTypeEnum orderExecutionType();
 

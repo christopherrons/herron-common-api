@@ -19,8 +19,9 @@ public interface Trade extends Message {
     boolean isBidSideAggressor();
 
     double volume();
+    double price();
 
-    MonetaryAmount price();
+    MonetaryAmount monetaryAmount();
 
     long timeStampInMs();
 

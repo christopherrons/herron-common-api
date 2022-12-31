@@ -56,8 +56,13 @@ public record BitstampAddOrder(@JsonProperty("orderOperation") String orderOpera
     }
 
     @Override
-    public MonetaryAmount price() {
+    public MonetaryAmount monetaryAmount() {
         return new MonetaryAmount(priceValue, currency);
+    }
+
+    @Override
+    public double price() {
+        return priceValue;
     }
 
     @Override

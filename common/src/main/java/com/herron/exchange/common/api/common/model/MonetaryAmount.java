@@ -2,6 +2,8 @@ package com.herron.exchange.common.api.common.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Objects;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record MonetaryAmount(double value, String currency) {
 
@@ -35,5 +37,17 @@ public record MonetaryAmount(double value, String currency) {
 
     public MonetaryAmount divide(MonetaryAmount otherMonetaryAmount) {
         return new MonetaryAmount(value * (1.0 / otherMonetaryAmount.value()), currency);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MonetaryAmount that)) return false;
+        return Double.compare(that.value, value) == 0 && Objects.equals(currency, that.currency);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, currency);
     }
 }

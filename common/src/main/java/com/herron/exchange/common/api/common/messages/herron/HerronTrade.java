@@ -14,7 +14,7 @@ public record HerronTrade(Participant bidParticipant,
                           String askOrderId,
                           boolean isBidSideAggressor,
                           double volume,
-                          MonetaryAmount price,
+                          MonetaryAmount monetaryAmount,
                           long timeStampInMs,
                           String instrumentId,
                           String orderbookId) implements Trade {
@@ -28,7 +28,7 @@ public record HerronTrade(Participant bidParticipant,
                 trade.askOrderId(),
                 trade.isBidSideAggressor(),
                 trade.volume(),
-                trade.price(),
+                trade.monetaryAmount(),
                 trade.timeStampInMs(),
                 trade.instrumentId(),
                 trade.orderbookId());
@@ -42,6 +42,11 @@ public record HerronTrade(Participant bidParticipant,
     @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_TRADE;
+    }
+
+    @Override
+    public double price() {
+        return monetaryAmount().value();
     }
 
 }

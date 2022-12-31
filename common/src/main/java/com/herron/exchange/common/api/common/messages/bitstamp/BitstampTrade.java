@@ -15,7 +15,7 @@ public record BitstampTrade(@JsonProperty("bidParticipant") Participant bidParti
                             @JsonProperty("askOrderId") String askOrderId,
                             @JsonProperty("isBidSideAggressor") boolean isBidSideAggressor,
                             @JsonProperty("volume") double volume,
-                            @JsonProperty("price") MonetaryAmount price,
+                            @JsonProperty("price") MonetaryAmount monetaryAmount,
                             @JsonProperty("timeStampInMs") long timeStampInMs,
                             @JsonProperty("instrumentId") String instrumentId,
                             @JsonProperty("orderbookId") String orderbookId) implements Trade {
@@ -28,7 +28,7 @@ public record BitstampTrade(@JsonProperty("bidParticipant") Participant bidParti
                 trade.askOrderId(),
                 trade.isBidSideAggressor(),
                 trade.volume(),
-                trade.price(),
+                trade.monetaryAmount(),
                 trade.timeStampInMs(),
                 trade.instrumentId(),
                 trade.orderbookId());
@@ -42,6 +42,11 @@ public record BitstampTrade(@JsonProperty("bidParticipant") Participant bidParti
     @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.BITSTAMP_TRADE;
+    }
+
+    @Override
+    public double price() {
+        return monetaryAmount().value();
     }
 
 }
