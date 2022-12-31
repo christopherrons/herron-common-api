@@ -6,11 +6,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public record MonetaryAmount(double value, String currency) {
 
     public boolean gt(MonetaryAmount otherMonetaryAmount) {
-        return this.value >= otherMonetaryAmount.value();
+        return this.value > otherMonetaryAmount.value();
     }
 
     public boolean lt(MonetaryAmount otherMonetaryAmount) {
         return this.value < otherMonetaryAmount.value();
+    }
+
+    public boolean ge(MonetaryAmount otherMonetaryAmount) {
+        return this.value >= otherMonetaryAmount.value();
+    }
+
+    public boolean le(MonetaryAmount otherMonetaryAmount) {
+        return this.value <= otherMonetaryAmount.value();
     }
 
     public MonetaryAmount add(MonetaryAmount otherMonetaryAmount) {
