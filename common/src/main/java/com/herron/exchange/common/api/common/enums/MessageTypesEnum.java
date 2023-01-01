@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toMap;
 public enum MessageTypesEnum {
 
     INVALID_MESSAGE_TYPE(null, null, null),
-    BITSTAMP_BROADCAST_MESSAGE("BSBM", new HerronJsonMapper(BitstampBroadcastMessage.class)::deserializeMessage, new HerronJsonMapper(BitstampBroadcastMessage.class)::serializeMessage),
+    BITSTAMP_BROADCAST_MESSAGE("BSBM", new HerronJsonMapper(HerronBroadcastMessage.class)::deserializeMessage, new HerronJsonMapper(HerronBroadcastMessage.class)::serializeMessage),
     BITSTAMP_ADD_ORDER("BSAO", new HerronJsonMapper(BitstampAddOrder.class)::deserializeMessage, new HerronJsonMapper(BitstampAddOrder.class)::serializeMessage),
     BITSTAMP_TRADE("BSTR", new HerronJsonMapper(BitstampTrade.class)::deserializeMessage, new HerronJsonMapper(BitstampTrade.class)::serializeMessage),
     BITSTAMP_ORDERBOOK_DATA("BSOB", new HerronJsonMapper(BitstampOrderbookData.class)::deserializeMessage, new HerronJsonMapper(BitstampOrderbookData.class)::serializeMessage),
@@ -33,10 +33,10 @@ public enum MessageTypesEnum {
     private static final Map<String, MessageTypesEnum> VALUES_BY_IDENTIFIER = stream(MessageTypesEnum.values())
             .collect(toMap(MessageTypesEnum::getMessageTypeId, identity()));
     private final String messageTypeId;
-    private final Function<String, Message> messageDeserializer;
+    private final Function<Object, Message> messageDeserializer;
     private final Function<Message, String> messageSerializer;
 
-    MessageTypesEnum(String messageTypeId, Function<String, Message> messageDeserializer, Function<Message, String> messageSerializer) {
+    MessageTypesEnum(String messageTypeId, Function<Object, Message> messageDeserializer, Function<Message, String> messageSerializer) {
         this.messageTypeId = messageTypeId;
         this.messageDeserializer = messageDeserializer;
         this.messageSerializer = messageSerializer;
@@ -54,7 +54,7 @@ public enum MessageTypesEnum {
         return messageTypeId;
     }
 
-    public Message deserializeMessage(String message) {
+    public Message deserializeMessage(Object message) {
         if (messageDeserializer == null) {
             return null;
         }

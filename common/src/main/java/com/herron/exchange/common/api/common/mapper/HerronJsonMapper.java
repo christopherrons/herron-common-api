@@ -1,6 +1,7 @@
 package com.herron.exchange.common.api.common.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.herron.exchange.common.api.common.api.Message;
 import org.slf4j.Logger;
@@ -24,9 +25,14 @@ public class HerronJsonMapper {
         return null;
     }
 
-    public Message deserializeMessage(String message) {
+    public Message deserializeMessage(Object message) {
         try {
-            return objectMapper.readValue(message, classToBeDecoded);
+            if (message instanceof String messageString) {
+                return objectMapper.readValue(messageString, classToBeDecoded);
+            } else if (message instanceof JsonNode node) {
+                return objectMapper.treeToValue(node, classToBeDecoded);
+            }
+            LOGGER.warn("Unable to map unhandled type: {}:", message);
         } catch (JsonProcessingException e) {
             LOGGER.warn("Unable to map message {}: {}", message, e);
         }

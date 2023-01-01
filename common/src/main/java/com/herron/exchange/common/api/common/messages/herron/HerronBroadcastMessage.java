@@ -1,19 +1,22 @@
 package com.herron.exchange.common.api.common.messages.herron;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.BroadcastMessage;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
+import com.herron.exchange.common.api.common.mapper.HerronBroadCastJsonDeserializer;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record HerronBroadcastMessage(String serializedMessage,
-                                     MessageTypesEnum serializedMessageType,
+@JsonDeserialize(using = HerronBroadCastJsonDeserializer.class)
+public record HerronBroadcastMessage(Message message,
+                                     String messageMessageType,
                                      long sequenceNumber,
                                      long timeStampInMs) implements BroadcastMessage {
 
-    public HerronBroadcastMessage(BroadcastMessage broadcastMessage) {
-        this(broadcastMessage.serializedMessage(),
-                broadcastMessage.serializedMessageType(),
+    public HerronBroadcastMessage(HerronBroadcastMessage broadcastMessage) {
+        this(broadcastMessage.message(),
+                broadcastMessage.messageMessageType(),
                 broadcastMessage.sequenceNumber(),
                 broadcastMessage.timeStampInMs());
     }
@@ -23,10 +26,6 @@ public record HerronBroadcastMessage(String serializedMessage,
         return new HerronBroadcastMessage(this);
     }
 
-    @Override
-    public Message message() {
-        return serializedMessageType.deserializeMessage(serializedMessage);
-    }
 
     @Override
     public MessageTypesEnum messageType() {

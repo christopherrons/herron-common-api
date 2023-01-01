@@ -1,16 +1,15 @@
 package com.herron.exchange.common.api.common.api;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.herron.exchange.common.api.common.mapper.HerronBroadCastJsonDeserializer;
 
+@JsonDeserialize(using = HerronBroadCastJsonDeserializer.class)
 public interface BroadcastMessage extends Message {
 
     long sequenceNumber();
 
-    String serializedMessage();
-    MessageTypesEnum serializedMessageType();
+    String messageMessageType();
 
-    @JsonIgnore
     Message message();
 
 }

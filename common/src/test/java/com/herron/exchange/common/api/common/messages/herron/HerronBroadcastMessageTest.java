@@ -14,9 +14,9 @@ class HerronBroadcastMessageTest {
     void test_serialize_and_deserialize() {
         PodamFactory factory = new PodamFactoryImpl();
         HerronAddOrder message = factory.manufacturePojo(HerronAddOrder.class);
-        HerronBroadcastMessage broadcastMessage = new HerronBroadcastMessage(message.serialize(), MessageTypesEnum.HERRON_ADD_ORDER, 1, 0);
+        HerronBroadcastMessage broadcastMessage = new HerronBroadcastMessage(message, MessageTypesEnum.HERRON_ADD_ORDER.getMessageTypeId(), 1, 0);
         String serialized = broadcastMessage.serialize();
-        assertEquals(broadcastMessage.getCopy(), broadcastMessage.deserialize(serialized));
         assertEquals(message.getCopy(), ((BroadcastMessage) broadcastMessage.deserialize(serialized)).message());
+        assertEquals(broadcastMessage.getCopy(), broadcastMessage.deserialize(serialized));
     }
 }
