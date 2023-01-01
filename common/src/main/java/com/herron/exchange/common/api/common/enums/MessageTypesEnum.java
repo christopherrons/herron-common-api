@@ -20,6 +20,7 @@ public enum MessageTypesEnum {
     BITSTAMP_ORDERBOOK_DATA("BSOB", new HerronJsonMapper(BitstampOrderbookData.class)::deserializeMessage, new HerronJsonMapper(BitstampOrderbookData.class)::serializeMessage),
     BITSTAMP_STOCK_INSTRUMENT("BSSI", new HerronJsonMapper(BitstampStockInstrument.class)::deserializeMessage, new HerronJsonMapper(BitstampStockInstrument.class)::serializeMessage),
     BITSTAMP_STATE_CHANGE("BSSC", new HerronJsonMapper(BitstampStateChange.class)::deserializeMessage, new HerronJsonMapper(BitstampStateChange.class)::serializeMessage),
+    HERRON_BROADCAST_MESSAGE("HEBM", new HerronJsonMapper(HerronBroadcastMessage.class)::deserializeMessage, new HerronJsonMapper(HerronBroadcastMessage.class)::serializeMessage),
     HERRON_ADD_ORDER("HEAO", new HerronJsonMapper(HerronAddOrder.class)::deserializeMessage, new HerronJsonMapper(HerronAddOrder.class)::serializeMessage),
     HERRON_UPDATE_ORDER("HEUO", new HerronJsonMapper(HerronUpdateOrder.class)::deserializeMessage, new HerronJsonMapper(HerronUpdateOrder.class)::serializeMessage),
     HERRON_CANCEL_ORDER("HECO", new HerronJsonMapper(HerronCancelOrder.class)::deserializeMessage, new HerronJsonMapper(HerronCancelOrder.class)::serializeMessage),
