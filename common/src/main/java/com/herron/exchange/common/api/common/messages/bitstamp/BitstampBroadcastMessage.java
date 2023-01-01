@@ -8,7 +8,7 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record BitstampBroadcastMessage(@JsonProperty("serializedMessage") String serializedMessage,
-                                       @JsonProperty("serializedMessageTypeString") String serializedMessageTypeString,
+                                       @JsonProperty("serializedMessageType") String serializedMessageTypeString,
                                        @JsonProperty("sequenceNumber") long sequenceNumber,
                                        @JsonProperty("timeStampInMs") long timeStampInMs) implements BroadcastMessage {
 
