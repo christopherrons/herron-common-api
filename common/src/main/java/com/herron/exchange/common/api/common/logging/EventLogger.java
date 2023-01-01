@@ -9,6 +9,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public class EventLogger {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EventLogger.class);
+
+    private static double MILLI_TO_SEK = 1.0 / 1000;
     private static final int MESSAGE_UPDATE_INTERVAL = 1000;
     private final AtomicLong totalNrOfEvents = new AtomicLong();
     private final Instant startTime = Instant.now();
@@ -37,11 +39,11 @@ public class EventLogger {
         }
     }
 
-    private long getCurrentEventsPerSecond(final Instant currentTime) {
-        return (totalNrOfEvents.get() - lastUpdateTimeNrOfEvents.get()) / currentTime.minusMillis((lastLogUpdateTime.toEpochMilli())).getEpochSecond();
+    private long getCurrentEventsPerSecond(Instant currentTime) {
+        return (long) MILLI_TO_SEK * (totalNrOfEvents.get() - lastUpdateTimeNrOfEvents.get()) / (currentTime.toEpochMilli() - lastLogUpdateTime.toEpochMilli());
     }
 
-    private long getAverageEventsPerSecond(final Instant currentTime) {
-        return totalNrOfEvents.get() / currentTime.minusMillis((startTime.toEpochMilli())).getEpochSecond();
+    private long getAverageEventsPerSecond(Instant currentTime) {
+        return (long) MILLI_TO_SEK * totalNrOfEvents.get() / (currentTime.toEpochMilli() - lastLogUpdateTime.toEpochMilli());
     }
 }
