@@ -1,12 +1,11 @@
 package com.herron.exchange.common.api.common.enums;
 
 import com.herron.exchange.common.api.common.api.Message;
-import com.herron.exchange.common.api.common.mapper.HerronJsonMapper;
+import com.herron.exchange.common.api.common.mapper.HerronJsonMapperUtil;
 import com.herron.exchange.common.api.common.messages.bitstamp.*;
 import com.herron.exchange.common.api.common.messages.herron.*;
 
 import java.util.Map;
-import java.util.function.Function;
 
 import static java.util.Arrays.stream;
 import static java.util.function.UnaryOperator.identity;
@@ -14,32 +13,30 @@ import static java.util.stream.Collectors.toMap;
 
 public enum MessageTypesEnum {
 
-    INVALID_MESSAGE_TYPE(null, null, null),
-    BITSTAMP_BROADCAST_MESSAGE("BSBM", new HerronJsonMapper(HerronBroadcastMessage.class)::deserializeMessage, new HerronJsonMapper(HerronBroadcastMessage.class)::serializeMessage),
-    BITSTAMP_ADD_ORDER("BSAO", new HerronJsonMapper(BitstampAddOrder.class)::deserializeMessage, new HerronJsonMapper(BitstampAddOrder.class)::serializeMessage),
-    BITSTAMP_TRADE("BSTR", new HerronJsonMapper(BitstampTrade.class)::deserializeMessage, new HerronJsonMapper(BitstampTrade.class)::serializeMessage),
-    BITSTAMP_ORDERBOOK_DATA("BSOB", new HerronJsonMapper(BitstampOrderbookData.class)::deserializeMessage, new HerronJsonMapper(BitstampOrderbookData.class)::serializeMessage),
-    BITSTAMP_STOCK_INSTRUMENT("BSSI", new HerronJsonMapper(BitstampStockInstrument.class)::deserializeMessage, new HerronJsonMapper(BitstampStockInstrument.class)::serializeMessage),
-    BITSTAMP_STATE_CHANGE("BSSC", new HerronJsonMapper(BitstampStateChange.class)::deserializeMessage, new HerronJsonMapper(BitstampStateChange.class)::serializeMessage),
-    HERRON_BROADCAST_MESSAGE("HEBM", new HerronJsonMapper(HerronBroadcastMessage.class)::deserializeMessage, new HerronJsonMapper(HerronBroadcastMessage.class)::serializeMessage),
-    HERRON_ADD_ORDER("HEAO", new HerronJsonMapper(HerronAddOrder.class)::deserializeMessage, new HerronJsonMapper(HerronAddOrder.class)::serializeMessage),
-    HERRON_UPDATE_ORDER("HEUO", new HerronJsonMapper(HerronUpdateOrder.class)::deserializeMessage, new HerronJsonMapper(HerronUpdateOrder.class)::serializeMessage),
-    HERRON_CANCEL_ORDER("HECO", new HerronJsonMapper(HerronCancelOrder.class)::deserializeMessage, new HerronJsonMapper(HerronCancelOrder.class)::serializeMessage),
-    HERRON_TRADE("HETR", new HerronJsonMapper(HerronTrade.class)::deserializeMessage, new HerronJsonMapper(HerronTrade.class)::serializeMessage),
-    HERRON_ORDERBOOK_DATA("HEOB", new HerronJsonMapper(HerronOrderbookData.class)::deserializeMessage, new HerronJsonMapper(HerronOrderbookData.class)::serializeMessage),
-    HERRON_STOCK_INSTRUMENT("HESI", new HerronJsonMapper(HerronStockInstrument.class)::deserializeMessage, new HerronJsonMapper(HerronStockInstrument.class)::serializeMessage),
-    HERRON_STATE_CHANGE("HESC", new HerronJsonMapper(HerronStateChange.class)::deserializeMessage, new HerronJsonMapper(HerronStateChange.class)::serializeMessage);
+    INVALID_MESSAGE_TYPE(null, null),
+    BITSTAMP_BROADCAST_MESSAGE("BSBM", HerronBroadcastMessage.class),
+    BITSTAMP_ADD_ORDER("BSAO", BitstampAddOrder.class),
+    BITSTAMP_TRADE("BSTR", BitstampTrade.class),
+    BITSTAMP_ORDERBOOK_DATA("BSOB", BitstampOrderbookData.class),
+    BITSTAMP_STOCK_INSTRUMENT("BSSI", BitstampStockInstrument.class),
+    BITSTAMP_STATE_CHANGE("BSSC", BitstampStateChange.class),
+    HERRON_BROADCAST_MESSAGE("HEBM", HerronBroadcastMessage.class),
+    HERRON_ADD_ORDER("HEAO", HerronAddOrder.class),
+    HERRON_UPDATE_ORDER("HEUO", HerronUpdateOrder.class),
+    HERRON_CANCEL_ORDER("HECO", HerronCancelOrder.class),
+    HERRON_TRADE("HETR", HerronTrade.class),
+    HERRON_ORDERBOOK_DATA("HEOB", HerronOrderbookData.class),
+    HERRON_STOCK_INSTRUMENT("HESI", HerronStockInstrument.class),
+    HERRON_STATE_CHANGE("HESC", HerronStateChange.class);
 
     private static final Map<String, MessageTypesEnum> VALUES_BY_IDENTIFIER = stream(MessageTypesEnum.values())
             .collect(toMap(MessageTypesEnum::getMessageTypeId, identity()));
     private final String messageTypeId;
-    private final Function<Object, Message> messageDeserializer;
-    private final Function<Message, String> messageSerializer;
+    private final Class<? extends Message> classToBeDecoded;
 
-    MessageTypesEnum(String messageTypeId, Function<Object, Message> messageDeserializer, Function<Message, String> messageSerializer) {
+    MessageTypesEnum(String messageTypeId, Class<? extends Message> classToBeDecoded) {
         this.messageTypeId = messageTypeId;
-        this.messageDeserializer = messageDeserializer;
-        this.messageSerializer = messageSerializer;
+        this.classToBeDecoded = classToBeDecoded;
     }
 
     public static MessageTypesEnum getMessageTypeEnum(String messageTypeId) {
@@ -55,16 +52,16 @@ public enum MessageTypesEnum {
     }
 
     public Message deserializeMessage(Object message) {
-        if (messageDeserializer == null) {
+        if (classToBeDecoded == null) {
             return null;
         }
-        return messageDeserializer.apply(message);
+        return HerronJsonMapperUtil.deserializeMessage(message, classToBeDecoded);
     }
 
     public String serializeMessage(Message message) {
-        if (messageSerializer == null) {
+        if (message == null) {
             return null;
         }
-        return messageSerializer.apply(message);
+        return HerronJsonMapperUtil.serializeMessage(message);
     }
 }

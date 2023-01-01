@@ -7,30 +7,25 @@ import com.herron.exchange.common.api.common.api.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HerronJsonMapper {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HerronJsonMapper.class);
-    private final Class<? extends Message> classToBeDecoded;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+public class HerronJsonMapperUtil {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HerronJsonMapperUtil.class);
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    public HerronJsonMapper(Class<? extends Message> classToBeDecoded) {
-        this.classToBeDecoded = classToBeDecoded;
-    }
-
-    public String serializeMessage(Message message) {
+    public static String serializeMessage(Message message) {
         try {
-            return objectMapper.writeValueAsString(message);
+            return OBJECT_MAPPER.writeValueAsString(message);
         } catch (JsonProcessingException e) {
             LOGGER.warn("Unable to map message {}: {}", message, e);
         }
         return null;
     }
 
-    public Message deserializeMessage(Object message) {
+    public static Message deserializeMessage(Object message, Class<? extends Message> classToBeDecoded) {
         try {
             if (message instanceof String messageString) {
-                return objectMapper.readValue(messageString, classToBeDecoded);
+                return OBJECT_MAPPER.readValue(messageString, classToBeDecoded);
             } else if (message instanceof JsonNode node) {
-                return objectMapper.treeToValue(node, classToBeDecoded);
+                return OBJECT_MAPPER.treeToValue(node, classToBeDecoded);
             }
             LOGGER.warn("Unable to map unhandled type: {}:", message);
         } catch (JsonProcessingException e) {
