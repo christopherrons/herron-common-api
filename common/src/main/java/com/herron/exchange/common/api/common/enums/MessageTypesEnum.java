@@ -15,6 +15,7 @@ import static java.util.stream.Collectors.toMap;
 public enum MessageTypesEnum {
 
     INVALID_MESSAGE_TYPE(null, null, null),
+    BITSTAMP_BROADCAST_MESSAGE("BSBM", new HerronJsonMapper(BitstampBroadcastMessage.class)::deserializeMessage, new HerronJsonMapper(BitstampBroadcastMessage.class)::serializeMessage),
     BITSTAMP_ADD_ORDER("BSAO", new HerronJsonMapper(BitstampAddOrder.class)::deserializeMessage, new HerronJsonMapper(BitstampAddOrder.class)::serializeMessage),
     BITSTAMP_TRADE("BSTR", new HerronJsonMapper(BitstampTrade.class)::deserializeMessage, new HerronJsonMapper(BitstampTrade.class)::serializeMessage),
     BITSTAMP_ORDERBOOK_DATA("BSOB", new HerronJsonMapper(BitstampOrderbookData.class)::deserializeMessage, new HerronJsonMapper(BitstampOrderbookData.class)::serializeMessage),
