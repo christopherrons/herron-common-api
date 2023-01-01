@@ -31,7 +31,7 @@ public enum MessageTypesEnum {
 
     private static final Map<String, MessageTypesEnum> VALUES_BY_IDENTIFIER = stream(MessageTypesEnum.values())
             .collect(toMap(MessageTypesEnum::getMessageTypeId, identity()));
-    
+
     private final String messageTypeId;
     private final Class<? extends Message> classToBeDecoded;
 
