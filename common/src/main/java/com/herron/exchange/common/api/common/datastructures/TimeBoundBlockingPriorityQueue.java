@@ -24,12 +24,12 @@ public class TimeBoundBlockingPriorityQueue<T extends Message> extends PriorityB
         this.timeBoundQueue = queue;
     }
 
-    public List<T> addItemThenPurge(final T item) {
+    public List<T> addItemThenPurge(T item) {
         timeBoundQueue.add(item);
         return purgeItems(item);
     }
 
-    private List<T> purgeItems(final T item) {
+    private List<T> purgeItems(T item) {
         List<T> timeExceedingItems = new ArrayList<>();
         while (timeBoundQueue.peek() != null && isTimeExceeded(item, timeBoundQueue.peek())) {
             timeExceedingItems.add(timeBoundQueue.poll());
@@ -37,7 +37,7 @@ public class TimeBoundBlockingPriorityQueue<T extends Message> extends PriorityB
         return timeExceedingItems;
     }
 
-    private boolean isTimeExceeded(final T currentItem, final T item) {
+    private boolean isTimeExceeded(T currentItem, T item) {
         return currentItem.timeStampInMs() - item.timeStampInMs() > timeInMs;
     }
 }
