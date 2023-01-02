@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public class TimeBoundPriorityQueue<T extends Message> extends PriorityQueue<T> {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(TimeBoundPriorityQueue.class);
     private final int timeInMs;
     private final transient PriorityQueue<T> timeBoundQueue;
@@ -44,7 +43,7 @@ public class TimeBoundPriorityQueue<T extends Message> extends PriorityQueue<T> 
         return timeExceedingItems;
     }
 
-    private boolean isTimeExceeded(final T currentItem, final T item) {
+    private boolean isTimeExceeded(T currentItem, T item) {
         return currentItem.timeStampInMs() - item.timeStampInMs() > timeInMs;
     }
 }
