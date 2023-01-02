@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.messages.herron;
+package com.herron.exchange.common.api.common.messages;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

@@ -2,6 +2,8 @@ package com.herron.exchange.common.api.common.messages.herron;
 
 import com.herron.exchange.common.api.common.api.BroadcastMessage;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
+import com.herron.exchange.common.api.common.messages.HerronAddOrder;
+import com.herron.exchange.common.api.common.messages.HerronBroadcastMessage;
 import org.junit.jupiter.api.Test;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;

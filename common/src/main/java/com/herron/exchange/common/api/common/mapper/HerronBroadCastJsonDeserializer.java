@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
-import com.herron.exchange.common.api.common.messages.herron.HerronBroadcastMessage;
+import com.herron.exchange.common.api.common.messages.HerronBroadcastMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
