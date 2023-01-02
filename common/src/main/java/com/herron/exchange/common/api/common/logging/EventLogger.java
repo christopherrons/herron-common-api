@@ -13,25 +13,24 @@ public class EventLogger {
     private static final int MESSAGE_UPDATE_INTERVAL = 1000;
     private final AtomicLong totalNrOfEvents = new AtomicLong();
     private final Instant startTime = Instant.now();
-    private final String eventLoggDescription;
+    private final int messageUpdateInterval;
     private Instant lastLogUpdateTime = Instant.now();
     private AtomicLong lastUpdateTimeNrOfEvents = new AtomicLong();
 
     public EventLogger() {
-        this("");
+        this(MESSAGE_UPDATE_INTERVAL);
     }
 
-    public EventLogger(String eventLoggDescription) {
-        this.eventLoggDescription = eventLoggDescription;
+    public EventLogger(int messageUpdateInterval) {
+        this.messageUpdateInterval = messageUpdateInterval;
     }
 
     public void logEvent() {
         try {
             long currentNrOfEvents = totalNrOfEvents.incrementAndGet();
-            if (currentNrOfEvents % MESSAGE_UPDATE_INTERVAL == 0) {
+            if (currentNrOfEvents % messageUpdateInterval == 0) {
                 Instant currentTime = Instant.now();
-                LOGGER.info("{}: Message count: {}. Current event rate {}/s, average event rate {}/s",
-                        eventLoggDescription, totalNrOfEvents.get(), (long) getCurrentEventsPerSecond(currentTime), (long) getAverageEventsPerSecond(currentTime));
+                LOGGER.info("Message count: {}. Current event rate {}/s, average event rate {}/s", totalNrOfEvents.get(), (long) getCurrentEventsPerSecond(currentTime), (long) getAverageEventsPerSecond(currentTime));
                 lastLogUpdateTime = currentTime;
                 lastUpdateTimeNrOfEvents = new AtomicLong(currentNrOfEvents);
             }
