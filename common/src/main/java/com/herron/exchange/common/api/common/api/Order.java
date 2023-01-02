@@ -38,7 +38,7 @@ public interface Order extends Message {
     }
 
     default boolean isNonActiveOrder() {
-        if (this.orderType().equals(OrderTypeEnum.MARKET)) {
+        if (this.orderType() == OrderTypeEnum.MARKET) {
             return true;
         }
 
