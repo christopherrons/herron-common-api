@@ -3,7 +3,6 @@ package com.herron.exchange.common.api.common.enums;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.mapper.HerronJsonMapperUtil;
 import com.herron.exchange.common.api.common.messages.*;
-import com.herron.exchange.common.api.common.messages.bitstamp.*;
 
 import java.util.Map;
 
@@ -18,10 +17,10 @@ public enum MessageTypesEnum {
     BITSTAMP_ADD_ORDER("BSAO", HerronAddOrder.class),
     BITSTAMP_UPDATE_ORDER("BSUO", HerronUpdateOrder.class),
     BITSTAMP_CANCEL_ORDER("BSCO", HerronCancelOrder.class),
-    BITSTAMP_TRADE("BSTR", BitstampTrade.class),
-    BITSTAMP_ORDERBOOK_DATA("BSOB", BitstampOrderbookData.class),
-    BITSTAMP_STOCK_INSTRUMENT("BSSI", BitstampStockInstrument.class),
-    BITSTAMP_STATE_CHANGE("BSSC", BitstampStateChange.class),
+    BITSTAMP_TRADE("BSTR", HerronTrade.class),
+    BITSTAMP_ORDERBOOK_DATA("BSOB", HerronOrderbookData.class),
+    BITSTAMP_STOCK_INSTRUMENT("BSSI", HerronStockInstrument.class),
+    BITSTAMP_STATE_CHANGE("BSSC", HerronStateChange.class),
     HERRON_BROADCAST_MESSAGE("HEBM", HerronBroadcastMessage.class),
     HERRON_ADD_ORDER("HEAO", HerronAddOrder.class),
     HERRON_UPDATE_ORDER("HEUO", HerronUpdateOrder.class),
