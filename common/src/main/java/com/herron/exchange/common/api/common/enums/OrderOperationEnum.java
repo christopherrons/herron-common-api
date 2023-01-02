@@ -10,7 +10,7 @@ import static java.util.stream.Collectors.toMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum OrderOperationEnum {
-    INVALID_ORDER_OPERATION(null),
+    INVALID_ORDER_OPERATION("invalid"),
     CREATE("create"),
     UPDATE("update"),
     DELETE("delete");
