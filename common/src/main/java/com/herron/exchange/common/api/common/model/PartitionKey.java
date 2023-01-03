@@ -1,8 +1,8 @@
 package com.herron.exchange.common.api.common.model;
 
-import com.herron.exchange.common.api.common.enums.TopicEnum;
+import com.herron.exchange.common.api.common.enums.KafkaTopicEnum;
 
-public record PartitionKey(TopicEnum topicEnum, int partitionId) {
+public record PartitionKey(KafkaTopicEnum topicEnum, int partitionId) {
 
     public String description() {
         return topicEnum.getTopicName() + "-" + partitionId;
