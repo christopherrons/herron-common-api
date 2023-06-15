@@ -11,7 +11,6 @@ import static java.util.stream.Collectors.toMap;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum MatchingAlgorithmEnum {
     INVALID_MATCHING_ALGORITHM(null),
-
     PRO_RATA("pro-rata"),
     FIFO("fifo");
 

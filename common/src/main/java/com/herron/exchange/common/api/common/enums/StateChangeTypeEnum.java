@@ -11,6 +11,8 @@ import static java.util.stream.Collectors.toMap;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum StateChangeTypeEnum {
     INVALID_STATE_CHANGE(null),
+    TRADE_STOP("trade stop"),
+    AUCTION_TRADING("auction trading"),
     CONTINUOUS_TRADING("continuous trading");
 
     private static final Map<String, StateChangeTypeEnum> VALUES_BY_IDENTIFIER = stream(StateChangeTypeEnum.values()).collect(toMap(StateChangeTypeEnum::getValue, identity()));
