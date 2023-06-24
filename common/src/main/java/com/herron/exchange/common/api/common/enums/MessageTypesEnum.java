@@ -3,6 +3,11 @@ package com.herron.exchange.common.api.common.enums;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.mapper.HerronJsonMapperUtil;
 import com.herron.exchange.common.api.common.messages.*;
+import com.herron.exchange.common.api.common.request.HerronInstrumentRequest;
+import com.herron.exchange.common.api.common.request.HerronOrderRequest;
+import com.herron.exchange.common.api.common.request.HerronOrderbookDataRequest;
+import com.herron.exchange.common.api.common.request.HerronStateChangeRequest;
+import com.herron.exchange.common.api.common.response.*;
 
 import java.util.Map;
 
@@ -13,6 +18,15 @@ import static java.util.stream.Collectors.toMap;
 public enum MessageTypesEnum {
 
     INVALID_MESSAGE_TYPE(null, null),
+    HERRON_ORDERBOOK_DATA_REQUEST("HODREQ", HerronOrderbookDataRequest.class),
+    HERRON_ORDERBOOK_DATA_RESPONSE("HODREP", HerronOrderbookDataResponse.class),
+    HERRON_INSTRUMENT_REQUEST("HINREQ", HerronInstrumentRequest.class),
+    HERRON_INSTRUMENT_RESPONSE("HINREP", HerronInstrumentResponse.class),
+    HERRON_ORDER_REQUEST("HORREQ", HerronOrderRequest.class),
+    HERRON_ORDER_RESPONSE("HORREP", HerronOrderResponse.class),
+    HERRON_STATE_CHANGE_REQUEST("HSTREQ", HerronStateChangeRequest.class),
+    HERRON_STATE_CHANGE_RESPONSE("HSTREP", HerronStateChangeResponse.class),
+    INVALID_REQUEST_RESPONSE("IREQREP", InvalidRequestResponse.class),
     BITSTAMP_BROADCAST_MESSAGE("BSBM", HerronBroadcastMessage.class),
     BITSTAMP_ADD_ORDER("BSAO", HerronAddOrder.class),
     BITSTAMP_UPDATE_ORDER("BSUO", HerronUpdateOrder.class),

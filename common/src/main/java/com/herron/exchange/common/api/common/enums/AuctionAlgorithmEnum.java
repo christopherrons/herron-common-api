@@ -11,7 +11,8 @@ import static java.util.stream.Collectors.toMap;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum AuctionAlgorithmEnum {
     INVALID_AUCTION_ALGORITHM(null),
-    MAX_VOLUME("max volume");
+    DUTCH("dutch auction"),
+    AMERICAN("american auction");
 
     private static final Map<String, AuctionAlgorithmEnum> VALUES_BY_IDENTIFIER = stream(AuctionAlgorithmEnum.values()).collect(toMap(AuctionAlgorithmEnum::getValue, identity()));
     private final String value;

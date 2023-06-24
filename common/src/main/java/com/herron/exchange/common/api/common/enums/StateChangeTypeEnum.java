@@ -3,6 +3,7 @@ package com.herron.exchange.common.api.common.enums;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Map;
+import java.util.Set;
 
 import static java.util.Arrays.stream;
 import static java.util.function.UnaryOperator.identity;
@@ -13,9 +14,17 @@ public enum StateChangeTypeEnum {
     INVALID_STATE_CHANGE(null),
     TRADE_STOP("trade stop"),
     AUCTION_TRADING("auction trading"),
+    AUCTION_RUN("auction run"),
     CONTINUOUS_TRADING("continuous trading");
 
     private static final Map<String, StateChangeTypeEnum> VALUES_BY_IDENTIFIER = stream(StateChangeTypeEnum.values()).collect(toMap(StateChangeTypeEnum::getValue, identity()));
+    private static final Map<StateChangeTypeEnum, Set<StateChangeTypeEnum>> fromStateToState = Map.of(
+            TRADE_STOP, Set.of(AUCTION_TRADING, AUCTION_RUN),
+            AUCTION_TRADING, Set.of(TRADE_STOP, AUCTION_RUN),
+            AUCTION_RUN, Set.of(TRADE_STOP, CONTINUOUS_TRADING),
+            CONTINUOUS_TRADING, Set.of(TRADE_STOP, AUCTION_TRADING)
+    );
+
     private final String value;
 
     StateChangeTypeEnum(String value) {
@@ -37,5 +46,9 @@ public enum StateChangeTypeEnum {
 
     public String getValue() {
         return value;
+    }
+
+    public boolean isValidStateChange(StateChangeTypeEnum toState) {
+        return fromStateToState.get(this).contains(toState);
     }
 }
