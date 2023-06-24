@@ -6,10 +6,10 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
 import java.util.List;
 
-public record HerronTradeExecution(List<Message> messages, long timeStampInMs) implements TradeExecution {
+public record HerronTradeExecution(Message triggerMessage, List<Message> messages, long timeStampInMs) implements TradeExecution {
 
     public HerronTradeExecution(TradeExecution tradeExecution) {
-        this(tradeExecution.messages(), tradeExecution.timeStampInMs());
+        this(tradeExecution.triggerMessage(), tradeExecution.messages(), tradeExecution.timeStampInMs());
     }
 
     @Override

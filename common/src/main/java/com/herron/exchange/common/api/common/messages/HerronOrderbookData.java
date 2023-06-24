@@ -2,6 +2,7 @@ package com.herron.exchange.common.api.common.messages;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.herron.exchange.common.api.common.api.OrderbookData;
+import com.herron.exchange.common.api.common.enums.AuctionAlgorithmEnum;
 import com.herron.exchange.common.api.common.enums.MatchingAlgorithmEnum;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
@@ -11,7 +12,8 @@ public record HerronOrderbookData(String orderbookId,
                                   MatchingAlgorithmEnum matchingAlgorithm,
                                   String tradingCurrency,
                                   double minTradeVolume,
-                                  long timeStampInMs) implements OrderbookData {
+                                  long timeStampInMs,
+                                  AuctionAlgorithmEnum auctionAlgorithm) implements OrderbookData {
 
     public HerronOrderbookData(OrderbookData orderbookData) {
         this(orderbookData.orderbookId(),
@@ -19,7 +21,8 @@ public record HerronOrderbookData(String orderbookId,
                 orderbookData.matchingAlgorithm(),
                 orderbookData.tradingCurrency(),
                 orderbookData.minTradeVolume(),
-                orderbookData.timeStampInMs());
+                orderbookData.timeStampInMs(),
+                orderbookData.auctionAlgorithm());
     }
 
     @Override

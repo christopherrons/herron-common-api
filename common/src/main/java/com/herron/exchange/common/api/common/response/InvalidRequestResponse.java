@@ -22,7 +22,7 @@ public record InvalidRequestResponse(long timeStampInMs,
 
     @Override
     public MessageTypesEnum messageType() {
-        return MessageTypesEnum.HERRON_INSTRUMENT_RESPONSE;
+        return MessageTypesEnum.INVALID_REQUEST_RESPONSE;
     }
 
     @Override

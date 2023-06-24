@@ -1,5 +1,6 @@
 package com.herron.exchange.common.api.common.api;
 
+import com.herron.exchange.common.api.common.enums.AuctionAlgorithmEnum;
 import com.herron.exchange.common.api.common.enums.MatchingAlgorithmEnum;
 
 public interface OrderbookData extends Message {
@@ -13,5 +14,7 @@ public interface OrderbookData extends Message {
     String tradingCurrency();
 
     double minTradeVolume();
+
+    AuctionAlgorithmEnum auctionAlgorithm();
 
 }

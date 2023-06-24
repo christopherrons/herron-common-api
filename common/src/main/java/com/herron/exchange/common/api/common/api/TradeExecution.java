@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface TradeExecution extends Message {
 
+    Message triggerMessage();
     List<Message> messages();
 
 }
