@@ -1,6 +1,6 @@
 package com.herron.exchange.common.api.common.datastructures;
 
-import com.herron.exchange.common.api.common.api.Message;
+import com.herron.exchange.common.api.common.api.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,13 +9,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class TimeBoundPriorityQueue<T extends Message> extends PriorityQueue<T> {
+public class TimeBoundPriorityQueue<T extends Event> extends PriorityQueue<T> {
     private static final Logger LOGGER = LoggerFactory.getLogger(TimeBoundPriorityQueue.class);
     private final int timeInMs;
     private final transient PriorityQueue<T> timeBoundQueue;
 
     public TimeBoundPriorityQueue(int timeInMs) {
-        this(timeInMs, Comparator.comparing(Message::timeStampInMs));
+        this(timeInMs, Comparator.comparing(Event::timeStampInMs));
     }
 
     public TimeBoundPriorityQueue(int timeInMs, Comparator<T> comparator) {

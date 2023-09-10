@@ -42,6 +42,7 @@ public enum MessageTypesEnum {
     HERRON_TRADE("HETR", HerronTrade.class),
     HERRON_ORDERBOOK_DATA("HEOB", HerronOrderbookData.class),
     HERRON_STOCK_INSTRUMENT("HESI", HerronStockInstrument.class),
+    HERRON_BOND_INSTRUMENT("HEBI", HerronBondInstrument.class),
     HERRON_TRADE_EXECUTION("HEEX", HerronTradeExecution.class),
     HERRON_STATE_CHANGE("HESC", HerronStateChange.class);
 

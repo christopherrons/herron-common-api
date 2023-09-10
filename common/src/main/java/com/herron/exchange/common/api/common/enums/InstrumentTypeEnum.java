@@ -11,6 +11,10 @@ import static java.util.stream.Collectors.toMap;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum InstrumentTypeEnum {
     INVALID_INSTRUMENT_TYPE(null),
+    BOND("bond"),
+    PERPETUAL_BOND("perpetual bond"),
+    SWAP("swap"),
+    BILL("bill"),
     STOCK("stock"),
     OPTION("option"),
     SPREAD("spread"),

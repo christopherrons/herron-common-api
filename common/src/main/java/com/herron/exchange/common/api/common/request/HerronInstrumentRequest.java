@@ -5,13 +5,12 @@ import com.herron.exchange.common.api.common.api.*;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.enums.RequestStatus;
 import com.herron.exchange.common.api.common.response.HerronInstrumentResponse;
-import com.herron.exchange.common.api.common.response.HerronOrderbookDataResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record HerronInstrumentRequest(long requestId, Instrument instrument) implements InstrumentRequest {
+public record HerronInstrumentRequest(long requestId, Instrument instrument, long timeStampInMs) implements InstrumentRequest {
 
     public HerronInstrumentRequest(HerronInstrumentRequest instrumentRequest) {
-        this(instrumentRequest.requestId, instrumentRequest.instrument);
+        this(instrumentRequest.requestId, instrumentRequest.instrument, instrumentRequest.timeStampInMs);
     }
 
     @Override
@@ -26,7 +25,7 @@ public record HerronInstrumentRequest(long requestId, Instrument instrument) imp
 
     @Override
     public long timeStampInMs() {
-        return instrument.timeStampInMs();
+        return timeStampInMs;
     }
 
     @Override

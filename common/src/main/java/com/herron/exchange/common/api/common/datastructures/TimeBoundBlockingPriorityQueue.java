@@ -1,5 +1,6 @@
 package com.herron.exchange.common.api.common.datastructures;
 
+import com.herron.exchange.common.api.common.api.Event;
 import com.herron.exchange.common.api.common.api.Message;
 
 import java.util.ArrayList;
@@ -7,12 +8,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.PriorityBlockingQueue;
 
-public class TimeBoundBlockingPriorityQueue<T extends Message> extends PriorityBlockingQueue<T> {
+public class TimeBoundBlockingPriorityQueue<T extends Event> extends PriorityBlockingQueue<T> {
     private final int timeInMs;
     private final transient PriorityBlockingQueue<T> timeBoundQueue;
 
     public TimeBoundBlockingPriorityQueue(int timeInMs) {
-        this(timeInMs, Comparator.comparing(Message::timeStampInMs));
+        this(timeInMs, Comparator.comparing(Event::timeStampInMs));
     }
 
     public TimeBoundBlockingPriorityQueue(int timeInMs, Comparator<T> comparator) {

@@ -7,13 +7,11 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record HerronStockInstrument(String instrumentId,
-                                    InstrumentTypeEnum instrumentType,
-                                    long timeStampInMs) implements Instrument {
+                                    InstrumentTypeEnum instrumentType) implements Instrument {
 
     public HerronStockInstrument(Instrument instrument) {
         this(instrument.instrumentId(),
-                instrument.instrumentType(),
-                instrument.timeStampInMs());
+                instrument.instrumentType());
     }
 
     @Override

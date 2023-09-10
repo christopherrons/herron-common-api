@@ -3,7 +3,7 @@ package com.herron.exchange.common.api.common.api;
 import com.herron.exchange.common.api.common.model.MonetaryAmount;
 import com.herron.exchange.common.api.common.model.Participant;
 
-public interface Trade extends Message {
+public interface Trade extends Event {
 
 
     Participant bidParticipant();
@@ -19,6 +19,7 @@ public interface Trade extends Message {
     boolean isBidSideAggressor();
 
     double volume();
+
     double price();
 
     MonetaryAmount monetaryAmount();

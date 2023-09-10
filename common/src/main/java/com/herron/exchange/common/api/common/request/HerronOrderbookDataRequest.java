@@ -10,10 +10,10 @@ import com.herron.exchange.common.api.common.enums.RequestStatus;
 import com.herron.exchange.common.api.common.response.HerronOrderbookDataResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record HerronOrderbookDataRequest(long requestId, OrderbookData orderbookData) implements OrderbookDataRequest {
+public record HerronOrderbookDataRequest(long requestId, OrderbookData orderbookData, long timeStampInMs) implements OrderbookDataRequest {
 
     public HerronOrderbookDataRequest(HerronOrderbookDataRequest orderbookDataRequest) {
-        this(orderbookDataRequest.requestId, orderbookDataRequest.orderbookData);
+        this(orderbookDataRequest.requestId, orderbookDataRequest.orderbookData, orderbookDataRequest.timeStampInMs);
     }
 
     @Override
@@ -28,7 +28,7 @@ public record HerronOrderbookDataRequest(long requestId, OrderbookData orderbook
 
     @Override
     public long timeStampInMs() {
-        return orderbookData.timeStampInMs();
+        return timeStampInMs;
     }
 
     @Override

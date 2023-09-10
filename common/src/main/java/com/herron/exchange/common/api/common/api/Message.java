@@ -9,8 +9,6 @@ public interface Message {
 
     MessageTypesEnum messageType();
 
-    long timeStampInMs();
-
     default Message deserialize(String message) {
         return messageType().deserializeMessage(message);
     }

@@ -12,7 +12,6 @@ public record HerronOrderbookData(String orderbookId,
                                   MatchingAlgorithmEnum matchingAlgorithm,
                                   String tradingCurrency,
                                   double minTradeVolume,
-                                  long timeStampInMs,
                                   AuctionAlgorithmEnum auctionAlgorithm) implements OrderbookData {
 
     public HerronOrderbookData(OrderbookData orderbookData) {
@@ -21,7 +20,6 @@ public record HerronOrderbookData(String orderbookId,
                 orderbookData.matchingAlgorithm(),
                 orderbookData.tradingCurrency(),
                 orderbookData.minTradeVolume(),
-                orderbookData.timeStampInMs(),
                 orderbookData.auctionAlgorithm());
     }
 
