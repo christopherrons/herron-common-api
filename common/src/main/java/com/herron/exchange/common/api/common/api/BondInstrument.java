@@ -12,6 +12,10 @@ public interface BondInstrument extends Instrument {
 
     LocalDate maturityDate();
 
+    LocalDate startDate();
+
     CompoundingMethodEnum compoundingMethod();
+
+    double couponRate();
 
 }

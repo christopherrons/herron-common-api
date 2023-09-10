@@ -6,12 +6,10 @@ import com.herron.exchange.common.api.common.enums.InstrumentTypeEnum;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record HerronStockInstrument(String instrumentId,
-                                    InstrumentTypeEnum instrumentType) implements Instrument {
+public record HerronStockInstrument(String instrumentId) implements Instrument {
 
     public HerronStockInstrument(Instrument instrument) {
-        this(instrument.instrumentId(),
-                instrument.instrumentType());
+        this(instrument.instrumentId());
     }
 
     @Override
@@ -24,4 +22,8 @@ public record HerronStockInstrument(String instrumentId,
         return MessageTypesEnum.HERRON_STOCK_INSTRUMENT;
     }
 
+    @Override
+    public InstrumentTypeEnum instrumentType() {
+        return InstrumentTypeEnum.STOCK;
+    }
 }

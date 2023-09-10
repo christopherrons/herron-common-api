@@ -10,19 +10,21 @@ import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record HerronBondInstrument(String instrumentId,
-                                   InstrumentTypeEnum instrumentType,
                                    int couponYearlyFrequency,
                                    LocalDate maturityDate,
+                                   LocalDate startDate,
                                    double nominalValue,
-                                   CompoundingMethodEnum compoundingMethod) implements BondInstrument {
+                                   CompoundingMethodEnum compoundingMethod,
+                                   double couponRate) implements BondInstrument {
 
     public HerronBondInstrument(BondInstrument instrument) {
         this(instrument.instrumentId(),
-                instrument.instrumentType(),
                 instrument.couponYearlyFrequency(),
                 instrument.maturityDate(),
+                instrument.startDate(),
                 instrument.nominalValue(),
-                instrument.compoundingMethod());
+                instrument.compoundingMethod(),
+                instrument.couponRate());
     }
 
     @Override
@@ -35,4 +37,8 @@ public record HerronBondInstrument(String instrumentId,
         return MessageTypesEnum.HERRON_BOND_INSTRUMENT;
     }
 
+    @Override
+    public InstrumentTypeEnum instrumentType() {
+        return InstrumentTypeEnum.BOND;
+    }
 }
