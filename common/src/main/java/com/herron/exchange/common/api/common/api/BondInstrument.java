@@ -21,4 +21,8 @@ public interface BondInstrument extends Instrument {
 
     DayCountConvetionEnum dayCountConvention();
 
+    default boolean isZeroCouponBond() {
+        return couponRate() == 0;
+    }
+
 }
