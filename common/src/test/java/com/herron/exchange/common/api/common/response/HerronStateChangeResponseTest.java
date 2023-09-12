@@ -1,5 +1,6 @@
 package com.herron.exchange.common.api.common.response;
 
+import com.herron.exchange.common.api.common.messages.response.HerronStateChangeResponse;
 import org.junit.jupiter.api.Test;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;

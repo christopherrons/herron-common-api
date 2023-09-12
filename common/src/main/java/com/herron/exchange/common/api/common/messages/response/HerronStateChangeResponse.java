@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.response;
+package com.herron.exchange.common.api.common.messages.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.herron.exchange.common.api.common.api.Message;

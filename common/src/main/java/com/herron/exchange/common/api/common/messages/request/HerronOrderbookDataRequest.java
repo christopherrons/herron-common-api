@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.request;
+package com.herron.exchange.common.api.common.messages.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.herron.exchange.common.api.common.api.Message;
@@ -7,7 +7,7 @@ import com.herron.exchange.common.api.common.api.OrderbookDataRequest;
 import com.herron.exchange.common.api.common.api.OrderbookDataResponse;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.enums.RequestStatus;
-import com.herron.exchange.common.api.common.response.HerronOrderbookDataResponse;
+import com.herron.exchange.common.api.common.messages.response.HerronOrderbookDataResponse;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record HerronOrderbookDataRequest(long requestId, OrderbookData orderbookData, long timeStampInMs) implements OrderbookDataRequest {
@@ -27,10 +27,16 @@ public record HerronOrderbookDataRequest(long requestId, OrderbookData orderbook
     }
 
     @Override
-    public OrderbookDataResponse createResponse(long timeStampInMs,
-                                                long requestId,
-                                                RequestStatus requestStatus,
-                                                String responseMessage) {
-        return new HerronOrderbookDataResponse(timeStampInMs, requestId, requestStatus, responseMessage);
+    public OrderbookDataResponse createOkResponse(long timeStampInMs,
+                                                  long requestId,
+                                                  String responseMessage) {
+        return new HerronOrderbookDataResponse(timeStampInMs, requestId, RequestStatus.OK, responseMessage);
+    }
+
+    @Override
+    public OrderbookDataResponse createErrorResponse(long timeStampInMs,
+                                                     long requestId,
+                                                     String errorMessage) {
+        return new HerronOrderbookDataResponse(timeStampInMs, requestId, RequestStatus.ERROR, errorMessage);
     }
 }

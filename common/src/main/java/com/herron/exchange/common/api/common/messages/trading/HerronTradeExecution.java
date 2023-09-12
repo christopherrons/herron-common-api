@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.messages;
+package com.herron.exchange.common.api.common.messages.trading;
 
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.api.TradeExecution;
