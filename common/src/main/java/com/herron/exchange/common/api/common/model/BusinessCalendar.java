@@ -17,4 +17,10 @@ public record BusinessCalendar(String calendarId, Set<DayOfWeek> weekends, Set<L
     public static BusinessCalendar defaultWeekendCalendar() {
         return new BusinessCalendar("defaultWeekendCalendar", Set.of(SATURDAY, SUNDAY), Set.of(), Set.of());
     }
+
+    public boolean isHolidayOrWeekend(LocalDate date) {
+        return holidays.contains(date) ||
+                reoccurringHolidays.contains(MonthDay.from(date)) ||
+                weekends.contains(date.getDayOfWeek());
+    }
 }
