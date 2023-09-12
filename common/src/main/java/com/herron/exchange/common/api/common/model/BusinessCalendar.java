@@ -18,6 +18,22 @@ public record BusinessCalendar(String calendarId, Set<DayOfWeek> weekends, Set<L
         return new BusinessCalendar("defaultWeekendCalendar", Set.of(SATURDAY, SUNDAY), Set.of(), Set.of());
     }
 
+    public LocalDate getDateBeforeHoliday(LocalDate date) {
+        LocalDate preHolidayDate = date;
+        while (isHolidayOrWeekend(date)) {
+            preHolidayDate = preHolidayDate.minusDays(1);
+        }
+        return preHolidayDate;
+    }
+
+    public LocalDate getDateAfterHoliday(LocalDate date) {
+        LocalDate preHolidayDate = date;
+        while (isHolidayOrWeekend(date)) {
+            preHolidayDate = preHolidayDate.plusDays(1);
+        }
+        return preHolidayDate;
+    }
+
     public boolean isHolidayOrWeekend(LocalDate date) {
         return holidays.contains(date) ||
                 reoccurringHolidays.contains(MonthDay.from(date)) ||
