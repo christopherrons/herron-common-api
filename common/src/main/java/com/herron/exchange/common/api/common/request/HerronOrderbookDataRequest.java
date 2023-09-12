@@ -27,11 +27,6 @@ public record HerronOrderbookDataRequest(long requestId, OrderbookData orderbook
     }
 
     @Override
-    public long timeStampInMs() {
-        return timeStampInMs;
-    }
-
-    @Override
     public OrderbookDataResponse createResponse(long timeStampInMs,
                                                 long requestId,
                                                 RequestStatus requestStatus,

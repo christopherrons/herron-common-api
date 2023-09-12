@@ -6,6 +6,7 @@ import com.herron.exchange.common.api.common.enums.CompoundingMethodEnum;
 import com.herron.exchange.common.api.common.enums.DayCountConvetionEnum;
 import com.herron.exchange.common.api.common.enums.InstrumentTypeEnum;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
+import com.herron.exchange.common.api.common.model.Market;
 
 import java.time.LocalDate;
 
@@ -17,7 +18,8 @@ public record HerronBondInstrument(String instrumentId,
                                    double nominalValue,
                                    CompoundingMethodEnum compoundingMethod,
                                    double couponRate,
-                                   DayCountConvetionEnum dayCountConvention) implements BondInstrument {
+                                   DayCountConvetionEnum dayCountConvention,
+                                   Market market) implements BondInstrument {
 
     public HerronBondInstrument(BondInstrument instrument) {
         this(instrument.instrumentId(),
@@ -27,7 +29,8 @@ public record HerronBondInstrument(String instrumentId,
                 instrument.nominalValue(),
                 instrument.compoundingMethod(),
                 instrument.couponRate(),
-                instrument.dayCountConvention());
+                instrument.dayCountConvention(),
+                instrument.market());
     }
 
     @Override

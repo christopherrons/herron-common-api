@@ -24,11 +24,6 @@ public record HerronInstrumentRequest(long requestId, Instrument instrument, lon
     }
 
     @Override
-    public long timeStampInMs() {
-        return timeStampInMs;
-    }
-
-    @Override
     public InstrumentResponse createResponse(long timeStampInMs,
                                    long requestId,
                                    RequestStatus requestStatus,
