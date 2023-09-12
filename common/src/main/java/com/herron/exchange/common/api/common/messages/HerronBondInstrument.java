@@ -3,6 +3,7 @@ package com.herron.exchange.common.api.common.messages;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.herron.exchange.common.api.common.api.BondInstrument;
 import com.herron.exchange.common.api.common.enums.CompoundingMethodEnum;
+import com.herron.exchange.common.api.common.enums.DayCountConvetionEnum;
 import com.herron.exchange.common.api.common.enums.InstrumentTypeEnum;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
@@ -10,21 +11,23 @@ import java.time.LocalDate;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record HerronBondInstrument(String instrumentId,
-                                   int couponYearlyFrequency,
+                                   int couponAnnualFrequency,
                                    LocalDate maturityDate,
                                    LocalDate startDate,
                                    double nominalValue,
                                    CompoundingMethodEnum compoundingMethod,
-                                   double couponRate) implements BondInstrument {
+                                   double couponRate,
+                                   DayCountConvetionEnum dayCountConvention) implements BondInstrument {
 
     public HerronBondInstrument(BondInstrument instrument) {
         this(instrument.instrumentId(),
-                instrument.couponYearlyFrequency(),
+                instrument.couponAnnualFrequency(),
                 instrument.maturityDate(),
                 instrument.startDate(),
                 instrument.nominalValue(),
                 instrument.compoundingMethod(),
-                instrument.couponRate());
+                instrument.couponRate(),
+                instrument.dayCountConvention());
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.herron.exchange.common.api.common.math.probability;
 
+import com.herron.exchange.common.api.common.testutils.TestAssertionUtils;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.junit.jupiter.api.Test;
-import testutils.TestAssertionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.christopherrons.common.math.probability.ProbabilityCalculationUtils.*;
+import static com.herron.exchange.common.api.common.math.probability.ProbabilityCalculationUtils.*;
 
 class ProbabilityCalculationUtilsTest {
 
