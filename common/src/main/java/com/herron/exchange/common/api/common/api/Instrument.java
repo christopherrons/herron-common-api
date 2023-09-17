@@ -1,7 +1,6 @@
 package com.herron.exchange.common.api.common.api;
 
 import com.herron.exchange.common.api.common.enums.InstrumentTypeEnum;
-import com.herron.exchange.common.api.common.model.Market;
 
 public interface Instrument extends Message {
 
@@ -9,5 +8,7 @@ public interface Instrument extends Message {
 
     InstrumentTypeEnum instrumentType();
 
-    Market market();
+    String marketId();
+
+    String currency();
 }

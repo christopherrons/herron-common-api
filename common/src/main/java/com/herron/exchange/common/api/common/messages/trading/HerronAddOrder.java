@@ -13,7 +13,7 @@ public record HerronAddOrder(OrderOperationEnum orderOperation,
                              OrderSideEnum orderSide,
                              double initialVolume,
                              double currentVolume,
-                             MonetaryAmount monetaryAmount,
+                             double price,
                              long timeStampInMs,
                              String instrumentId,
                              String orderbookId,
@@ -29,7 +29,7 @@ public record HerronAddOrder(OrderOperationEnum orderOperation,
                 order.orderSide(),
                 order.initialVolume(),
                 order.currentVolume(),
-                order.monetaryAmount(),
+                order.price(),
                 order.timeStampInMs(),
                 order.instrumentId(),
                 order.orderbookId(),
@@ -46,10 +46,5 @@ public record HerronAddOrder(OrderOperationEnum orderOperation,
     @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_ADD_ORDER;
-    }
-
-    @Override
-    public double price() {
-        return monetaryAmount().value();
     }
 }

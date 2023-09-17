@@ -22,8 +22,6 @@ public interface Trade extends Event {
 
     double price();
 
-    MonetaryAmount monetaryAmount();
-
     long timeStampInMs();
 
     String instrumentId();

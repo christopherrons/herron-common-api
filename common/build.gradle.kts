@@ -4,6 +4,7 @@ dependencies {
     implementation(libs.javax.json.api)
     implementation(libs.javax.json)
     implementation(libs.commons.math)
+    implementation(libs.spring.kafka)
 
     // External Test Libs
     testImplementation(testlibs.junit.jupiter.api)

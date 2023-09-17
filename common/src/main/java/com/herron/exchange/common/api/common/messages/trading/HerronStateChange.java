@@ -23,7 +23,7 @@ public record HerronStateChange(String orderbookId,
 
     @Override
     public MessageTypesEnum messageType() {
-        return MessageTypesEnum.HERRON_STATE_CHANGE;
+        return MessageTypesEnum.HERRON_ORDERBOOK_STATE_CHANGE;
     }
 
 }
