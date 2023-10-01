@@ -44,6 +44,10 @@ public class ReferenceDataCache {
         return orderbookIdToOrderbookData.values();
     }
 
+    public Collection<Market> getMarkets() {
+        return marketIdToMarket.values();
+    }
+
     public Instrument getInstrument(String instrumentId) {
         return instrumentIdToInstrument.get(instrumentId);
     }

@@ -65,6 +65,8 @@ dependencies {
     implementation(libs.spring.boot.starter.parent)
     implementation(libs.javax.json.api)
     implementation(libs.javax.json)
+    implementation(libs.immutables.value)
+    annotationProcessor(libs.immutables.value)
 
     // External Test Libs
     testImplementation(testlibs.junit.jupiter.api)

@@ -1,0 +1,10 @@
+package com.herron.exchange.common.api.common.api;
+
+import com.herron.exchange.common.api.common.enums.OptionTypeEnum;
+
+public interface OptionInstrument extends DerivativeInstrument {
+
+    double strikePrice();
+
+    OptionTypeEnum optionType();
+}

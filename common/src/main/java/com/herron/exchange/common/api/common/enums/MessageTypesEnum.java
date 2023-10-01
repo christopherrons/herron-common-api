@@ -4,10 +4,7 @@ import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.mapper.HerronJsonMapperUtil;
 import com.herron.exchange.common.api.common.messages.HerronBroadcastMessage;
 import com.herron.exchange.common.api.common.messages.common.HerronDataLoading;
-import com.herron.exchange.common.api.common.messages.refdata.HerronBondInstrument;
-import com.herron.exchange.common.api.common.messages.refdata.HerronMarket;
-import com.herron.exchange.common.api.common.messages.refdata.HerronOrderbookData;
-import com.herron.exchange.common.api.common.messages.refdata.HerronStockInstrument;
+import com.herron.exchange.common.api.common.messages.refdata.*;
 import com.herron.exchange.common.api.common.messages.request.HerronInstrumentRequest;
 import com.herron.exchange.common.api.common.messages.request.HerronOrderRequest;
 import com.herron.exchange.common.api.common.messages.request.HerronOrderbookDataRequest;
@@ -38,17 +35,19 @@ public enum MessageTypesEnum {
     BITSTAMP_UPDATE_ORDER("BSUO", HerronUpdateOrder.class),
     BITSTAMP_CANCEL_ORDER("BSCO", HerronCancelOrder.class),
     BITSTAMP_TRADE("BSTR", HerronTrade.class),
-    BITSTAMP_ORDERBOOK_DATA("BSOB", HerronOrderbookData.class),
-    BITSTAMP_STOCK_INSTRUMENT("BSSI", HerronStockInstrument.class),
+    BITSTAMP_ORDERBOOK_DATA("BSOB", ImmutableHerronOrderbookData.class),
+    BITSTAMP_STOCK_INSTRUMENT("BSSI", ImmutableHerronEquityInstrument.class),
     BITSTAMP_STATE_CHANGE("BSSC", HerronStateChange.class),
     HERRON_BROADCAST_MESSAGE("HEBM", HerronBroadcastMessage.class),
     HERRON_ADD_ORDER("HEAO", HerronAddOrder.class),
     HERRON_UPDATE_ORDER("HEUO", HerronUpdateOrder.class),
     HERRON_CANCEL_ORDER("HECO", HerronCancelOrder.class),
     HERRON_TRADE("HETR", HerronTrade.class),
-    HERRON_ORDERBOOK_DATA("HEOB", HerronOrderbookData.class),
-    HERRON_STOCK_INSTRUMENT("HESI", HerronStockInstrument.class),
-    HERRON_BOND_INSTRUMENT("HEBI", HerronBondInstrument.class),
+    HERRON_ORDERBOOK_DATA("HEOB", ImmutableHerronOrderbookData.class),
+    HERRON_STOCK_INSTRUMENT("HESI", ImmutableHerronEquityInstrument.class),
+    HERRON_BOND_INSTRUMENT("HEBI", ImmutableHerronBondInstrument.class),
+    HERRON_OPTION_INSTRUMENT("HEOI", ImmutableHerronOptionInstrument.class),
+    HERRON_FUTURE_INSTRUMENT("HEFI", ImmutableHerronFutureInstrument.class),
     HERRON_TRADE_EXECUTION("HEEX", HerronTradeExecution.class),
     HERRON_DATA_LOADING_START("HEDL", HerronDataLoading.class),
     HERRON_MARKET("HEMA", HerronMarket.class),

@@ -3,7 +3,6 @@ package com.herron.exchange.common.api.common.messages.trading;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.herron.exchange.common.api.common.api.AddOrder;
 import com.herron.exchange.common.api.common.enums.*;
-import com.herron.exchange.common.api.common.model.MonetaryAmount;
 import com.herron.exchange.common.api.common.model.Participant;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

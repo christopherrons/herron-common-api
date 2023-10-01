@@ -5,6 +5,8 @@ dependencies {
     implementation(libs.javax.json)
     implementation(libs.commons.math)
     implementation(libs.spring.kafka)
+    implementation(libs.immutables.value)
+    annotationProcessor(libs.immutables.value)
 
     // External Test Libs
     testImplementation(testlibs.junit.jupiter.api)
