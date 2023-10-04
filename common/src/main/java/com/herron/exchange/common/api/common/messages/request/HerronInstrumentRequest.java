@@ -17,11 +17,6 @@ public record HerronInstrumentRequest(long requestId, Instrument instrument, lon
     }
 
     @Override
-    public Message getCopy() {
-        return new HerronInstrumentRequest(this);
-    }
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_INSTRUMENT_REQUEST;
     }

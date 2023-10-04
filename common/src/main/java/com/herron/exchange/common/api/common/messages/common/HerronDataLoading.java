@@ -13,11 +13,6 @@ public record HerronDataLoading(long timeStampInMs, DataLoadingStateEnum state) 
     }
 
     @Override
-    public HerronDataLoading getCopy() {
-        return new HerronDataLoading(this);
-    }
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_DATA_LOADING_START;
     }

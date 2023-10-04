@@ -34,11 +34,6 @@ public record HerronTrade(Participant bidParticipant,
     }
 
     @Override
-    public HerronTrade getCopy() {
-        return new HerronTrade(this);
-    }
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_TRADE;
     }

@@ -17,11 +17,6 @@ public record HerronOrderbookDataRequest(long requestId, OrderbookData orderbook
     }
 
     @Override
-    public Message getCopy() {
-        return new HerronOrderbookDataRequest(this);
-    }
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_ORDERBOOK_DATA_REQUEST;
     }

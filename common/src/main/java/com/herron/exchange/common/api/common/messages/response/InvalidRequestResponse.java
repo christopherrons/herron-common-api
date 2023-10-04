@@ -16,11 +16,6 @@ public record InvalidRequestResponse(long timeStampInMs,
     }
 
     @Override
-    public Message getCopy() {
-        return new InvalidRequestResponse(this);
-    }
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.INVALID_REQUEST_RESPONSE;
     }

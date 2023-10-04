@@ -17,11 +17,6 @@ public record HerronStateChangeResponse(long timeStampInMs,
     }
 
     @Override
-    public Message getCopy() {
-        return new HerronStateChangeResponse(this);
-    }
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_STATE_CHANGE_RESPONSE;
     }

@@ -17,11 +17,6 @@ public record HerronStateChange(String orderbookId,
     }
 
     @Override
-    public HerronStateChange getCopy() {
-        return new HerronStateChange(this);
-    }
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_ORDERBOOK_STATE_CHANGE;
     }

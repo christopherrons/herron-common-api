@@ -16,9 +16,4 @@ public record HerronTradeExecution(Message triggerMessage, List<Message> message
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_TRADE_EXECUTION;
     }
-
-    @Override
-    public Message getCopy() {
-        return new HerronTradeExecution(this);
-    }
 }

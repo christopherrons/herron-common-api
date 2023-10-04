@@ -1,7 +1,6 @@
 package com.herron.exchange.common.api.common.messages.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.api.StateChange;
 import com.herron.exchange.common.api.common.api.StateChangeRequest;
 import com.herron.exchange.common.api.common.api.StateChangeResponse;
@@ -14,11 +13,6 @@ public record HerronStateChangeRequest(long requestId, StateChange stateChange) 
 
     public HerronStateChangeRequest(HerronStateChangeRequest stateChangeRequest) {
         this(stateChangeRequest.requestId, stateChangeRequest.stateChange);
-    }
-
-    @Override
-    public Message getCopy() {
-        return new HerronStateChangeRequest(this);
     }
 
     @Override

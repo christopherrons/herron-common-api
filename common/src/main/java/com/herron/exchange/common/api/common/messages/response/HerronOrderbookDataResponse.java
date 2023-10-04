@@ -17,11 +17,6 @@ public record HerronOrderbookDataResponse(long timeStampInMs,
     }
 
     @Override
-    public Message getCopy() {
-        return new HerronOrderbookDataResponse(this);
-    }
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_ORDERBOOK_DATA_RESPONSE;
     }

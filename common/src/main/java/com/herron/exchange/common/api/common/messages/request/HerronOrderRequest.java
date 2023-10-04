@@ -14,11 +14,6 @@ public record HerronOrderRequest(long requestId, Order order) implements OrderRe
     }
 
     @Override
-    public Message getCopy() {
-        return new HerronOrderRequest(this);
-    }
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_ORDER_REQUEST;
     }

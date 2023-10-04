@@ -1,11 +1,12 @@
 package com.herron.exchange.common.api.common.messages.refdata;
 
-import com.herron.exchange.common.api.common.api.BondInstrument;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.FutureInstrument;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
 @Value.Immutable
+@JsonDeserialize(builder = ImmutableHerronFutureInstrument.Builder.class)
 public interface HerronFutureInstrument extends FutureInstrument {
 
     @Value.Default

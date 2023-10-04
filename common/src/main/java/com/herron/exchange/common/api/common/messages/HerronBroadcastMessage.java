@@ -22,12 +22,6 @@ public record HerronBroadcastMessage(Message message,
     }
 
     @Override
-    public Message getCopy() {
-        return new HerronBroadcastMessage(this);
-    }
-
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_BROADCAST_MESSAGE;
     }

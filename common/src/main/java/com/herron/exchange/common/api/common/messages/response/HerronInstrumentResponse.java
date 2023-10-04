@@ -17,11 +17,6 @@ public record HerronInstrumentResponse(long timeStampInMs,
     }
 
     @Override
-    public Message getCopy() {
-        return new HerronInstrumentResponse(this);
-    }
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_INSTRUMENT_RESPONSE;
     }

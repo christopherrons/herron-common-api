@@ -38,11 +38,6 @@ public record HerronUpdateOrder(OrderOperationEnum orderOperation,
     }
 
     @Override
-    public HerronUpdateOrder getCopy() {
-        return new HerronUpdateOrder(this);
-    }
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_UPDATE_ORDER;
     }

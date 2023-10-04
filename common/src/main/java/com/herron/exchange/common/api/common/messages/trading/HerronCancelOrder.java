@@ -39,11 +39,6 @@ public record HerronCancelOrder(OrderOperationEnum orderOperation,
     }
 
     @Override
-    public Message getCopy() {
-        return new HerronCancelOrder(this);
-    }
-
-    @Override
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_CANCEL_ORDER;
     }
