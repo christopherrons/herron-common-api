@@ -1,10 +1,10 @@
 package com.herron.exchange.common.api.common.api;
 
-import com.herron.exchange.common.api.common.model.BusinessCalendar;
+import com.herron.exchange.common.api.common.model.HerronBusinessCalendar;
 
 public interface Market extends Message {
 
     String marketId();
 
-    BusinessCalendar businessCalendar();
+    HerronBusinessCalendar businessCalendar();
 }

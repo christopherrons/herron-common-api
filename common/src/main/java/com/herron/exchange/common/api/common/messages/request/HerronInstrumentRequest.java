@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.herron.exchange.common.api.common.api.Instrument;
 import com.herron.exchange.common.api.common.api.InstrumentRequest;
 import com.herron.exchange.common.api.common.api.InstrumentResponse;
-import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.enums.RequestStatus;
 import com.herron.exchange.common.api.common.messages.response.HerronInstrumentResponse;

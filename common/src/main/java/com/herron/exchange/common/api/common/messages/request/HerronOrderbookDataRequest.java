@@ -1,7 +1,6 @@
 package com.herron.exchange.common.api.common.messages.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.api.OrderbookData;
 import com.herron.exchange.common.api.common.api.OrderbookDataRequest;
 import com.herron.exchange.common.api.common.api.OrderbookDataResponse;

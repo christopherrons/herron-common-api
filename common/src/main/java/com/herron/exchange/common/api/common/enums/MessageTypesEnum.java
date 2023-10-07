@@ -3,7 +3,7 @@ package com.herron.exchange.common.api.common.enums;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.mapper.HerronJsonMapperUtil;
 import com.herron.exchange.common.api.common.messages.HerronBroadcastMessage;
-import com.herron.exchange.common.api.common.messages.common.HerronDataLoading;
+import com.herron.exchange.common.api.common.messages.common.HerronDataLoadingState;
 import com.herron.exchange.common.api.common.messages.refdata.*;
 import com.herron.exchange.common.api.common.messages.request.HerronInstrumentRequest;
 import com.herron.exchange.common.api.common.messages.request.HerronOrderRequest;
@@ -49,7 +49,7 @@ public enum MessageTypesEnum {
     HERRON_OPTION_INSTRUMENT("HEOI", ImmutableHerronOptionInstrument.class),
     HERRON_FUTURE_INSTRUMENT("HEFI", ImmutableHerronFutureInstrument.class),
     HERRON_TRADE_EXECUTION("HEEX", HerronTradeExecution.class),
-    HERRON_DATA_LOADING_START("HEDL", HerronDataLoading.class),
+    HERRON_DATA_LOADING_STATE("HEDL", HerronDataLoadingState.class),
     HERRON_MARKET("HEMA", HerronMarket.class),
     HERRON_ORDERBOOK_STATE_CHANGE("HESC", HerronStateChange.class);
 

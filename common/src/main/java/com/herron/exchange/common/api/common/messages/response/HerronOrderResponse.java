@@ -1,7 +1,6 @@
 package com.herron.exchange.common.api.common.messages.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.api.OrderResponse;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.enums.RequestStatus;

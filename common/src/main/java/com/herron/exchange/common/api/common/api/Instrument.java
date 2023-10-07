@@ -7,6 +7,8 @@ import java.time.LocalDate;
 
 public interface Instrument extends Message {
 
+    String instrumentName();
+
     String instrumentId();
 
     InstrumentTypeEnum instrumentType();

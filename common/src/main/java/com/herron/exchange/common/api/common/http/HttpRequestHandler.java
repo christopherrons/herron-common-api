@@ -23,7 +23,9 @@ public class HttpRequestHandler {
     }
 
     public static <T> T postRequest(String url, String body, Map<String, String> headers, Class<T> responseClass) {
-        LOGGER.info("Post request for {} with body {} received.", url, body);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Post request for {} with body {} received.", url, body);
+        }
         var request = HttpRequest.newBuilder();
         request.uri(URI.create(url))
                 .header("Content-Type", "application/json")
@@ -38,7 +40,9 @@ public class HttpRequestHandler {
     }
 
     public static <T> T getRequest(String url, Map<String, String> headers, Class<T> responseClass) {
-        LOGGER.info("Get request for {} received.", url);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Get request for {} received.", url);
+        }
         var request = HttpRequest.newBuilder();
         request.uri(URI.create(url))
                 .header("Content-Type", "application/json")
@@ -51,7 +55,9 @@ public class HttpRequestHandler {
     private static <T> T request(HttpRequest request, Class<T> responseClass) {
         try {
             var response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            LOGGER.info("Response received for {} with status {}.", response.uri(), response.statusCode());
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Response received for {} with status {}.", response.uri(), response.statusCode());
+            }
             return mapResponse(response.body(), responseClass);
         } catch (InterruptedException | IOException e) {
             LOGGER.error("Request failed", e);

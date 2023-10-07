@@ -1,7 +1,6 @@
 package com.herron.exchange.common.api.common.datastructures;
 
 import com.herron.exchange.common.api.common.api.Event;
-import com.herron.exchange.common.api.common.api.Message;
 
 import java.util.ArrayList;
 import java.util.Comparator;

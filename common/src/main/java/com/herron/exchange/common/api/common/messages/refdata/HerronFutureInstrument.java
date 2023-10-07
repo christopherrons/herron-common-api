@@ -11,6 +11,6 @@ public interface HerronFutureInstrument extends FutureInstrument {
 
     @Value.Default
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.HERRON_OPTION_INSTRUMENT;
+        return MessageTypesEnum.HERRON_FUTURE_INSTRUMENT;
     }
 }
