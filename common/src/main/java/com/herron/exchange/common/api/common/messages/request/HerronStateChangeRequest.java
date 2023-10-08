@@ -1,9 +1,9 @@
 package com.herron.exchange.common.api.common.messages.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.herron.exchange.common.api.common.api.StateChange;
-import com.herron.exchange.common.api.common.api.StateChangeRequest;
-import com.herron.exchange.common.api.common.api.StateChangeResponse;
+import com.herron.exchange.common.api.common.api.trading.statechange.StateChange;
+import com.herron.exchange.common.api.common.api.broadcasts.requests.StateChangeRequest;
+import com.herron.exchange.common.api.common.api.broadcasts.response.StateChangeResponse;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.enums.RequestStatus;
 import com.herron.exchange.common.api.common.messages.response.HerronStateChangeResponse;

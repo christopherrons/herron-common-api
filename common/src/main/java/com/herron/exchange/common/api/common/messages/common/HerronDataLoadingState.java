@@ -1,7 +1,7 @@
 package com.herron.exchange.common.api.common.messages.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.herron.exchange.common.api.common.api.DataLoadingState;
+import com.herron.exchange.common.api.common.api.broadcasts.DataLoadingState;
 import com.herron.exchange.common.api.common.enums.DataLoadingStateEnum;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 

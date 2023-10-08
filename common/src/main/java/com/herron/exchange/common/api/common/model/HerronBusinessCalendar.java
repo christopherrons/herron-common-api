@@ -1,7 +1,7 @@
 package com.herron.exchange.common.api.common.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.herron.exchange.common.api.common.api.BusinessCalendar;
+import com.herron.exchange.common.api.common.api.referencedata.exchange.BusinessCalendar;
 import org.immutables.value.Value;
 
 import java.util.Set;

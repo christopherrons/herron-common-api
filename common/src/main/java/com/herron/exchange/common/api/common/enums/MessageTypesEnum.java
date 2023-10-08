@@ -51,6 +51,7 @@ public enum MessageTypesEnum {
     HERRON_TRADE_EXECUTION("HEEX", HerronTradeExecution.class),
     HERRON_DATA_LOADING_STATE("HEDL", HerronDataLoadingState.class),
     HERRON_MARKET("HEMA", HerronMarket.class),
+    HERRON_PRODUCT("HEPR", HerronProduct.class),
     HERRON_ORDERBOOK_STATE_CHANGE("HESC", HerronStateChange.class);
 
     private static final Map<String, MessageTypesEnum> VALUES_BY_IDENTIFIER = stream(MessageTypesEnum.values())

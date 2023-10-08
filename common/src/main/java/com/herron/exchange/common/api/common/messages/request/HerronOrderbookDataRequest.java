@@ -1,9 +1,9 @@
 package com.herron.exchange.common.api.common.messages.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.herron.exchange.common.api.common.api.OrderbookData;
-import com.herron.exchange.common.api.common.api.OrderbookDataRequest;
-import com.herron.exchange.common.api.common.api.OrderbookDataResponse;
+import com.herron.exchange.common.api.common.api.referencedata.orderbook.OrderbookData;
+import com.herron.exchange.common.api.common.api.broadcasts.requests.OrderbookDataRequest;
+import com.herron.exchange.common.api.common.api.broadcasts.response.OrderbookDataResponse;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.enums.RequestStatus;
 import com.herron.exchange.common.api.common.messages.response.HerronOrderbookDataResponse;

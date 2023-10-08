@@ -39,7 +39,7 @@ public abstract class KafkaBroadCastProducer {
         HerronDataLoadingState done = new HerronDataLoadingState(Instant.now().toEpochMilli(), DataLoadingStateEnum.DONE);
         broadcastMessage(done);
         isBroadCasting.set(false);
-        logger.info("Broadcasting stopped for partition {}", partitionKey);
+        logger.info("Broadcasting stopped for partition {}. Total messages {}.", partitionKey, eventLogger.totalNrOfEvents());
     }
 
     public synchronized boolean broadcastMessage(Message message) {

@@ -1,7 +1,7 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.herron.exchange.common.api.common.api.StateChange;
+import com.herron.exchange.common.api.common.api.trading.statechange.StateChange;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.enums.StateChangeTypeEnum;
 

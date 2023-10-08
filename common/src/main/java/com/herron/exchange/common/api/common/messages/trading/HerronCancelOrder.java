@@ -1,7 +1,7 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.herron.exchange.common.api.common.api.CancelOrder;
+import com.herron.exchange.common.api.common.api.trading.orders.CancelOrder;
 import com.herron.exchange.common.api.common.enums.*;
 import com.herron.exchange.common.api.common.model.Participant;
 

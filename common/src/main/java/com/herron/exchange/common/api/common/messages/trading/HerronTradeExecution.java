@@ -1,7 +1,7 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
 import com.herron.exchange.common.api.common.api.Message;
-import com.herron.exchange.common.api.common.api.TradeExecution;
+import com.herron.exchange.common.api.common.api.trading.trades.TradeExecution;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
 import java.util.List;

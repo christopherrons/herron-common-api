@@ -1,7 +1,7 @@
 package com.herron.exchange.common.api.common.messages.refdata;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.herron.exchange.common.api.common.api.OrderbookData;
+import com.herron.exchange.common.api.common.api.referencedata.orderbook.OrderbookData;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 

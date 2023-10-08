@@ -2,7 +2,7 @@ package com.herron.exchange.common.api.common.messages;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.herron.exchange.common.api.common.api.BroadcastMessage;
+import com.herron.exchange.common.api.common.api.broadcasts.BroadcastMessage;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.mapper.HerronBroadCastJsonDeserializer;

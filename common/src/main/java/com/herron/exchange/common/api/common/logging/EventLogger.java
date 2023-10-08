@@ -45,4 +45,8 @@ public class EventLogger {
     private double getAverageEventsPerSecond(Instant currentTime) {
         return totalNrOfEvents.get() / (MILLI_TO_SEK * (currentTime.toEpochMilli() - startTime.toEpochMilli()));
     }
+
+    public long totalNrOfEvents() {
+        return totalNrOfEvents.get();
+    }
 }
