@@ -1,8 +1,9 @@
-package com.herron.exchange.common.api.common.messages;
+package com.herron.exchange.common.api.common.kafka;
 
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.enums.DataLoadingStateEnum;
 import com.herron.exchange.common.api.common.logging.EventLogger;
+import com.herron.exchange.common.api.common.messages.ImmutableHerronBroadcastMessage;
 import com.herron.exchange.common.api.common.messages.common.HerronDataLoadingState;
 import com.herron.exchange.common.api.common.messages.common.ImmutableHerronDataLoadingState;
 import com.herron.exchange.common.api.common.model.PartitionKey;
@@ -14,7 +15,7 @@ import java.time.Instant;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
-public abstract class KafkaBroadcastProducer {
+public class KafkaBroadcastProducer {
 
     private final Logger logger = LoggerFactory.getLogger(KafkaBroadcastProducer.class);
     private final PartitionKey partitionKey;
