@@ -1,40 +1,16 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.trading.trades.Trade;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
-import com.herron.exchange.common.api.common.model.Participant;
+import org.immutables.value.Value;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public record HerronTrade(Participant bidParticipant,
-                          Participant askParticipant,
-                          String tradeId,
-                          String buyOrderId,
-                          String askOrderId,
-                          boolean isBidSideAggressor,
-                          double volume,
-                          double price,
-                          long timeStampInMs,
-                          String instrumentId,
-                          String orderbookId) implements Trade {
+@Value.Immutable
+@JsonDeserialize(builder = ImmutableHerronTrade.Builder.class)
+public interface HerronTrade extends Trade {
 
-
-    public HerronTrade(Trade trade) {
-        this(trade.bidParticipant(),
-                trade.askParticipant(),
-                trade.tradeId(),
-                trade.buyOrderId(),
-                trade.askOrderId(),
-                trade.isBidSideAggressor(),
-                trade.volume(),
-                trade.price(),
-                trade.timeStampInMs(),
-                trade.instrumentId(),
-                trade.orderbookId());
-    }
-
-    @Override
-    public MessageTypesEnum messageType() {
+    @Value.Default
+    default MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_TRADE;
     }
 

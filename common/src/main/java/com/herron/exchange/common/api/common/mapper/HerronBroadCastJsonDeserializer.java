@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
-import com.herron.exchange.common.api.common.messages.HerronBroadcastMessage;
+import com.herron.exchange.common.api.common.messages.ImmutableHerronBroadcastMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,13 +33,13 @@ public class HerronBroadCastJsonDeserializer extends StdDeserializer<Message> {
 
         String messageTypeString = node.get("messageMessageType").asText();
         String sequenceNumber = node.get("sequenceNumber").asText();
-        String timeStampInMs = node.get("timeStampInMs").asText();
+        String timeOfEventMs = node.get("timeOfEventMs").asText();
         var messageType = MessageTypesEnum.getMessageTypeEnum(messageTypeString);
-        return new HerronBroadcastMessage(
-                messageType.deserializeMessage(node.get("message")),
-                messageTypeString,
-                Long.parseLong(sequenceNumber),
-                Long.parseLong(timeStampInMs)
-        );
+        return ImmutableHerronBroadcastMessage.builder()
+                .timeOfEventMs(Long.parseLong(timeOfEventMs))
+                .message(messageType.deserializeMessage(node.get("message")))
+                .messageMessageType(messageTypeString)
+                .sequenceNumber(Long.parseLong(sequenceNumber))
+                .build();
     }
 }

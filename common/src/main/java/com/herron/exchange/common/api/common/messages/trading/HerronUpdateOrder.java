@@ -1,44 +1,16 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.trading.orders.UpdateOrder;
-import com.herron.exchange.common.api.common.enums.*;
-import com.herron.exchange.common.api.common.model.Participant;
+import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
+import org.immutables.value.Value;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public record HerronUpdateOrder(OrderOperationEnum orderOperation,
-                                Participant participant,
-                                String orderId,
-                                OrderSideEnum orderSide,
-                                double initialVolume,
-                                double currentVolume,
-                                double price,
-                                long timeStampInMs,
-                                String instrumentId,
-                                String orderbookId,
-                                OrderExecutionTypeEnum orderExecutionType,
-                                OrderTypeEnum orderType,
-                                OrderUpdatedOperationTypeEnum updateOperationType) implements UpdateOrder {
+@Value.Immutable
+@JsonDeserialize(builder = ImmutableHerronTradeExecution.Builder.class)
+public interface HerronUpdateOrder extends UpdateOrder {
 
-
-    public HerronUpdateOrder(UpdateOrder order) {
-        this(order.orderOperation(),
-                order.participant(),
-                order.orderId(),
-                order.orderSide(),
-                order.initialVolume(),
-                order.currentVolume(),
-                order.price(),
-                order.timeStampInMs(),
-                order.instrumentId(),
-                order.orderbookId(),
-                order.orderExecutionType(),
-                order.orderType(),
-                order.updateOperationType());
-    }
-
-    @Override
-    public MessageTypesEnum messageType() {
+    @Value.Default
+    default MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_UPDATE_ORDER;
     }
 }

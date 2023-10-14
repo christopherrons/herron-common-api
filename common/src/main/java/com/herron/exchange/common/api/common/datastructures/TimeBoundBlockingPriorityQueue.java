@@ -12,7 +12,7 @@ public class TimeBoundBlockingPriorityQueue<T extends Event> extends PriorityBlo
     private final transient PriorityBlockingQueue<T> timeBoundQueue;
 
     public TimeBoundBlockingPriorityQueue(int timeInMs) {
-        this(timeInMs, Comparator.comparing(Event::timeStampInMs));
+        this(timeInMs, Comparator.comparing(Event::timeOfEventMs));
     }
 
     public TimeBoundBlockingPriorityQueue(int timeInMs, Comparator<T> comparator) {
@@ -38,6 +38,6 @@ public class TimeBoundBlockingPriorityQueue<T extends Event> extends PriorityBlo
     }
 
     private boolean isTimeExceeded(T currentItem, T item) {
-        return currentItem.timeStampInMs() - item.timeStampInMs() > timeInMs;
+        return currentItem.timeOfEventMs() - item.timeOfEventMs() > timeInMs;
     }
 }

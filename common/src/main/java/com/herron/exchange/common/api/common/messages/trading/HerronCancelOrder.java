@@ -1,44 +1,17 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.trading.orders.CancelOrder;
-import com.herron.exchange.common.api.common.enums.*;
-import com.herron.exchange.common.api.common.model.Participant;
+import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
+import com.herron.exchange.common.api.common.enums.OrderCancelOperationTypeEnum;
+import org.immutables.value.Value;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public record HerronCancelOrder(OrderOperationEnum orderOperation,
-                                Participant participant,
-                                String orderId,
-                                OrderSideEnum orderSide,
-                                double initialVolume,
-                                double currentVolume,
-                                double price,
-                                long timeStampInMs,
-                                String instrumentId,
-                                String orderbookId,
-                                OrderExecutionTypeEnum orderExecutionType,
-                                OrderTypeEnum orderType,
-                                OrderCancelOperationTypeEnum cancelOperationType) implements CancelOrder {
+@Value.Immutable
+@JsonDeserialize(builder = ImmutableHerronCancelOrder.Builder.class)
+public interface HerronCancelOrder extends CancelOrder {
 
-
-    public HerronCancelOrder(CancelOrder order) {
-        this(order.orderOperation(),
-                order.participant(),
-                order.orderId(),
-                order.orderSide(),
-                order.initialVolume(),
-                order.currentVolume(),
-                order.price(),
-                order.timeStampInMs(),
-                order.instrumentId(),
-                order.orderbookId(),
-                order.orderExecutionType(),
-                order.orderType(),
-                order.cancelOperationType());
-    }
-
-    @Override
-    public MessageTypesEnum messageType() {
+    @Value.Default
+    default MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_CANCEL_ORDER;
     }
 

@@ -7,10 +7,10 @@ import java.util.Comparator;
 public class EventComparator<T extends Event> implements Comparator<T> {
     @Override
     public int compare(T event, T otherEvent) {
-        if (event.timeStampInMs() < otherEvent.timeStampInMs()) {
+        if (event.timeOfEventMs() < otherEvent.timeOfEventMs()) {
             return -1;
         }
-        if (event.timeStampInMs() > otherEvent.timeStampInMs()) {
+        if (event.timeOfEventMs() > otherEvent.timeOfEventMs()) {
             return 1;
         }
 

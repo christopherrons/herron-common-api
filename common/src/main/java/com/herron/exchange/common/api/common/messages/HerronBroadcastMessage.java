@@ -1,28 +1,16 @@
 package com.herron.exchange.common.api.common.messages;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.broadcasts.BroadcastMessage;
-import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
-import com.herron.exchange.common.api.common.mapper.HerronBroadCastJsonDeserializer;
+import org.immutables.value.Value;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonDeserialize(using = HerronBroadCastJsonDeserializer.class)
-public record HerronBroadcastMessage(Message message,
-                                     String messageMessageType,
-                                     long sequenceNumber,
-                                     long timeStampInMs) implements BroadcastMessage {
+@Value.Immutable
+@JsonDeserialize(builder = ImmutableHerronBroadcastMessage.Builder.class)
+public interface HerronBroadcastMessage extends BroadcastMessage {
 
-    public HerronBroadcastMessage(HerronBroadcastMessage broadcastMessage) {
-        this(broadcastMessage.message(),
-                broadcastMessage.messageMessageType(),
-                broadcastMessage.sequenceNumber(),
-                broadcastMessage.timeStampInMs());
-    }
-
-    @Override
-    public MessageTypesEnum messageType() {
+    @Value.Default
+    default MessageTypesEnum messageType() {
         return MessageTypesEnum.HERRON_BROADCAST_MESSAGE;
     }
 }

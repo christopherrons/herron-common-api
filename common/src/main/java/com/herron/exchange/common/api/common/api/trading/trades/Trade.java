@@ -2,6 +2,8 @@ package com.herron.exchange.common.api.common.api.trading.trades;
 
 import com.herron.exchange.common.api.common.api.Event;
 import com.herron.exchange.common.api.common.model.Participant;
+import com.herron.exchange.common.api.common.model.Price;
+import com.herron.exchange.common.api.common.model.Volume;
 
 public interface Trade extends Event {
 
@@ -18,11 +20,9 @@ public interface Trade extends Event {
 
     boolean isBidSideAggressor();
 
-    double volume();
+    Volume volume();
 
-    double price();
-
-    long timeStampInMs();
+    Price price();
 
     String instrumentId();
 
