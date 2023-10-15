@@ -38,7 +38,6 @@ public class DefaultBroadcastJsonDeserializer extends StdDeserializer<Message> {
         return ImmutableDefaultBroadcastMessage.builder()
                 .timeOfEventMs(Long.parseLong(timeOfEventMs))
                 .message(messageType.deserializeMessage(node.get("message")))
-                .messageMessageType(messageTypeString)
                 .sequenceNumber(Long.parseLong(sequenceNumber))
                 .build();
     }

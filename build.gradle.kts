@@ -63,8 +63,6 @@ dependencies {
     // External Libs
     implementation(libs.spring.boot.starter.web)
     implementation(libs.spring.boot.starter.parent)
-    implementation(libs.javax.json.api)
-    implementation(libs.javax.json)
     implementation(libs.immutables.value)
     annotationProcessor(libs.immutables.value)
 

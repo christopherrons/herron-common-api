@@ -11,16 +11,16 @@ import static java.time.DayOfWeek.SATURDAY;
 import static java.time.DayOfWeek.SUNDAY;
 
 @Value.Immutable
-@JsonDeserialize(builder = ImmutableHerronBusinessCalendar.Builder.class)
-public interface HerronBusinessCalendar extends BusinessCalendar {
+@JsonDeserialize(builder = ImmutableDefaultBusinessCalendar.Builder.class)
+public interface DefaultBusinessCalendar extends BusinessCalendar {
 
     @Value.Default
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.HERRON_BUSINESS_CALENDAR;
+        return MessageTypesEnum.DEFAULT_BUSINESS_CALENDAR;
     }
 
     static BusinessCalendar noHolidayCalendar() {
-        return ImmutableHerronBusinessCalendar.builder()
+        return ImmutableDefaultBusinessCalendar.builder()
                 .calendarId("noHolidayCalendar")
                 .holidays(Set.of())
                 .weekends(Set.of())
@@ -29,7 +29,7 @@ public interface HerronBusinessCalendar extends BusinessCalendar {
     }
 
     static BusinessCalendar defaultWeekendCalendar() {
-        return ImmutableHerronBusinessCalendar.builder()
+        return ImmutableDefaultBusinessCalendar.builder()
                 .calendarId("weekendCalendar")
                 .holidays(Set.of())
                 .weekends(Set.of(SATURDAY, SUNDAY))

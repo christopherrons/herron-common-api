@@ -3,8 +3,8 @@ package com.herron.exchange.common.api.common.enums;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.mapper.HerronJsonMapperUtil;
 import com.herron.exchange.common.api.common.messages.DefaultBroadcastMessage;
-import com.herron.exchange.common.api.common.messages.common.HerronBusinessCalendar;
-import com.herron.exchange.common.api.common.messages.common.HerronDataStreamState;
+import com.herron.exchange.common.api.common.messages.common.DefaultBusinessCalendar;
+import com.herron.exchange.common.api.common.messages.common.DefaultDataStreamState;
 import com.herron.exchange.common.api.common.messages.marketdata.DefaultMarketDataPrice;
 import com.herron.exchange.common.api.common.messages.refdata.*;
 import com.herron.exchange.common.api.common.messages.trading.*;
@@ -20,32 +20,32 @@ public enum MessageTypesEnum {
     INVALID_MESSAGE_TYPE(null, null),
     DEFAULT_MARKET_DATA_PRICE("DMDP", DefaultMarketDataPrice.class),
     DEFAULT_BROADCAST_MESSAGE("DEBM", DefaultBroadcastMessage.class),
-    HERRON_TRADING_CALENDAR("HETC", HerronTradingCalendar.class),
-    HERRON_BUSINESS_CALENDAR("HEBC", HerronBusinessCalendar.class),
-    HERRON_ADD_ORDER("HEAO", HerronAddOrder.class),
-    HERRON_UPDATE_ORDER("HEUO", HerronUpdateOrder.class),
-    HERRON_CANCEL_ORDER("HECO", HerronCancelOrder.class),
-    HERRON_TRADE("HETR", HerronTrade.class),
-    HERRON_ORDERBOOK_DATA("HEOB", HerronOrderbookData.class),
-    HERRON_STOCK_INSTRUMENT("HESI", HerronEquityInstrument.class),
-    HERRON_BOND_INSTRUMENT("HEBI", HerronBondInstrument.class),
-    HERRON_OPTION_INSTRUMENT("HEOI", HerronOptionInstrument.class),
-    HERRON_FUTURE_INSTRUMENT("HEFI", HerronFutureInstrument.class),
-    HERRON_TRADE_EXECUTION("HEEX", HerronTradeExecution.class),
-    HERRON_DATA_STREAM_STATE("HEDL", HerronDataStreamState.class),
-    HERRON_MARKET("HEMA", HerronMarket.class),
-    HERRON_PRODUCT("HEPR", HerronProduct.class),
-    HERRON_ORDERBOOK_STATE_CHANGE("HESC", HerronStateChange.class);
+    DEFAULT_TRADING_CALENDAR("DFTC", DefaultTradingCalendar.class),
+    DEFAULT_BUSINESS_CALENDAR("DFBC", DefaultBusinessCalendar.class),
+    DEFAULT_ADD_ORDER("DFAO", DefaultAddOrder.class),
+    DEFAULT_UPDATE_ORDER("DFUO", DefaultUpdateOrder.class),
+    DEFAULT_CANCEL_ORDER("DFCO", DefaultCancelOrder.class),
+    DEFAULT_TRADE("DFTR", DefaultTrade.class),
+    DEFAULT_ORDERBOOK_DATA("DFOB", DefaultOrderbookData.class),
+    DEFAULT_EQUITY_INSTRUMENT("DFSI", DefaultEquityInstrument.class),
+    DEFAULT_BOND_INSTRUMENT("DFBI", DefaultBondInstrument.class),
+    DEFAULT_OPTION_INSTRUMENT("DFOI", DefaultOptionInstrument.class),
+    DEFAULT_FUTURE_INSTRUMENT("DFFI", DefaultFutureInstrument.class),
+    DEFAULT_TRADE_EXECUTION("DFEX", DefaultTradeExecution.class),
+    DEFAULT_DATA_STREAM_STATE("DFDL", DefaultDataStreamState.class),
+    DEFAULT_MARKET("DFMA", DefaultMarket.class),
+    DEFAULT_PRODUCT("DFPR", DefaultProduct.class),
+    DEFAULT_ORDERBOOK_STATE_CHANGE("DFSC", DefaultStateChange.class);
 
     private static final Map<String, MessageTypesEnum> VALUES_BY_IDENTIFIER = stream(MessageTypesEnum.values())
             .collect(toMap(MessageTypesEnum::getMessageTypeId, identity()));
 
     private final String messageTypeId;
-    private final Class<? extends Message> classToBeDecoded;
+    private final Class<? extends Message> classToBeDeserialized;
 
-    MessageTypesEnum(String messageTypeId, Class<? extends Message> classToBeDecoded) {
+    MessageTypesEnum(String messageTypeId, Class<? extends Message> classToBeDeserialized) {
         this.messageTypeId = messageTypeId;
-        this.classToBeDecoded = classToBeDecoded;
+        this.classToBeDeserialized = classToBeDeserialized;
     }
 
     public static MessageTypesEnum getMessageTypeEnum(String messageTypeId) {
@@ -61,10 +61,10 @@ public enum MessageTypesEnum {
     }
 
     public Message deserializeMessage(Object message) {
-        if (classToBeDecoded == null) {
+        if (classToBeDeserialized == null) {
             return null;
         }
-        return HerronJsonMapperUtil.deserializeMessage(message, classToBeDecoded);
+        return HerronJsonMapperUtil.deserializeMessage(message, classToBeDeserialized);
     }
 
     public String serializeMessage(Message message) {

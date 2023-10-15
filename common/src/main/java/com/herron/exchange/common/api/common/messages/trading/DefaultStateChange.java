@@ -6,12 +6,12 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
 @Value.Immutable
-@JsonDeserialize(builder = ImmutableHerronStateChange.Builder.class)
-public interface HerronStateChange extends StateChange {
+@JsonDeserialize(builder = ImmutableDefaultStateChange.Builder.class)
+public interface DefaultStateChange extends StateChange {
 
     @Value.Default
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.HERRON_ORDERBOOK_STATE_CHANGE;
+        return MessageTypesEnum.DEFAULT_ORDERBOOK_STATE_CHANGE;
     }
 
 }

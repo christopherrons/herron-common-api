@@ -4,8 +4,8 @@ import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.enums.DataStreamEnum;
 import com.herron.exchange.common.api.common.logging.EventLogger;
 import com.herron.exchange.common.api.common.messages.ImmutableDefaultBroadcastMessage;
-import com.herron.exchange.common.api.common.messages.common.HerronDataStreamState;
-import com.herron.exchange.common.api.common.messages.common.ImmutableHerronDataStreamState;
+import com.herron.exchange.common.api.common.messages.common.DefaultDataStreamState;
+import com.herron.exchange.common.api.common.messages.common.ImmutableDefaultDataStreamState;
 import com.herron.exchange.common.api.common.messages.common.PartitionKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ public class KafkaBroadcastProducer {
 
     public void startBroadcasting() {
         isBroadCasting.set(true);
-        HerronDataStreamState start = ImmutableHerronDataStreamState.builder().timeOfEventMs(Instant.now().toEpochMilli())
+        DefaultDataStreamState start = ImmutableDefaultDataStreamState.builder().timeOfEventMs(Instant.now().toEpochMilli())
                 .state(DataStreamEnum.START)
                 .build();
         broadcastMessage(start);
@@ -40,7 +40,7 @@ public class KafkaBroadcastProducer {
     }
 
     public void endBroadcasting() {
-        HerronDataStreamState done = ImmutableHerronDataStreamState.builder().timeOfEventMs(Instant.now().toEpochMilli())
+        DefaultDataStreamState done = ImmutableDefaultDataStreamState.builder().timeOfEventMs(Instant.now().toEpochMilli())
                 .state(DataStreamEnum.DONE)
                 .build();
         broadcastMessage(done);
@@ -56,7 +56,6 @@ public class KafkaBroadcastProducer {
         eventLogger.logEvent();
         var broadCast = ImmutableDefaultBroadcastMessage.builder()
                 .message(message)
-                .messageMessageType(message.messageType().getMessageTypeId())
                 .sequenceNumber(sequenceNumberHandler.getAndIncrement())
                 .timeOfEventMs(Instant.now().toEpochMilli())
                 .build();

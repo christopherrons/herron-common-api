@@ -6,12 +6,12 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
 @Value.Immutable
-@JsonDeserialize(builder = ImmutableHerronDataStreamState.Builder.class)
-public interface HerronDataStreamState extends DataStreamState {
+@JsonDeserialize(builder = ImmutableDefaultDataStreamState.Builder.class)
+public interface DefaultDataStreamState extends DataStreamState {
 
 
     @Value.Default
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.HERRON_DATA_STREAM_STATE;
+        return MessageTypesEnum.DEFAULT_DATA_STREAM_STATE;
     }
 }

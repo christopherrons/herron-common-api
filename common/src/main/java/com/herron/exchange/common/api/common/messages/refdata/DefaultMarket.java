@@ -6,11 +6,11 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
 @Value.Immutable
-@JsonDeserialize(builder = ImmutableHerronMarket.Builder.class)
-public interface HerronMarket extends Market {
+@JsonDeserialize(builder = ImmutableDefaultMarket.Builder.class)
+public interface DefaultMarket extends Market {
 
     @Value.Default
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.HERRON_MARKET;
+        return MessageTypesEnum.DEFAULT_MARKET;
     }
 }

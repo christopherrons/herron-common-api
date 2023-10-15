@@ -6,11 +6,11 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
 @Value.Immutable
-@JsonDeserialize(builder = ImmutableHerronTradeExecution.Builder.class)
-public interface HerronUpdateOrder extends UpdateOrder {
+@JsonDeserialize(builder = ImmutableDefaultTradeExecution.Builder.class)
+public interface DefaultUpdateOrder extends UpdateOrder {
 
     @Value.Default
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.HERRON_UPDATE_ORDER;
+        return MessageTypesEnum.DEFAULT_UPDATE_ORDER;
     }
 }

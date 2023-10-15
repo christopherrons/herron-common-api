@@ -2,7 +2,7 @@ package com.herron.exchange.common.api.common.api.referencedata.exchange;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.herron.exchange.common.api.common.api.Message;
-import com.herron.exchange.common.api.common.messages.common.HerronBusinessCalendar;
+import com.herron.exchange.common.api.common.messages.common.ImmutableDefaultBusinessCalendar;
 import org.immutables.value.Value;
 
 import java.time.DayOfWeek;
@@ -11,7 +11,7 @@ import java.time.MonthDay;
 import java.util.Set;
 
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = HerronBusinessCalendar.class, name = "HEBC"),
+        @JsonSubTypes.Type(value = ImmutableDefaultBusinessCalendar.class, name = "DFBC"),
 })
 public interface BusinessCalendar extends Message {
     String calendarId();

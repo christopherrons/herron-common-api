@@ -24,7 +24,7 @@ public class MonetaryAmount extends Amount<MonetaryAmount> {
     }
 
     protected void validate(MonetaryAmount otherMonetaryAmount) {
-        if (currency.equals(otherMonetaryAmount.currency)) {
+        if (!currency.equals(otherMonetaryAmount.currency)) {
             throw new IllegalArgumentException(String.format("Currency %s and %s are incompatible.", currency, otherMonetaryAmount.currency));
         }
     }

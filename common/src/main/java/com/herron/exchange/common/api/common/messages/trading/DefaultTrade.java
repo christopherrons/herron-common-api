@@ -1,18 +1,17 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.herron.exchange.common.api.common.api.trading.trades.TradeExecution;
+import com.herron.exchange.common.api.common.api.trading.trades.Trade;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
-
 @Value.Immutable
-@JsonDeserialize(builder = ImmutableHerronTradeExecution.Builder.class)
-public interface HerronTradeExecution extends TradeExecution {
-
+@JsonDeserialize(builder = ImmutableDefaultTrade.Builder.class)
+public interface DefaultTrade extends Trade {
 
     @Value.Default
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.HERRON_TRADE_EXECUTION;
+        return MessageTypesEnum.DEFAULT_TRADE;
     }
+
 }

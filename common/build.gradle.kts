@@ -1,8 +1,6 @@
 dependencies {
     // External Libs
     implementation(libs.spring.boot.starter.web)
-    implementation(libs.javax.json.api)
-    implementation(libs.javax.json)
     implementation(libs.commons.math)
     implementation(libs.spring.kafka)
     implementation(libs.immutables.value)
