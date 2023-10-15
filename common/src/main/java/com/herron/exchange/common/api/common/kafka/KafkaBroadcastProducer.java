@@ -1,12 +1,12 @@
 package com.herron.exchange.common.api.common.kafka;
 
 import com.herron.exchange.common.api.common.api.Message;
-import com.herron.exchange.common.api.common.enums.DataLoadingStateEnum;
+import com.herron.exchange.common.api.common.enums.DataStreamEnum;
 import com.herron.exchange.common.api.common.logging.EventLogger;
-import com.herron.exchange.common.api.common.messages.ImmutableHerronBroadcastMessage;
-import com.herron.exchange.common.api.common.messages.common.HerronDataLoadingState;
-import com.herron.exchange.common.api.common.messages.common.ImmutableHerronDataLoadingState;
-import com.herron.exchange.common.api.common.model.PartitionKey;
+import com.herron.exchange.common.api.common.messages.ImmutableDefaultBroadcastMessage;
+import com.herron.exchange.common.api.common.messages.common.HerronDataStreamState;
+import com.herron.exchange.common.api.common.messages.common.ImmutableHerronDataStreamState;
+import com.herron.exchange.common.api.common.messages.common.PartitionKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -32,16 +32,16 @@ public class KafkaBroadcastProducer {
 
     public void startBroadcasting() {
         isBroadCasting.set(true);
-        HerronDataLoadingState start = ImmutableHerronDataLoadingState.builder().timeOfEventMs(Instant.now().toEpochMilli())
-                .state(DataLoadingStateEnum.START)
+        HerronDataStreamState start = ImmutableHerronDataStreamState.builder().timeOfEventMs(Instant.now().toEpochMilli())
+                .state(DataStreamEnum.START)
                 .build();
         broadcastMessage(start);
         logger.info("Broadcasting started for partition {}", partitionKey);
     }
 
     public void endBroadcasting() {
-        HerronDataLoadingState done = ImmutableHerronDataLoadingState.builder().timeOfEventMs(Instant.now().toEpochMilli())
-                .state(DataLoadingStateEnum.DONE)
+        HerronDataStreamState done = ImmutableHerronDataStreamState.builder().timeOfEventMs(Instant.now().toEpochMilli())
+                .state(DataStreamEnum.DONE)
                 .build();
         broadcastMessage(done);
         isBroadCasting.set(false);
@@ -54,7 +54,7 @@ public class KafkaBroadcastProducer {
         }
 
         eventLogger.logEvent();
-        var broadCast = ImmutableHerronBroadcastMessage.builder()
+        var broadCast = ImmutableDefaultBroadcastMessage.builder()
                 .message(message)
                 .messageMessageType(message.messageType().getMessageTypeId())
                 .sequenceNumber(sequenceNumberHandler.getAndIncrement())

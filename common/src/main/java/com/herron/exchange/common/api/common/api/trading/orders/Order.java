@@ -5,9 +5,9 @@ import com.herron.exchange.common.api.common.enums.OrderExecutionTypeEnum;
 import com.herron.exchange.common.api.common.enums.OrderOperationEnum;
 import com.herron.exchange.common.api.common.enums.OrderSideEnum;
 import com.herron.exchange.common.api.common.enums.OrderTypeEnum;
-import com.herron.exchange.common.api.common.model.Participant;
-import com.herron.exchange.common.api.common.model.Price;
-import com.herron.exchange.common.api.common.model.Volume;
+import com.herron.exchange.common.api.common.messages.common.Participant;
+import com.herron.exchange.common.api.common.messages.common.Price;
+import com.herron.exchange.common.api.common.messages.common.Volume;
 
 public interface Order extends Event {
 

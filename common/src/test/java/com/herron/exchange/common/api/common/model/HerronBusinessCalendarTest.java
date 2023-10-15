@@ -1,5 +1,7 @@
 package com.herron.exchange.common.api.common.model;
 
+import com.herron.exchange.common.api.common.messages.common.HerronBusinessCalendar;
+import com.herron.exchange.common.api.common.messages.common.ImmutableHerronBusinessCalendar;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

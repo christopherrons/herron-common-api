@@ -8,21 +8,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
-import com.herron.exchange.common.api.common.messages.ImmutableHerronBroadcastMessage;
+import com.herron.exchange.common.api.common.messages.ImmutableDefaultBroadcastMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class HerronBroadCastJsonDeserializer extends StdDeserializer<Message> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HerronBroadCastJsonDeserializer.class);
+public class DefaultBroadcastJsonDeserializer extends StdDeserializer<Message> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultBroadcastJsonDeserializer.class);
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public HerronBroadCastJsonDeserializer() {
+    public DefaultBroadcastJsonDeserializer() {
         this(null);
     }
 
-    public HerronBroadCastJsonDeserializer(Class<?> vc) {
+    public DefaultBroadcastJsonDeserializer(Class<?> vc) {
         super(vc);
     }
 
@@ -35,7 +35,7 @@ public class HerronBroadCastJsonDeserializer extends StdDeserializer<Message> {
         String sequenceNumber = node.get("sequenceNumber").asText();
         String timeOfEventMs = node.get("timeOfEventMs").asText();
         var messageType = MessageTypesEnum.getMessageTypeEnum(messageTypeString);
-        return ImmutableHerronBroadcastMessage.builder()
+        return ImmutableDefaultBroadcastMessage.builder()
                 .timeOfEventMs(Long.parseLong(timeOfEventMs))
                 .message(messageType.deserializeMessage(node.get("message")))
                 .messageMessageType(messageTypeString)

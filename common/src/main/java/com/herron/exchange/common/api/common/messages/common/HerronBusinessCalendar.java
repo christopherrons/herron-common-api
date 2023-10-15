@@ -1,7 +1,8 @@
-package com.herron.exchange.common.api.common.model;
+package com.herron.exchange.common.api.common.messages.common;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.referencedata.exchange.BusinessCalendar;
+import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
 import java.util.Set;
@@ -12,6 +13,11 @@ import static java.time.DayOfWeek.SUNDAY;
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableHerronBusinessCalendar.Builder.class)
 public interface HerronBusinessCalendar extends BusinessCalendar {
+
+    @Value.Default
+    default MessageTypesEnum messageType() {
+        return MessageTypesEnum.HERRON_BUSINESS_CALENDAR;
+    }
 
     static BusinessCalendar noHolidayCalendar() {
         return ImmutableHerronBusinessCalendar.builder()

@@ -2,7 +2,7 @@ package com.herron.exchange.common.api.common.kafka;
 
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.logging.EventLogger;
-import com.herron.exchange.common.api.common.model.PartitionKey;
+import com.herron.exchange.common.api.common.messages.common.PartitionKey;
 import org.springframework.kafka.core.KafkaTemplate;
 
 import java.util.Map;

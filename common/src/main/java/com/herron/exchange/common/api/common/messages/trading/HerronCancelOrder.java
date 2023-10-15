@@ -3,7 +3,6 @@ package com.herron.exchange.common.api.common.messages.trading;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.trading.orders.CancelOrder;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
-import com.herron.exchange.common.api.common.enums.OrderCancelOperationTypeEnum;
 import org.immutables.value.Value;
 
 @Value.Immutable

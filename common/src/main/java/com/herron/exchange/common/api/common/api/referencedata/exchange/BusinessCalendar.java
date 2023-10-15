@@ -1,5 +1,8 @@
 package com.herron.exchange.common.api.common.api.referencedata.exchange;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.herron.exchange.common.api.common.api.Message;
+import com.herron.exchange.common.api.common.messages.common.HerronBusinessCalendar;
 import org.immutables.value.Value;
 
 import java.time.DayOfWeek;
@@ -7,7 +10,10 @@ import java.time.LocalDate;
 import java.time.MonthDay;
 import java.util.Set;
 
-public interface BusinessCalendar {
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = HerronBusinessCalendar.class, name = "HEBC"),
+})
+public interface BusinessCalendar extends Message {
     String calendarId();
 
     @Value.Default

@@ -1,6 +1,6 @@
 package com.herron.exchange.common.api.common.enums;
 
-public enum DataLoadingStateEnum {
+public enum DataStreamEnum {
     START,
     DONE
 }

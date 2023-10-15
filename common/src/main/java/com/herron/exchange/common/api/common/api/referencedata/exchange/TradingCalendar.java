@@ -1,5 +1,8 @@
 package com.herron.exchange.common.api.common.api.referencedata.exchange;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.herron.exchange.common.api.common.api.Message;
+import com.herron.exchange.common.api.common.messages.trading.HerronTradingCalendar;
 import jakarta.annotation.Nullable;
 import org.immutables.value.Value;
 
@@ -8,7 +11,10 @@ import java.time.LocalTime;
 import java.time.MonthDay;
 import java.util.Map;
 
-public interface TradingCalendar {
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = HerronTradingCalendar.class, name = "HETC"),
+})
+public interface TradingCalendar extends Message {
     String calendarId();
 
     @Nullable
