@@ -10,9 +10,7 @@ import java.time.LocalDate;
 import java.time.MonthDay;
 import java.util.Set;
 
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = ImmutableDefaultBusinessCalendar.class, name = "DFBC"),
-})
+
 public interface BusinessCalendar extends Message {
     String calendarId();
 

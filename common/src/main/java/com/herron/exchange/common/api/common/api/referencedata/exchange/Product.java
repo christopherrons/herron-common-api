@@ -6,9 +6,6 @@ import com.herron.exchange.common.api.common.messages.refdata.ImmutableDefaultPr
 import org.immutables.value.Value;
 
 
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = ImmutableDefaultProduct.class, name = "DFPR"),
-})
 public interface Product extends Message {
 
     @Value.Default

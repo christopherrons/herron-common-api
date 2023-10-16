@@ -11,9 +11,7 @@ import java.time.LocalTime;
 import java.time.MonthDay;
 import java.util.Map;
 
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = DefaultTradingCalendar.class, name = "DFTC"),
-})
+
 public interface TradingCalendar extends Message {
     String calendarId();
 

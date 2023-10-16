@@ -1,7 +1,5 @@
 package com.herron.exchange.common.api.common.enums;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.herron.exchange.common.api.common.messages.DefaultBroadcastMessage;
 import com.herron.exchange.common.api.common.messages.ImmutableDefaultBroadcastMessage;
 import com.herron.exchange.common.api.common.messages.common.DefaultBusinessCalendar;
@@ -26,19 +24,18 @@ class MessageTypesEnumTest {
     }
 
     @Test
-    void tmp_test() throws JsonProcessingException {
-        var mapper = new ObjectMapper();
+    void tmp_test() {
         ImmutableDefaultMarket market = ImmutableDefaultMarket.builder()
                 .marketId("bitstamp")
                 .businessCalendar(DefaultBusinessCalendar.defaultWeekendCalendar())
                 .build();
-        var r = mapper.readValue(market.serialize(), DefaultMarket.class);
+        var r = MessageTypesEnum.DEFAULT_MARKET.deserializeMessage(market.serialize());
         DefaultProduct product = ImmutableDefaultProduct.builder()
                 .market(market)
                 .productId(String.format("%s_equity", market.marketId()))
                 .currency("usd")
                 .build();
-        var r2 = mapper.readValue(product.serialize(), DefaultProduct.class);
+        var r2 =  MessageTypesEnum.DEFAULT_PRODUCT.deserializeMessage(product.serialize());
         DefaultBroadcastMessage b = ImmutableDefaultBroadcastMessage.builder()
                 .message(product)
                 .sequenceNumber(1)
@@ -51,7 +48,7 @@ class MessageTypesEnumTest {
                 .firstTradingDate(LocalDate.MIN)
                 .lastTradingDate(LocalDate.MAX)
                 .build();
-        var r3 = mapper.readValue(product.serialize(), DefaultEquityInstrument.class);
+        var r3 =  MessageTypesEnum.DEFAULT_EQUITY_INSTRUMENT.deserializeMessage(ins.serialize());
         MessageTypesEnum.DEFAULT_BROADCAST_MESSAGE.deserializeMessage(b.serialize());
 
     }

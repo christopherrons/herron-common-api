@@ -7,8 +7,8 @@ import com.herron.exchange.common.api.common.api.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HerronJsonMapperUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HerronJsonMapperUtil.class);
+public class JsonMapperUtil {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonMapperUtil.class);
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     public static String serializeMessage(Message message) {
