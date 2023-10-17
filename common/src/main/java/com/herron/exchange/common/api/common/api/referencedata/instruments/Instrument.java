@@ -29,7 +29,7 @@ public interface Instrument extends Message {
     default double contractSize() {
         return product().contractSize();
     }
-    
+
     LocalDate firstTradingDate();
 
     LocalDate lastTradingDate();

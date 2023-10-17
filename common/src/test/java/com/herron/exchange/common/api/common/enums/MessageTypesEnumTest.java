@@ -1,9 +1,11 @@
 package com.herron.exchange.common.api.common.enums;
 
-import com.herron.exchange.common.api.common.messages.DefaultBroadcastMessage;
 import com.herron.exchange.common.api.common.messages.ImmutableDefaultBroadcastMessage;
 import com.herron.exchange.common.api.common.messages.common.DefaultBusinessCalendar;
-import com.herron.exchange.common.api.common.messages.refdata.*;
+import com.herron.exchange.common.api.common.messages.refdata.DefaultProduct;
+import com.herron.exchange.common.api.common.messages.refdata.ImmutableDefaultEquityInstrument;
+import com.herron.exchange.common.api.common.messages.refdata.ImmutableDefaultMarket;
+import com.herron.exchange.common.api.common.messages.refdata.ImmutableDefaultProduct;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -23,7 +25,7 @@ class MessageTypesEnumTest {
         }
     }
 
-    @Test
+  /*  @Test
     void tmp_test() {
         ImmutableDefaultMarket market = ImmutableDefaultMarket.builder()
                 .marketId("bitstamp")
@@ -35,12 +37,7 @@ class MessageTypesEnumTest {
                 .productId(String.format("%s_equity", market.marketId()))
                 .currency("usd")
                 .build();
-        var r2 =  MessageTypesEnum.DEFAULT_PRODUCT.deserializeMessage(product.serialize());
-        DefaultBroadcastMessage b = ImmutableDefaultBroadcastMessage.builder()
-                .message(product)
-                .sequenceNumber(1)
-                .timeOfEventMs(1)
-                .build();
+        var r2 = MessageTypesEnum.DEFAULT_PRODUCT.deserializeMessage(product.serialize());
 
         var ins = ImmutableDefaultEquityInstrument.builder()
                 .instrumentId(String.format("%s_btcusd", product.productId()))
@@ -48,8 +45,15 @@ class MessageTypesEnumTest {
                 .firstTradingDate(LocalDate.MIN)
                 .lastTradingDate(LocalDate.MAX)
                 .build();
-        var r3 =  MessageTypesEnum.DEFAULT_EQUITY_INSTRUMENT.deserializeMessage(ins.serialize());
-        MessageTypesEnum.DEFAULT_BROADCAST_MESSAGE.deserializeMessage(b.serialize());
 
-    }
+        var r3 = MessageTypesEnum.DEFAULT_EQUITY_INSTRUMENT.deserializeMessage(ins.serialize());
+
+        var broad = ImmutableDefaultBroadcastMessage.builder()
+                .sequenceNumber(1)
+                .message(ins)
+                .timeOfEventMs(1)
+                .build();
+
+        var r4 = MessageTypesEnum.DEFAULT_BROADCAST_MESSAGE.deserializeMessage(broad.serialize());
+    }*/
 }

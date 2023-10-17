@@ -17,13 +17,14 @@ public abstract class DataConsumer {
     private final Map<PartitionKey, AtomicLong> partitionToSequenceNumberHandler = new ConcurrentHashMap<>();
 
     public BroadcastMessage deserializeBroadcast(ConsumerRecord<String, String> consumerRecord, PartitionKey partitionKey) {
+        long expected = getSequenceNumber(partitionKey);
+
         BroadcastMessage broadcastMessage = (BroadcastMessage) deserializeMessage(consumerRecord.key(), consumerRecord.value());
         if (broadcastMessage == null || broadcastMessage.serialize().isEmpty()) {
             logger.error("Unable to map message: {}", consumerRecord);
             return null;
         }
 
-        long expected = getSequenceNumber(partitionKey);
         if (broadcastMessage.sequenceNumber() != expected) {
             logger.warn("GAP detected: Expected={}, Incoming={}", expected, broadcastMessage.sequenceNumber());
         }

@@ -5,6 +5,7 @@ dependencies {
     implementation(libs.spring.kafka)
     implementation(libs.immutables.value)
     annotationProcessor(libs.immutables.value)
+//    implementation(libs.jackson.datatype)
 
     // External Test Libs
     testImplementation(testlibs.junit.jupiter.api)

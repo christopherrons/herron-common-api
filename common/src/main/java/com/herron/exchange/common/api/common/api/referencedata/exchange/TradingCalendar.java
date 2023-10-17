@@ -1,8 +1,7 @@
 package com.herron.exchange.common.api.common.api.referencedata.exchange;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.herron.exchange.common.api.common.api.Message;
-import com.herron.exchange.common.api.common.messages.trading.DefaultTradingCalendar;
 import jakarta.annotation.Nullable;
 import org.immutables.value.Value;
 
@@ -10,7 +9,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.MonthDay;
 import java.util.Map;
-
 
 public interface TradingCalendar extends Message {
     String calendarId();
@@ -36,6 +34,7 @@ public interface TradingCalendar extends Message {
         return Map.of();
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     record TradingHours(LocalTime start, LocalTime end) {
         public TradingHours(int startHour, int endHour) {
             this(LocalTime.of(startHour, 0, 0), LocalTime.of(endHour, 0, 0));

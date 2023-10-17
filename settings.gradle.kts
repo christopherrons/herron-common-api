@@ -12,6 +12,7 @@ dependencyResolutionManagement {
             library("immutables.value", "org.immutables:value:2.9.0")
             library("immutables.builder", "org.immutables:builder:2.9.0")
             library("immutables.annotations", "org.immutables:value-annotations:2.9.0")
+          //  library("jackson.datatype", "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3")
         }
 
         create("testlibs") {

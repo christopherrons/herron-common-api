@@ -1,8 +1,5 @@
 package com.herron.exchange.common.api.common.enums;
 
-import java.util.Arrays;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -13,28 +10,18 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.herron.exchange.common.api.common.api.Message;
-import com.herron.exchange.common.api.common.mapper.JsonMapperUtil;
 import com.herron.exchange.common.api.common.messages.DefaultBroadcastMessage;
 import com.herron.exchange.common.api.common.messages.common.DefaultBusinessCalendar;
 import com.herron.exchange.common.api.common.messages.common.DefaultDataStreamState;
 import com.herron.exchange.common.api.common.messages.marketdata.DefaultMarketDataPrice;
-import com.herron.exchange.common.api.common.messages.refdata.DefaultBondInstrument;
-import com.herron.exchange.common.api.common.messages.refdata.DefaultEquityInstrument;
-import com.herron.exchange.common.api.common.messages.refdata.DefaultFutureInstrument;
-import com.herron.exchange.common.api.common.messages.refdata.DefaultMarket;
-import com.herron.exchange.common.api.common.messages.refdata.DefaultOptionInstrument;
-import com.herron.exchange.common.api.common.messages.refdata.DefaultOrderbookData;
-import com.herron.exchange.common.api.common.messages.refdata.DefaultProduct;
-import com.herron.exchange.common.api.common.messages.trading.DefaultAddOrder;
-import com.herron.exchange.common.api.common.messages.trading.DefaultCancelOrder;
-import com.herron.exchange.common.api.common.messages.trading.DefaultStateChange;
-import com.herron.exchange.common.api.common.messages.trading.DefaultTrade;
-import com.herron.exchange.common.api.common.messages.trading.DefaultTradeExecution;
-import com.herron.exchange.common.api.common.messages.trading.DefaultTradingCalendar;
-import com.herron.exchange.common.api.common.messages.trading.DefaultUpdateOrder;
+import com.herron.exchange.common.api.common.messages.refdata.*;
+import com.herron.exchange.common.api.common.messages.trading.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+
+import java.util.Arrays;
+import java.util.Map;
 
 import static java.util.Arrays.stream;
 import static java.util.function.UnaryOperator.identity;
@@ -115,9 +102,9 @@ public enum MessageTypesEnum {
         }
 
         private void registerDefaultTypes() {
-            Arrays.stream(MessageTypesEnum.values()).forEach(
-                    messageType -> registerSubtype(messageType.getMessageTypeId(), messageType.getClassToBeDeserialized())
-            );
+            Arrays.stream(MessageTypesEnum.values())
+                    .filter(messageTypesEnum -> messageTypesEnum != INVALID_MESSAGE_TYPE)
+                    .forEach(messageType -> registerSubtype(messageType.getMessageTypeId(), messageType.getClassToBeDeserialized()));
         }
 
         private void registerSubtype(String typeId, Class<? extends Message> implementationClazz) {

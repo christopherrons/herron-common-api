@@ -1,8 +1,6 @@
 package com.herron.exchange.common.api.common.api.referencedata.exchange;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.herron.exchange.common.api.common.api.Message;
-import com.herron.exchange.common.api.common.messages.common.ImmutableDefaultBusinessCalendar;
 import org.immutables.value.Value;
 
 import java.time.DayOfWeek;
