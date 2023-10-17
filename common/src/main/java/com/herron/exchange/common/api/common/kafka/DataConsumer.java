@@ -44,7 +44,7 @@ public abstract class DataConsumer {
     }
 
     private void logEvent(PartitionKey partitionKey) {
-        partitionToEventLogger.computeIfAbsent(partitionKey, k -> new EventLogger(1000)).logEvent();
+        partitionToEventLogger.computeIfAbsent(partitionKey, k -> new EventLogger(partitionKey.toString(), 1000)).logEvent();
     }
 
     public double getTotalNumberOfEvents() {
