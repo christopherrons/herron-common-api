@@ -6,7 +6,7 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import java.util.Objects;
 
 public class MonetaryAmount extends Amount<MonetaryAmount> {
-    public static MonetaryAmount ZERO_AMOUNT = new MonetaryAmount(0, "N/A");
+    public static final MonetaryAmount ZERO_AMOUNT = new MonetaryAmount(0, "N/A");
     private final String currency;
 
     private MonetaryAmount(@JsonProperty("value") double value, @JsonProperty("currency") String currency) {
@@ -27,6 +27,11 @@ public class MonetaryAmount extends Amount<MonetaryAmount> {
         if (!currency.equals(otherMonetaryAmount.currency)) {
             throw new IllegalArgumentException(String.format("Currency %s and %s are incompatible.", currency, otherMonetaryAmount.currency));
         }
+    }
+
+    @Override
+    protected MonetaryAmount emptyAmount() {
+        return ZERO_AMOUNT;
     }
 
     @Override

@@ -33,12 +33,12 @@ class MonetaryAmountTest {
 
     @Test
     void test_ge() {
-        assertTrue(thatAmount.ge(thisAmount));
+        assertTrue(thatAmount.geq(thisAmount));
     }
 
     @Test
     void test_le() {
-        assertTrue(thisAmount.le(thatAmount));
+        assertTrue(thisAmount.leq(thatAmount));
     }
 
     @Test

@@ -4,6 +4,7 @@ public enum KafkaTopicEnum {
     ORDER_DATA("order-data"),
     PREVIOUS_SETTLEMENT_PRICE_DATA("previous-settlement-price-data"),
     REFERENCE_DATA("reference-data"),
+    TRADE_DATA("trade-data"),
     AUDIT_TRAIL("audit-trail");
 
     private final String topicName;

@@ -1,8 +1,10 @@
 package com.herron.exchange.common.api.common.messages;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
+import com.herron.exchange.common.api.common.enums.KafkaTopicEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.DefaultBusinessCalendar;
+import com.herron.exchange.common.api.common.messages.common.PartitionKey;
 import com.herron.exchange.common.api.common.messages.refdata.ImmutableDefaultMarket;
 import com.herron.exchange.common.api.common.messages.refdata.ImmutableDefaultProduct;
 import org.junit.jupiter.api.Test;
@@ -30,6 +32,7 @@ class DefaultBroadcastMessageTest {
                 .sequenceNumber(1)
                 .message(product)
                 .timeOfEventMs(1)
+                .partitionKey(new PartitionKey(KafkaTopicEnum.AUDIT_TRAIL, 1))
                 .build();
         var value = messageFactory.serialize(object);
         assertNotNull(value);

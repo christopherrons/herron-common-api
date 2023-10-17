@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
 public class Volume extends Amount<Volume> {
+    public static final Volume ZERO = new Volume(0);
 
     private Volume(@JsonProperty("value") double volume) {
         super(volume);
@@ -17,6 +18,11 @@ public class Volume extends Amount<Volume> {
     @Override
     protected void validate(Volume value) {
         // Always valid
+    }
+
+    @Override
+    protected Volume emptyAmount() {
+        return ZERO;
     }
 
     public static Volume create(double volume) {

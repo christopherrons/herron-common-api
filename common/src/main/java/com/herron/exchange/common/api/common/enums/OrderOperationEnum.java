@@ -11,9 +11,9 @@ import static java.util.stream.Collectors.toMap;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum OrderOperationEnum {
     INVALID_ORDER_OPERATION("invalid"),
-    CREATE("create"),
+    INSERT("insert"),
     UPDATE("update"),
-    DELETE("delete");
+    CANCEL("cancel");
 
     private static final Map<String, OrderOperationEnum> VALUES_BY_IDENTIFIER = stream(OrderOperationEnum.values()).collect(toMap(OrderOperationEnum::getValue, identity()));
     private final String value;

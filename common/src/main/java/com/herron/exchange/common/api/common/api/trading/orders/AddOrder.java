@@ -7,8 +7,8 @@ import org.immutables.value.Value;
 public interface AddOrder extends Order {
     OrderAddOperationTypeEnum addOperationType();
 
-    @Value.Default
+    @Value.Derived
     default OrderOperationEnum orderOperation() {
-        return OrderOperationEnum.CREATE;
+        return OrderOperationEnum.INSERT;
     }
 }

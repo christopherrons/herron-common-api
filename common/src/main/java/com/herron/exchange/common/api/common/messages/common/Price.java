@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
 public class Price extends Amount<Price> {
+    public static final Price ZERO = new Price(0);
 
     public Price(@JsonProperty("value") double price) {
         super(price);
@@ -17,6 +18,11 @@ public class Price extends Amount<Price> {
     @Override
     protected void validate(Price amount) {
         // Always valid
+    }
+
+    @Override
+    protected Price emptyAmount() {
+        return ZERO;
     }
 
     public static Price create(double price) {

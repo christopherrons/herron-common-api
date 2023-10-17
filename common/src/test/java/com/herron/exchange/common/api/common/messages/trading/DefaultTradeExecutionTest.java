@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class DefaultTradeExecutionTest {
     private final MessageFactory messageFactory = new DefaultMessageFactory();
@@ -31,7 +31,6 @@ class DefaultTradeExecutionTest {
                 .build();
         var object = ImmutableDefaultTradeExecution.builder()
                 .timeOfEventMs(1)
-                .triggerMessage(trade)
                 .addAllMessages(List.of(trade))
                 .build();
         var value = messageFactory.serialize(object);

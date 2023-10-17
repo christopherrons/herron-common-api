@@ -7,8 +7,8 @@ import org.immutables.value.Value;
 public interface CancelOrder extends Order {
     OrderCancelOperationTypeEnum cancelOperationType();
 
-    @Value.Default
+    @Value.Derived
     default OrderOperationEnum orderOperation() {
-        return OrderOperationEnum.DELETE;
+        return OrderOperationEnum.CANCEL;
     }
 }

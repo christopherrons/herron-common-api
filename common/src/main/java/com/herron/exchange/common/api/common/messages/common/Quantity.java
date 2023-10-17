@@ -7,7 +7,7 @@ import com.herron.exchange.common.api.common.enums.UnitEnum;
 import java.util.Objects;
 
 public class Quantity extends Amount<Quantity> {
-
+    public static final Quantity ZERO = new Quantity(0, UnitEnum.UNITLESS);
     private final UnitEnum unit;
 
     public Quantity(@JsonProperty("value") double quantity,
@@ -33,6 +33,11 @@ public class Quantity extends Amount<Quantity> {
         if (unit != otherQuantity.unit) {
             throw new IllegalArgumentException(String.format("Units %s and %s are incompatible.", unit, otherQuantity.unit));
         }
+    }
+
+    @Override
+    protected Quantity emptyAmount() {
+        return ZERO;
     }
 
     @Override

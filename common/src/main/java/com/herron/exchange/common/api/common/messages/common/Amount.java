@@ -17,44 +17,86 @@ public abstract class Amount<T extends Amount<?>> implements Message {
 
     protected abstract void validate(T value);
 
+    protected abstract T emptyAmount();
+
     public boolean gt(T otherAmount) {
         validate(otherAmount);
-        return this.value > otherAmount.value;
+        return gt(otherAmount.value);
+    }
+
+    public boolean gt(double otherValue) {
+        return this.value > otherValue;
     }
 
     public boolean lt(T otherAmount) {
         validate(otherAmount);
-        return this.value < otherAmount.value;
+        return lt(otherAmount.value);
     }
 
-    public boolean ge(T otherAmount) {
-        validate(otherAmount);
-        return this.value >= otherAmount.value;
+    public boolean lt(double otherValue) {
+        return this.value < otherValue;
     }
 
-    public boolean le(T otherAmount) {
+    public boolean geq(T otherAmount) {
         validate(otherAmount);
-        return this.value <= otherAmount.value;
+        return geq(otherAmount.value);
+    }
+
+    public boolean geq(double otherValue) {
+        return this.value >= otherValue;
+    }
+
+    public boolean leq(T otherAmount) {
+        validate(otherAmount);
+        return leq(otherAmount.value);
+    }
+
+    public boolean leq(double otherValue) {
+        return this.value <= otherValue;
     }
 
     public T multiply(T otherAmount) {
         validate(otherAmount);
-        return newInstance(value * otherAmount.value);
+        return multiply(otherAmount.value);
+    }
+
+    public T multiply(double otherValue) {
+        return newInstance(value * otherValue);
     }
 
     public T divide(T otherAmount) {
         validate(otherAmount);
-        return newInstance(value * (1 / otherAmount.value));
+        return divide(otherAmount.value);
+    }
+
+    public T divide(double otherValue) {
+        return newInstance(value * (1 / otherValue));
     }
 
     public T add(T otherAmount) {
         validate(otherAmount);
-        return newInstance(value + otherAmount.value);
+        return add(otherAmount.value);
+    }
+
+    public T add(double otherValue) {
+        return newInstance(value + otherValue);
     }
 
     public T subtract(T otherAmount) {
         validate(otherAmount);
-        return newInstance(value - otherAmount.value);
+        return subtract(otherAmount.value);
+    }
+
+    public T subtract(double otherValue) {
+        return newInstance(value - otherValue);
+    }
+
+    public T max(T otherAmount) {
+        return this.gt(otherAmount.value) ? (T) this : otherAmount;
+    }
+
+    public T min(T otherAmount) {
+        return this.lt(otherAmount.value) ? (T) this : otherAmount;
     }
 
     @Override

@@ -7,7 +7,7 @@ import org.immutables.value.Value;
 public interface UpdateOrder extends Order {
     OrderUpdatedOperationTypeEnum updateOperationType();
 
-    @Value.Default
+    @Value.Derived
     default OrderOperationEnum orderOperation() {
         return OrderOperationEnum.UPDATE;
     }

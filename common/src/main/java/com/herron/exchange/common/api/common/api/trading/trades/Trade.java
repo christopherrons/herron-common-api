@@ -1,11 +1,11 @@
 package com.herron.exchange.common.api.common.api.trading.trades;
 
-import com.herron.exchange.common.api.common.api.Event;
+import com.herron.exchange.common.api.common.api.trading.OrderbookEvent;
 import com.herron.exchange.common.api.common.messages.common.Participant;
 import com.herron.exchange.common.api.common.messages.common.Price;
 import com.herron.exchange.common.api.common.messages.common.Volume;
 
-public interface Trade extends Event {
+public interface Trade extends OrderbookEvent {
 
     Participant bidParticipant();
 
@@ -24,7 +24,5 @@ public interface Trade extends Event {
     Price price();
 
     String instrumentId();
-
-    String orderbookId();
 
 }
