@@ -58,6 +58,7 @@ public class KafkaBroadcastProducer {
                 .message(message)
                 .sequenceNumber(sequenceNumberHandler.getAndIncrement())
                 .timeOfEventMs(Instant.now().toEpochMilli())
+                .partitionKey(partitionKey)
                 .build();
 
         kafkaTemplate.send(partitionKey.topicEnum().getTopicName(), partitionKey.partitionId(), broadCast.messageType().getMessageTypeId(), broadCast);
