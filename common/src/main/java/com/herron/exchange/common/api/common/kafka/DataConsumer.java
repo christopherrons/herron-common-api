@@ -2,6 +2,7 @@ package com.herron.exchange.common.api.common.kafka;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.api.broadcasts.BroadcastMessage;
+import com.herron.exchange.common.api.common.logging.EventLogger;
 import com.herron.exchange.common.api.common.messages.common.PartitionKey;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public abstract class DataConsumer {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final Map<PartitionKey, AtomicLong> partitionToSequenceNumberHandler = new ConcurrentHashMap<>();
+    private final Map<PartitionKey, EventLogger> partitionToEventLogger = new ConcurrentHashMap<>();
     private final MessageFactory messageFactory;
 
     protected DataConsumer(MessageFactory messageFactory) {
@@ -22,6 +24,7 @@ public abstract class DataConsumer {
 
     public BroadcastMessage deserializeBroadcast(ConsumerRecord<String, String> consumerRecord, PartitionKey partitionKey) {
         long expected = getSequenceNumber(partitionKey);
+        logEvent(partitionKey);
 
         BroadcastMessage broadcastMessage = messageFactory.deserializeMessage(consumerRecord.value(), BroadcastMessage.class);
         if (broadcastMessage == null || messageFactory.serialize(broadcastMessage).isEmpty()) {
@@ -38,5 +41,13 @@ public abstract class DataConsumer {
 
     private long getSequenceNumber(PartitionKey partitionKey) {
         return partitionToSequenceNumberHandler.computeIfAbsent(partitionKey, k -> new AtomicLong(1)).getAndIncrement();
+    }
+
+    private void logEvent(PartitionKey partitionKey) {
+        partitionToEventLogger.computeIfAbsent(partitionKey, k -> new EventLogger(1000)).logEvent();
+    }
+
+    public double getTotalNumberOfEvents() {
+        return partitionToEventLogger.values().stream().mapToDouble(EventLogger::totalNrOfEvents).sum();
     }
 }
