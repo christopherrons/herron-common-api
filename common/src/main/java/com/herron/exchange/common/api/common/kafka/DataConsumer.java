@@ -1,5 +1,6 @@
 package com.herron.exchange.common.api.common.kafka;
 
+import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.api.broadcasts.BroadcastMessage;
 import com.herron.exchange.common.api.common.messages.common.PartitionKey;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -10,17 +11,20 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.deserializeMessage;
-
 public abstract class DataConsumer {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final Map<PartitionKey, AtomicLong> partitionToSequenceNumberHandler = new ConcurrentHashMap<>();
+    private final MessageFactory messageFactory;
+
+    protected DataConsumer(MessageFactory messageFactory) {
+        this.messageFactory = messageFactory;
+    }
 
     public BroadcastMessage deserializeBroadcast(ConsumerRecord<String, String> consumerRecord, PartitionKey partitionKey) {
         long expected = getSequenceNumber(partitionKey);
 
-        BroadcastMessage broadcastMessage = (BroadcastMessage) deserializeMessage(consumerRecord.key(), consumerRecord.value());
-        if (broadcastMessage == null || broadcastMessage.serialize().isEmpty()) {
+        BroadcastMessage broadcastMessage = messageFactory.deserializeMessage(consumerRecord.value(), BroadcastMessage.class);
+        if (broadcastMessage == null || messageFactory.serialize(broadcastMessage).isEmpty()) {
             logger.error("Unable to map message: {}", consumerRecord);
             return null;
         }

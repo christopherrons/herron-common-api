@@ -6,7 +6,7 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
 @Value.Immutable
-@JsonDeserialize(builder = ImmutableDefaultTradeExecution.Builder.class)
+@JsonDeserialize(builder = ImmutableDefaultUpdateOrder.Builder.class)
 public interface DefaultUpdateOrder extends UpdateOrder {
 
     @Value.Default

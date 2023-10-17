@@ -15,7 +15,10 @@ public interface BondInstrument extends Instrument {
 
     LocalDate maturityDate();
 
-    LocalDate startDate();
+    @Value.Default
+    default LocalDate startDate() {
+        return firstTradingDate();
+    }
 
     CompoundingMethodEnum compoundingMethod();
 

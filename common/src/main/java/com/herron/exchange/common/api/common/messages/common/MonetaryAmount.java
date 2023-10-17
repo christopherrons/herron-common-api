@@ -1,15 +1,15 @@
 package com.herron.exchange.common.api.common.messages.common;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
 import java.util.Objects;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class MonetaryAmount extends Amount<MonetaryAmount> {
     public static MonetaryAmount ZERO_AMOUNT = new MonetaryAmount(0, "N/A");
     private final String currency;
 
-    private MonetaryAmount(double value, String currency) {
+    private MonetaryAmount(@JsonProperty("value") double value, @JsonProperty("currency") String currency) {
         super(value);
         this.currency = currency;
     }
@@ -40,5 +40,10 @@ public class MonetaryAmount extends Amount<MonetaryAmount> {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), currency);
+    }
+
+    @Override
+    public MessageTypesEnum messageType() {
+        return MessageTypesEnum.MONETARY_AMOUNT;
     }
 }

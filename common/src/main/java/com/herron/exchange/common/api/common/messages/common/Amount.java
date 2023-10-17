@@ -1,9 +1,11 @@
 package com.herron.exchange.common.api.common.messages.common;
 
+import com.herron.exchange.common.api.common.api.Message;
+
 import java.util.Objects;
 
 //FIXME: Handle as long instead
-public abstract class Amount<T extends Amount<?>> {
+public abstract class Amount<T extends Amount<?>> implements Message {
 
     protected final double value;
 

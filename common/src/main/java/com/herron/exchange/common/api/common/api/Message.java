@@ -19,12 +19,4 @@ public interface Message {
     @JsonIgnore
     MessageTypesEnum messageType();
 
-    default Message deserialize(String message) {
-        return messageType().deserializeMessage(message);
-    }
-
-    default String serialize() {
-        return messageType().serializeMessage(this);
-    }
-
 }

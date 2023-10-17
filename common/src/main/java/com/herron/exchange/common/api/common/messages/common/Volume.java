@@ -1,11 +1,11 @@
 package com.herron.exchange.common.api.common.messages.common;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Volume extends Amount<Volume> {
 
-    private Volume(double volume) {
+    private Volume(@JsonProperty("value") double volume) {
         super(volume);
     }
 
@@ -23,4 +23,8 @@ public class Volume extends Amount<Volume> {
         return new Volume(volume);
     }
 
+    @Override
+    public MessageTypesEnum messageType() {
+        return MessageTypesEnum.VOLUME;
+    }
 }

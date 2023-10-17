@@ -7,14 +7,13 @@ import com.herron.exchange.common.api.common.messages.common.Volume;
 
 public interface Trade extends Event {
 
-
     Participant bidParticipant();
 
     Participant askParticipant();
 
     String tradeId();
 
-    String buyOrderId();
+    String bidOrderId();
 
     String askOrderId();
 

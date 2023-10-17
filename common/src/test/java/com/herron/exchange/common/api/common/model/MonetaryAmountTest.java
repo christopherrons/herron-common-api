@@ -1,15 +1,25 @@
 package com.herron.exchange.common.api.common.model;
 
+import com.herron.exchange.common.api.common.api.MessageFactory;
+import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.MonetaryAmount;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MonetaryAmountTest {
 
     private final MonetaryAmount thisAmount = MonetaryAmount.create(2.0, "eur");
     private final MonetaryAmount thatAmount = MonetaryAmount.create(10.0, "eur");
+    private final MessageFactory messageFactory = new DefaultMessageFactory();
+
+    @Test
+    void test_serialization_and_deserialization() {
+        var object = MonetaryAmount.create(100, "eur");
+        var value = messageFactory.serialize(object);
+        assertNotNull(value);
+        assertNotNull(messageFactory.deserializeMessage(value));
+    }
 
     @Test
     void test_gt() {

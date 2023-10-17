@@ -1,22 +1,23 @@
 package com.herron.exchange.common.api.common.messages.common;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.enums.UnitEnum;
 
 import java.util.Objects;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Quantity extends Amount<Quantity> {
 
     private final UnitEnum unit;
 
-    private Quantity(double quantity, UnitEnum unit) {
+    public Quantity(@JsonProperty("value") double quantity,
+                    @JsonProperty("unit") UnitEnum unit) {
         super(quantity);
         this.unit = unit;
     }
 
     public static Quantity create(double quantity, UnitEnum unit) {
-        return new Quantity(quantity, UnitEnum.UNITLESS);
+        return new Quantity(quantity, unit);
     }
 
     public static Quantity create(double quantity) {
@@ -45,5 +46,10 @@ public class Quantity extends Amount<Quantity> {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), unit);
+    }
+
+    @Override
+    public MessageTypesEnum messageType() {
+        return MessageTypesEnum.QUANTITY;
     }
 }

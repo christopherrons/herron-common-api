@@ -1,10 +1,12 @@
 package com.herron.exchange.common.api.common.api.marketdata;
 
+import com.herron.exchange.common.api.common.api.Message;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public interface TimeComponentKey {
+public interface TimeComponentKey extends Message {
 
     LocalDateTime timeOfEvent();
 

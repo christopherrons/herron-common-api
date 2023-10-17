@@ -8,7 +8,7 @@ public interface DerivativeInstrument extends Instrument {
 
     LocalDate maturityDate();
 
-    String underLyingInstrumentId();
+    String underlyingInstrumentId();
 
     SettlementTypeEnum settlementType();
 }

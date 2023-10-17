@@ -1,11 +1,11 @@
 package com.herron.exchange.common.api.common.messages.common;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Price extends Amount<Price> {
 
-    private Price(double price) {
+    public Price(@JsonProperty("value") double price) {
         super(price);
     }
 
@@ -23,4 +23,8 @@ public class Price extends Amount<Price> {
         return new Price(price);
     }
 
+    @Override
+    public MessageTypesEnum messageType() {
+        return MessageTypesEnum.PRICE;
+    }
 }
