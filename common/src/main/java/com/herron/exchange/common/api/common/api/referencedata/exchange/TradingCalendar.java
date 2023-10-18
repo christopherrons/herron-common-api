@@ -24,6 +24,12 @@ public interface TradingCalendar extends Message {
     @Nullable
     TradingHours closeAuctionTradingHours();
 
+    @Nullable
+    TradingHours postTradingHours();
+
+    @Nullable
+    TradingHours closedTradingHours();
+
     @Value.Default
     default Map<LocalDate, TradingHours> holidayMarketHours() {
         return Map.of();

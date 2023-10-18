@@ -5,6 +5,7 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
 public class Price extends Amount<Price> {
     public static final Price ZERO = new Price(0);
+    public static final Price EMPTY = null;
 
     public Price(@JsonProperty("value") double price) {
         super(price);

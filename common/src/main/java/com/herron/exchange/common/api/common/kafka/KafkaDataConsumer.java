@@ -12,14 +12,20 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-public abstract class DataConsumer {
+public abstract class KafkaDataConsumer {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final Map<PartitionKey, AtomicLong> partitionToSequenceNumberHandler = new ConcurrentHashMap<>();
     private final Map<PartitionKey, EventLogger> partitionToEventLogger = new ConcurrentHashMap<>();
     private final MessageFactory messageFactory;
+    private final Map<PartitionKey, Integer> keyToMessageUpdateInterval;
 
-    protected DataConsumer(MessageFactory messageFactory) {
+    protected KafkaDataConsumer(MessageFactory messageFactory) {
+        this(messageFactory, Map.of());
+    }
+
+    protected KafkaDataConsumer(MessageFactory messageFactory, Map<PartitionKey, Integer> keyToMessageUpdateInterval) {
         this.messageFactory = messageFactory;
+        this.keyToMessageUpdateInterval = keyToMessageUpdateInterval;
     }
 
     public BroadcastMessage deserializeBroadcast(ConsumerRecord<String, String> consumerRecord, PartitionKey partitionKey) {
@@ -44,7 +50,7 @@ public abstract class DataConsumer {
     }
 
     private void logEvent(PartitionKey partitionKey) {
-        partitionToEventLogger.computeIfAbsent(partitionKey, k -> new EventLogger(partitionKey.toString(), 1000)).logEvent();
+        partitionToEventLogger.computeIfAbsent(partitionKey, k -> new EventLogger(partitionKey.toString(), keyToMessageUpdateInterval.getOrDefault(partitionKey, 1000))).logEvent();
     }
 
     public double getTotalNumberOfEvents() {

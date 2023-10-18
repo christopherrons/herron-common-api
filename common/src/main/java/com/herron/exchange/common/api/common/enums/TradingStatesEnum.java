@@ -25,7 +25,7 @@ public enum TradingStatesEnum {
 
     private static final Map<String, TradingStatesEnum> VALUES_BY_IDENTIFIER = stream(TradingStatesEnum.values()).collect(toMap(TradingStatesEnum::getValue, identity()));
     private static final Map<TradingStatesEnum, Set<TradingStatesEnum>> fromStateToState = Map.of(
-            CLOSED, Set.of(CLOSED, PRE_TRADE),
+            CLOSED, Set.of(CLOSED, PRE_TRADE, CONTINUOUS_TRADING),
             PRE_TRADE, Set.of(TRADE_HALT, OPEN_AUCTION_TRADING, CONTINUOUS_TRADING),
             POST_TRADE, Set.of(CLOSED),
             TRADE_HALT, Set.of(TRADE_HALT_ENDED),
@@ -34,7 +34,7 @@ public enum TradingStatesEnum {
             CLOSING_AUCTION_TRADING, Set.of(TRADE_HALT, CLOSING_AUCTION_RUN),
             OPEN_AUCTION_RUN, Set.of(TRADE_HALT, CONTINUOUS_TRADING),
             CLOSING_AUCTION_RUN, Set.of(TRADE_HALT, POST_TRADE, CLOSED),
-            CONTINUOUS_TRADING, Set.of(TRADE_HALT, CLOSING_AUCTION_RUN, CLOSING_AUCTION_TRADING)
+            CONTINUOUS_TRADING, Set.of(TRADE_HALT, CLOSING_AUCTION_RUN, CLOSING_AUCTION_TRADING, POST_TRADE)
     );
 
     private final String value;
