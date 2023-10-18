@@ -1,16 +1,16 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
-import com.herron.exchange.common.api.common.enums.OrderAddOperationTypeEnum;
-import com.herron.exchange.common.api.common.enums.OrderExecutionTypeEnum;
-import com.herron.exchange.common.api.common.enums.OrderSideEnum;
-import com.herron.exchange.common.api.common.enums.OrderTypeEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Participant;
 import com.herron.exchange.common.api.common.messages.common.Price;
 import com.herron.exchange.common.api.common.messages.common.Volume;
 import org.junit.jupiter.api.Test;
 
+import static com.herron.exchange.common.api.common.enums.OrderAddOperationTypeEnum.NEW_ORDER;
+import static com.herron.exchange.common.api.common.enums.OrderSideEnum.BID;
+import static com.herron.exchange.common.api.common.enums.OrderTypeEnum.MARKET;
+import static com.herron.exchange.common.api.common.enums.TimeInForceEnum.FAK;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class DefaultAddOrderTest {
@@ -19,17 +19,17 @@ class DefaultAddOrderTest {
     @Test
     void test_serialization_and_deserialization() {
         var object = ImmutableDefaultAddOrder.builder()
-                .addOperationType(OrderAddOperationTypeEnum.NEW_ORDER)
+                .addOperationType(NEW_ORDER)
                 .currentVolume(Volume.create(1))
                 .initialVolume(Volume.create(1))
                 .instrumentId("instrument")
                 .orderId("orderid")
                 .orderbookId("orderbookid")
-                .orderExecutionType(OrderExecutionTypeEnum.FAK)
-                .orderSide(OrderSideEnum.BID)
+                .timeInForce(FAK)
+                .orderSide(BID)
                 .timeOfEventMs(1)
                 .price(Price.create(1))
-                .orderType(OrderTypeEnum.MARKET)
+                .orderType(MARKET)
                 .participant(new Participant("member", "user"))
                 .build();
 

@@ -9,20 +9,23 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public enum OrderExecutionTypeEnum {
+public enum TimeInForceEnum {
     INVALID_ORDER_EXECUTION_TYPE(null),
+    ICEBERG("iceberg-order"),
+    GTD("good-til-date"),
+    GTC("good-til-cancel"),
     FOK("fill-or-kill"),
     FAK("fill-and-kill"),
     FILL("fill");
 
-    private static final Map<String, OrderExecutionTypeEnum> VALUES_BY_IDENTIFIER = stream(OrderExecutionTypeEnum.values()).collect(toMap(OrderExecutionTypeEnum::getValue, identity()));
+    private static final Map<String, TimeInForceEnum> VALUES_BY_IDENTIFIER = stream(TimeInForceEnum.values()).collect(toMap(TimeInForceEnum::getValue, identity()));
     private final String value;
 
-    OrderExecutionTypeEnum(String value) {
+    TimeInForceEnum(String value) {
         this.value = value;
     }
 
-    public static OrderExecutionTypeEnum fromValue(String value) {
+    public static TimeInForceEnum fromValue(String value) {
         return VALUES_BY_IDENTIFIER.getOrDefault(value, INVALID_ORDER_EXECUTION_TYPE);
     }
 
