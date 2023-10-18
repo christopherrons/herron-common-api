@@ -7,8 +7,6 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum PriceType {
-
-    INVALID_PRICE_TYPE(null),
     SETTLEMENT("settlement"),
     LAST_PRICE("last price"),
     HISTORICAL("historical"),
@@ -22,7 +20,7 @@ public enum PriceType {
     }
 
     public static PriceType fromValue(String value) {
-        return VALUES_BY_IDENTIFIER.getOrDefault(value, INVALID_PRICE_TYPE);
+        return VALUES_BY_IDENTIFIER.getOrDefault(value, null);
     }
 
     public String getValue() {

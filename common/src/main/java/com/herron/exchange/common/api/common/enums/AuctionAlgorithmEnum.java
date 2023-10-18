@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum AuctionAlgorithmEnum {
-    INVALID_AUCTION_ALGORITHM(null),
     DUTCH("dutch auction"),
     AMERICAN("american auction");
 
@@ -22,7 +21,7 @@ public enum AuctionAlgorithmEnum {
     }
 
     public static AuctionAlgorithmEnum fromValue(String value) {
-        return VALUES_BY_IDENTIFIER.getOrDefault(value.toLowerCase(), INVALID_AUCTION_ALGORITHM);
+        return VALUES_BY_IDENTIFIER.getOrDefault(value.toLowerCase(), null);
     }
 
     public String getValue() {

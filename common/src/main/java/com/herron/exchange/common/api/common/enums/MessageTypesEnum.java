@@ -17,7 +17,6 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum MessageTypesEnum {
-
     INVALID_MESSAGE_TYPE(null, null),
     MONETARY_AMOUNT("MA", MonetaryAmount.class),
     VOLUME("V", Volume.class),
@@ -29,9 +28,8 @@ public enum MessageTypesEnum {
     DEFAULT_BROADCAST_MESSAGE("DEBM", DefaultBroadcastMessage.class),
     DEFAULT_TRADING_CALENDAR("DFTC", DefaultTradingCalendar.class),
     DEFAULT_BUSINESS_CALENDAR("DFBC", DefaultBusinessCalendar.class),
-    DEFAULT_ADD_ORDER("DFAO", DefaultAddOrder.class),
-    DEFAULT_UPDATE_ORDER("DFUO", DefaultUpdateOrder.class),
-    DEFAULT_CANCEL_ORDER("DFCO", DefaultCancelOrder.class),
+    DEFAULT_LIMIT_ORDER("DFLO", DefaultLimitOrder.class),
+    DEFAULT_MARKET_ORDER("DFMO", DefaultMarketOrder.class),
     DEFAULT_TRADE("DFTR", DefaultTrade.class),
     DEFAULT_ORDERBOOK_DATA("DFOB", DefaultOrderbookData.class),
     DEFAULT_EQUITY_INSTRUMENT("DFSI", DefaultEquityInstrument.class),

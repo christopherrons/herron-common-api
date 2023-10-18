@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum InstrumentTypeEnum {
-    INVALID_INSTRUMENT_TYPE(null),
     BOND("bond"),
     PERPETUAL_BOND("perpetual bond"),
     SWAP("swap"),
@@ -28,7 +27,7 @@ public enum InstrumentTypeEnum {
     }
 
     public static InstrumentTypeEnum fromValue(String value) {
-        return VALUES_BY_IDENTIFIER.getOrDefault(value.toLowerCase(), INVALID_INSTRUMENT_TYPE);
+        return VALUES_BY_IDENTIFIER.getOrDefault(value.toLowerCase(), null);
     }
 
     public String getValue() {

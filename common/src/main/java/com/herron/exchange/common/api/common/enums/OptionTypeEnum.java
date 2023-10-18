@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum OptionTypeEnum {
-    INVALID_OPTION_TYPE("INVALID_ORDER_SIDE"),
     PUT("PUT"),
     CALL("CALL");
 
@@ -22,7 +21,7 @@ public enum OptionTypeEnum {
     }
 
     public static OptionTypeEnum fromValue(String value) {
-        return VALUES_BY_IDENTIFIER.getOrDefault(value, INVALID_OPTION_TYPE);
+        return VALUES_BY_IDENTIFIER.getOrDefault(value, null);
     }
 
     public String getValue() {

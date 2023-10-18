@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum MatchingAlgorithmEnum {
-    INVALID_MATCHING_ALGORITHM(null),
     PRO_RATA("pro-rata"),
     FIFO("fifo");
 
@@ -22,7 +21,7 @@ public enum MatchingAlgorithmEnum {
     }
 
     public static MatchingAlgorithmEnum fromValue(String value) {
-        return VALUES_BY_IDENTIFIER.getOrDefault(value.toLowerCase(), INVALID_MATCHING_ALGORITHM);
+        return VALUES_BY_IDENTIFIER.getOrDefault(value.toLowerCase(), null);
     }
 
     public String getValue() {

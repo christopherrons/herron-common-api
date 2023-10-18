@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum OrderOperationEnum {
-    INVALID_ORDER_OPERATION("invalid"),
     INSERT("insert"),
     UPDATE("update"),
     CANCEL("cancel");
@@ -28,11 +27,11 @@ public enum OrderOperationEnum {
                 return orderOperationEnum;
             }
         }
-        return OrderOperationEnum.INVALID_ORDER_OPERATION;
+        return null;
     }
 
     public static OrderOperationEnum fromValue(String value) {
-        return VALUES_BY_IDENTIFIER.getOrDefault(value.toLowerCase(), INVALID_ORDER_OPERATION);
+        return VALUES_BY_IDENTIFIER.getOrDefault(value.toLowerCase(), null);
     }
 
     public String getValue() {

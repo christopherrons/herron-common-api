@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum OrderSideEnum {
-    INVALID_ORDER_SIDE(-1),
     BID(0),
     ASK(1);
 
@@ -22,7 +21,7 @@ public enum OrderSideEnum {
     }
 
     public static OrderSideEnum fromValue(int value) {
-        return VALUES_BY_IDENTIFIER.getOrDefault(value, INVALID_ORDER_SIDE);
+        return VALUES_BY_IDENTIFIER.getOrDefault(value, null);
     }
 
     public int getValue() {

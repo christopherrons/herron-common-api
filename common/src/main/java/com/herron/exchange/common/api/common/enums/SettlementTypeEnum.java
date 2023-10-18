@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum SettlementTypeEnum {
-    INVALID_SETTLEMENT_TYPE("INVALID_SETTLEMENT_TYPE"),
     CASH("CASH"),
     PHYSICAL("PHYSICAL");
 
@@ -22,7 +21,7 @@ public enum SettlementTypeEnum {
     }
 
     public static SettlementTypeEnum fromValue(String value) {
-        return VALUES_BY_IDENTIFIER.getOrDefault(value, INVALID_SETTLEMENT_TYPE);
+        return VALUES_BY_IDENTIFIER.getOrDefault(value, null);
     }
 
     public String getValue() {

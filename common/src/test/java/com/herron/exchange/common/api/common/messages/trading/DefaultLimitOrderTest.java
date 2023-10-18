@@ -7,19 +7,20 @@ import com.herron.exchange.common.api.common.messages.common.Price;
 import com.herron.exchange.common.api.common.messages.common.Volume;
 import org.junit.jupiter.api.Test;
 
+import static com.herron.exchange.common.api.common.enums.OrderOperationCauseEnum.NEW_ORDER;
+import static com.herron.exchange.common.api.common.enums.OrderOperationEnum.INSERT;
 import static com.herron.exchange.common.api.common.enums.OrderSideEnum.BID;
-import static com.herron.exchange.common.api.common.enums.OrderTypeEnum.MARKET;
-import static com.herron.exchange.common.api.common.enums.OrderUpdatedOperationTypeEnum.EXTERNAL_UPDATE;
 import static com.herron.exchange.common.api.common.enums.TimeInForceEnum.FAK;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class DefaultUpdateOrderTest {
+class DefaultLimitOrderTest {
     private final MessageFactory messageFactory = new DefaultMessageFactory();
 
     @Test
     void test_serialization_and_deserialization() {
-        var object = ImmutableDefaultUpdateOrder.builder()
-                .updateOperationType(EXTERNAL_UPDATE)
+        var object = ImmutableDefaultLimitOrder.builder()
+                .orderOperationCause(NEW_ORDER)
+                .orderOperation(INSERT)
                 .currentVolume(Volume.create(1))
                 .initialVolume(Volume.create(1))
                 .instrumentId("instrument")
@@ -29,7 +30,6 @@ class DefaultUpdateOrderTest {
                 .orderSide(BID)
                 .timeOfEventMs(1)
                 .price(Price.create(1))
-                .orderType(MARKET)
                 .participant(new Participant("member", "user"))
                 .build();
 

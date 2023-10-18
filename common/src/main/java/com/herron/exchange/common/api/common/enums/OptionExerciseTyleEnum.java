@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum OptionExerciseTyleEnum {
-    INVALID_OPTION_EXERCISE_STYLE("INVALID_OPTION_EXERCISE_STYLE"),
     EUROPEAN("EUROPEAN"),
     AMERICAN("AMERICAN");
 
@@ -22,7 +21,7 @@ public enum OptionExerciseTyleEnum {
     }
 
     public static OptionExerciseTyleEnum fromValue(String value) {
-        return VALUES_BY_IDENTIFIER.getOrDefault(value, INVALID_OPTION_EXERCISE_STYLE);
+        return VALUES_BY_IDENTIFIER.getOrDefault(value, null);
     }
 
     public String getValue() {

@@ -10,7 +10,6 @@ import static java.util.stream.Collectors.toMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum OrderTypeEnum {
-    INVALID_ORDER_TYPE(null),
     LIMIT("limit"),
     MARKET("market");
 
@@ -22,7 +21,7 @@ public enum OrderTypeEnum {
     }
 
     public static OrderTypeEnum fromValue(String value) {
-        return VALUES_BY_IDENTIFIER.getOrDefault(value, INVALID_ORDER_TYPE);
+        return VALUES_BY_IDENTIFIER.getOrDefault(value, null);
     }
 
     public String getValue() {

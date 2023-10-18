@@ -7,8 +7,6 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum CompoundingMethodEnum {
-
-    INVALID_COMPOUNDING_METHOD(null),
     SIMPLE("simple"),
     CONTINUOUS("continuous"),
     COMPOUNDING("compounding");
@@ -21,7 +19,7 @@ public enum CompoundingMethodEnum {
     }
 
     public static CompoundingMethodEnum fromValue(String value) {
-        return VALUES_BY_IDENTIFIER.getOrDefault(value, INVALID_COMPOUNDING_METHOD);
+        return VALUES_BY_IDENTIFIER.getOrDefault(value, null);
     }
 
     public String getValue() {

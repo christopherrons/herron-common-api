@@ -10,5 +10,6 @@ public interface MarketDataPrice extends MarketDataEntry {
 
     Price price();
 
+    @Override
     MarketDataPriceStaticKey staticKey();
 }

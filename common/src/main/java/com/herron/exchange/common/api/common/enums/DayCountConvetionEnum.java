@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public enum DayCountConvetionEnum {
-
-    INVALID_DAY_COUNT_CONVENTION(0, 0),
     ACT365(0, 365),
     ACT360(0, 360),
     BOND_BASIS_30360(30, 360);
