@@ -5,13 +5,15 @@ import com.herron.exchange.common.api.common.api.trading.trades.Trade;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
+import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.DEFAULT_TRADE;
+
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableDefaultTrade.Builder.class)
 public interface DefaultTrade extends Trade {
 
-    @Value.Default
+    @Value.Derived
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.DEFAULT_TRADE;
+        return DEFAULT_TRADE;
     }
 
 }

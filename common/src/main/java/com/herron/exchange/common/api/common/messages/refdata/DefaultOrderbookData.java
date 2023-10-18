@@ -5,12 +5,14 @@ import com.herron.exchange.common.api.common.api.referencedata.orderbook.Orderbo
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
+import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.DEFAULT_ORDERBOOK_DATA;
+
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableDefaultOrderbookData.Builder.class)
 public interface DefaultOrderbookData extends OrderbookData {
 
-    @Value.Default
+    @Value.Derived
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.DEFAULT_ORDERBOOK_DATA;
+        return DEFAULT_ORDERBOOK_DATA;
     }
 }

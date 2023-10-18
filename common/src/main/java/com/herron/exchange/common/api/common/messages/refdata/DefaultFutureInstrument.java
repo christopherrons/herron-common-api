@@ -5,12 +5,14 @@ import com.herron.exchange.common.api.common.api.referencedata.instruments.Futur
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
+import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.DEFAULT_FUTURE_INSTRUMENT;
+
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableDefaultFutureInstrument.Builder.class)
 public interface DefaultFutureInstrument extends FutureInstrument {
 
-    @Value.Default
+    @Value.Derived
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.DEFAULT_FUTURE_INSTRUMENT;
+        return DEFAULT_FUTURE_INSTRUMENT;
     }
 }

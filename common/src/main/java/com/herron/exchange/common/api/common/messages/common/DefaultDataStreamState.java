@@ -5,13 +5,14 @@ import com.herron.exchange.common.api.common.api.broadcasts.DataStreamState;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
+import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.DEFAULT_DATA_STREAM_STATE;
+
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableDefaultDataStreamState.Builder.class)
 public interface DefaultDataStreamState extends DataStreamState {
 
-
-    @Value.Default
+    @Value.Derived
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.DEFAULT_DATA_STREAM_STATE;
+        return DEFAULT_DATA_STREAM_STATE;
     }
 }

@@ -5,12 +5,14 @@ import com.herron.exchange.common.api.common.api.referencedata.instruments.Equit
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
+import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.DEFAULT_EQUITY_INSTRUMENT;
+
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableDefaultEquityInstrument.Builder.class)
 public interface DefaultEquityInstrument extends EquityInstrument {
 
-    @Value.Default
+    @Value.Derived
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.DEFAULT_EQUITY_INSTRUMENT;
+        return DEFAULT_EQUITY_INSTRUMENT;
     }
 }

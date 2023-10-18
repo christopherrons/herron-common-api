@@ -7,13 +7,15 @@ import org.immutables.value.Value;
 
 import java.time.LocalTime;
 
+import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.DEFAULT_TRADING_CALENDAR;
+
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableDefaultTradingCalendar.Builder.class)
 public interface DefaultTradingCalendar extends TradingCalendar {
 
-    @Value.Default
+    @Value.Derived
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.DEFAULT_TRADING_CALENDAR;
+        return DEFAULT_TRADING_CALENDAR;
     }
 
 

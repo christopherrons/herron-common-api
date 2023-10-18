@@ -29,6 +29,7 @@ public enum MessageTypesEnum {
     DEFAULT_TRADING_CALENDAR("DFTC", DefaultTradingCalendar.class),
     DEFAULT_BUSINESS_CALENDAR("DFBC", DefaultBusinessCalendar.class),
     DEFAULT_LIMIT_ORDER("DFLO", DefaultLimitOrder.class),
+    DEFAULT_PRICE_QUOTE("DFPQ", DefaultPriceQuote.class),
     DEFAULT_MARKET_ORDER("DFMO", DefaultMarketOrder.class),
     DEFAULT_TRADE("DFTR", DefaultTrade.class),
     DEFAULT_ORDERBOOK_DATA("DFOB", DefaultOrderbookData.class),

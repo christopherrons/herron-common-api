@@ -5,12 +5,14 @@ import com.herron.exchange.common.api.common.api.referencedata.instruments.Optio
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
+import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.DEFAULT_OPTION_INSTRUMENT;
+
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableDefaultOptionInstrument.Builder.class)
 public interface DefaultOptionInstrument extends OptionInstrument {
 
-    @Value.Default
+    @Value.Derived
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.DEFAULT_OPTION_INSTRUMENT;
+        return DEFAULT_OPTION_INSTRUMENT;
     }
 }

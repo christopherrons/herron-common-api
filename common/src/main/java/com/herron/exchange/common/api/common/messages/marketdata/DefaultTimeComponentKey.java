@@ -5,13 +5,15 @@ import com.herron.exchange.common.api.common.api.marketdata.TimeComponentKey;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
+import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.DEFAULT_TIME_COMPONENT_KEY;
+
 
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableDefaultTimeComponentKey.Builder.class)
 public interface DefaultTimeComponentKey extends TimeComponentKey {
 
-    @Value.Default
+    @Value.Derived
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.DEFAULT_TIME_COMPONENT_KEY;
+        return DEFAULT_TIME_COMPONENT_KEY;
     }
 }

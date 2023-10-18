@@ -5,12 +5,14 @@ import com.herron.exchange.common.api.common.api.referencedata.instruments.BondI
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import org.immutables.value.Value;
 
+import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.DEFAULT_BOND_INSTRUMENT;
+
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableDefaultBondInstrument.Builder.class)
 public interface DefaultBondInstrument extends BondInstrument {
 
-    @Value.Default
+    @Value.Derived
     default MessageTypesEnum messageType() {
-        return MessageTypesEnum.DEFAULT_BOND_INSTRUMENT;
+        return DEFAULT_BOND_INSTRUMENT;
     }
 }
