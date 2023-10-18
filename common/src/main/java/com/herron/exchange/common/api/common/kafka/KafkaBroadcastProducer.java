@@ -50,6 +50,7 @@ public class KafkaBroadcastProducer {
 
     public synchronized boolean broadcastMessage(Message message) {
         if (!isBroadCasting.get() || message == null) {
+            logger.warn("Attemping to broadcast message {} but broadcasting not started for {}.", message, partitionKey);
             return false;
         }
 

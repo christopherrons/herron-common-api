@@ -13,7 +13,7 @@ class DefaultStateChangeTest {
     @Test
     void test_serialization_and_deserialization() {
         var object = ImmutableDefaultStateChange.builder()
-                .stateChangeType(StateChangeTypeEnum.AUCTION_RUN)
+                .stateChangeType(StateChangeTypeEnum.OPEN_AUCTION_RUN)
                 .timeOfEventMs(1)
                 .orderbookId("obid")
                 .build();

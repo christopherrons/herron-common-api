@@ -28,10 +28,12 @@ class DefaultTradeExecutionTest {
                 .bidParticipant(new Participant("member", "user"))
                 .askOrderId("askorderid")
                 .bidOrderId("bidorderid")
+
                 .build();
         var object = ImmutableDefaultTradeExecution.builder()
                 .timeOfEventMs(1)
                 .addAllMessages(List.of(trade))
+                .orderbookId("orderbookid")
                 .build();
         var value = messageFactory.serialize(object);
         assertNotNull(value);

@@ -16,19 +16,23 @@ public enum StateChangeTypeEnum {
     PRE_TRADE("pre trade"),
     POST_TRADE("post trade"),
     TRADE_STOP("trade stop"),
-    AUCTION_TRADING("auction trading"),
-    AUCTION_RUN("auction run"),
+    OPEN_AUCTION_TRADING("open auction trading"),
+    CLOSING_AUCTION_TRADING("closing auction trading"),
+    OPEN_AUCTION_RUN("open auction run"),
+    CLOSING_AUCTION_RUN("closing auction run"),
     CONTINUOUS_TRADING("continuous trading");
 
     private static final Map<String, StateChangeTypeEnum> VALUES_BY_IDENTIFIER = stream(StateChangeTypeEnum.values()).collect(toMap(StateChangeTypeEnum::getValue, identity()));
     private static final Map<StateChangeTypeEnum, Set<StateChangeTypeEnum>> fromStateToState = Map.of(
             CLOSED, Set.of(CLOSED, PRE_TRADE),
-            PRE_TRADE, Set.of(TRADE_STOP, AUCTION_TRADING, CONTINUOUS_TRADING),
+            PRE_TRADE, Set.of(TRADE_STOP, OPEN_AUCTION_TRADING, CONTINUOUS_TRADING),
             POST_TRADE, Set.of(CLOSED),
-            TRADE_STOP, Set.of(CLOSED, AUCTION_TRADING, AUCTION_RUN, POST_TRADE, PRE_TRADE),
-            AUCTION_TRADING, Set.of(TRADE_STOP, AUCTION_RUN),
-            AUCTION_RUN, Set.of(TRADE_STOP, CONTINUOUS_TRADING),
-            CONTINUOUS_TRADING, Set.of(TRADE_STOP, AUCTION_TRADING)
+            TRADE_STOP, Set.of(CLOSED, OPEN_AUCTION_TRADING, OPEN_AUCTION_RUN, CLOSING_AUCTION_RUN, CLOSING_AUCTION_TRADING, POST_TRADE, PRE_TRADE),
+            OPEN_AUCTION_TRADING, Set.of(TRADE_STOP, OPEN_AUCTION_RUN),
+            CLOSING_AUCTION_TRADING, Set.of(TRADE_STOP, CLOSING_AUCTION_RUN),
+            OPEN_AUCTION_RUN, Set.of(TRADE_STOP, CONTINUOUS_TRADING),
+            CLOSING_AUCTION_RUN, Set.of(TRADE_STOP, POST_TRADE, CLOSED),
+            CONTINUOUS_TRADING, Set.of(TRADE_STOP, CLOSING_AUCTION_RUN, CLOSING_AUCTION_TRADING)
     );
 
     private final String value;

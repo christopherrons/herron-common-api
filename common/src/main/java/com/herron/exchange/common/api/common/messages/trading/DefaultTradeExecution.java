@@ -10,7 +10,6 @@ import org.immutables.value.Value;
 @JsonDeserialize(builder = ImmutableDefaultTradeExecution.Builder.class)
 public interface DefaultTradeExecution extends TradeExecution {
 
-
     @Value.Default
     default MessageTypesEnum messageType() {
         return MessageTypesEnum.DEFAULT_TRADE_EXECUTION;
