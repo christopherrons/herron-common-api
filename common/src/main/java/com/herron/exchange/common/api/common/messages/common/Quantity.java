@@ -57,4 +57,11 @@ public class Quantity extends Amount<Quantity> {
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.QUANTITY;
     }
+
+    @Override
+    public String toString() {
+        return "Quantity{" +
+                "unit=" + unit +
+                "} " + super.toString();
+    }
 }

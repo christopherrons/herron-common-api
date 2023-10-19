@@ -51,4 +51,11 @@ public class MonetaryAmount extends Amount<MonetaryAmount> {
     public MessageTypesEnum messageType() {
         return MessageTypesEnum.MONETARY_AMOUNT;
     }
+
+    @Override
+    public String toString() {
+        return "MonetaryAmount{" +
+                "value=" + value +
+                "} " + super.toString();
+    }
 }

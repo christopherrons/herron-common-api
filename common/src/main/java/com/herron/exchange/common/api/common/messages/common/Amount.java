@@ -114,4 +114,11 @@ public abstract class Amount<T extends Amount<?>> implements Message {
     public int hashCode() {
         return Objects.hash(value);
     }
+
+    @Override
+    public String toString() {
+        return "Amount{" +
+                "value=" + value +
+                '}';
+    }
 }
