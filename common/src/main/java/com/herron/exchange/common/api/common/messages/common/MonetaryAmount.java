@@ -3,13 +3,19 @@ package com.herron.exchange.common.api.common.messages.common;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class MonetaryAmount extends Amount<MonetaryAmount> {
     public static final MonetaryAmount ZERO_AMOUNT = new MonetaryAmount(0, "N/A");
     private final String currency;
 
-    private MonetaryAmount(@JsonProperty("value") double value, @JsonProperty("currency") String currency) {
+    private MonetaryAmount(double value, String currency) {
+        super(value);
+        this.currency = currency;
+    }
+
+    private MonetaryAmount(@JsonProperty("value") BigDecimal value, @JsonProperty("currency") String currency) {
         super(value);
         this.currency = currency;
     }
@@ -20,7 +26,12 @@ public class MonetaryAmount extends Amount<MonetaryAmount> {
 
     @Override
     protected MonetaryAmount newInstance(double value) {
-        return MonetaryAmount.create(value, currency);
+        return new MonetaryAmount(value, currency);
+    }
+
+    @Override
+    protected MonetaryAmount newInstance(BigDecimal value) {
+        return new MonetaryAmount(value, currency);
     }
 
     protected void validate(MonetaryAmount otherMonetaryAmount) {

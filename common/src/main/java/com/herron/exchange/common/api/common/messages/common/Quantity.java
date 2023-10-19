@@ -4,14 +4,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.enums.UnitEnum;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Quantity extends Amount<Quantity> {
     public static final Quantity ZERO = new Quantity(0, UnitEnum.UNITLESS);
     private final UnitEnum unit;
 
-    public Quantity(@JsonProperty("value") double quantity,
-                    @JsonProperty("unit") UnitEnum unit) {
+    private Quantity(double quantity, UnitEnum unit) {
+        super(quantity);
+        this.unit = unit;
+    }
+
+    private Quantity(@JsonProperty("value") BigDecimal quantity,
+                     @JsonProperty("unit") UnitEnum unit) {
         super(quantity);
         this.unit = unit;
     }
@@ -27,6 +33,11 @@ public class Quantity extends Amount<Quantity> {
     @Override
     protected Quantity newInstance(double quantity) {
         return Quantity.create(quantity, unit);
+    }
+
+    @Override
+    protected Quantity newInstance(BigDecimal quantity) {
+        return new Quantity(quantity, unit);
     }
 
     protected void validate(Quantity otherQuantity) {

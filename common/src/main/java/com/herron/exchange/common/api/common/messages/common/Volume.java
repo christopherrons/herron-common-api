@@ -3,16 +3,27 @@ package com.herron.exchange.common.api.common.messages.common;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
+import java.math.BigDecimal;
+
 public class Volume extends Amount<Volume> {
     public static final Volume ZERO = new Volume(0);
 
-    private Volume(@JsonProperty("value") double volume) {
+    private Volume(double volume) {
+        super(volume);
+    }
+
+    private Volume(@JsonProperty("value") BigDecimal volume) {
         super(volume);
     }
 
     @Override
+    protected Volume newInstance(BigDecimal volume) {
+        return new Volume(volume);
+    }
+
+    @Override
     protected Volume newInstance(double volume) {
-        return Volume.create(volume);
+        return new Volume(volume);
     }
 
     @Override
