@@ -10,9 +10,9 @@ import static java.util.stream.Collectors.toMap;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum OrderOperationEnum {
-    INSERT("insert"),
+    INSERT("insert/created"),
     UPDATE("update"),
-    CANCEL("cancel");
+    CANCEL("cancel/delete");
 
     private static final Map<String, OrderOperationEnum> VALUES_BY_IDENTIFIER = stream(OrderOperationEnum.values()).collect(toMap(OrderOperationEnum::getValue, identity()));
     private final String value;
@@ -23,7 +23,7 @@ public enum OrderOperationEnum {
 
     public static OrderOperationEnum extractValue(String value) {
         for (OrderOperationEnum orderOperationEnum : OrderOperationEnum.values()) {
-            if (value.contains(orderOperationEnum.getValue())) {
+            if (orderOperationEnum.getValue().contains(value)) {
                 return orderOperationEnum;
             }
         }
