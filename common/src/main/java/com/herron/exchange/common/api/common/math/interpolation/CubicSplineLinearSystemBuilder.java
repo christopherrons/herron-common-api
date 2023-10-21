@@ -1,6 +1,6 @@
 package com.herron.exchange.common.api.common.math.interpolation;
 
-import com.herron.exchange.common.api.common.math.model.CubicPolynomial;
+import com.herron.exchange.common.api.common.math.model.FunctionBoundary2dPoints;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -8,17 +8,16 @@ import org.apache.commons.math3.linear.RealVector;
 
 import java.util.List;
 
-import static com.herron.exchange.common.api.common.math.model.CubicPolynomial.NR_OF_COEFFICIENTS_IN_POLYNOMIAL;
 import static java.lang.Math.pow;
 
 public class CubicSplineLinearSystemBuilder {
-
-    private final List<CubicPolynomial> polynomials;
+    public static final int NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL = 4;
+    private final List<FunctionBoundary2dPoints> boundaryPoints;
     private final int nrOfMatrixColumns;
 
-    public CubicSplineLinearSystemBuilder(List<CubicPolynomial> polynomials) {
-        this.polynomials = polynomials;
-        this.nrOfMatrixColumns = polynomials.size() * NR_OF_COEFFICIENTS_IN_POLYNOMIAL;
+    public CubicSplineLinearSystemBuilder(List<FunctionBoundary2dPoints> boundaryPoints) {
+        this.boundaryPoints = boundaryPoints;
+        this.nrOfMatrixColumns = boundaryPoints.size() * NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL;
     }
 
     public RealMatrix createCoefficientMatrix() {
@@ -30,49 +29,49 @@ public class CubicSplineLinearSystemBuilder {
     }
 
     private RealMatrix firstConditionPolynomialPassesThroughRespectiveBoundaryPoints() {
-        RealMatrix matrix = new Array2DRowRealMatrix(polynomials.size() * 2, nrOfMatrixColumns);
-        for (int i = 0; i < polynomials.size(); i++) {
-            final CubicPolynomial polynomial = polynomials.get(i);
+        RealMatrix matrix = new Array2DRowRealMatrix(boundaryPoints.size() * 2, nrOfMatrixColumns);
+        for (int i = 0; i < boundaryPoints.size(); i++) {
+            final FunctionBoundary2dPoints boundaryPoint = boundaryPoints.get(i);
             int rowIndex = i * 2;
-            int columnShift = NR_OF_COEFFICIENTS_IN_POLYNOMIAL * i;
-            addBoundaryPoint(matrix, rowIndex, columnShift, polynomial.getStartBoundaryPointX());
-            addBoundaryPoint(matrix, rowIndex + 1, columnShift, polynomial.getEndBoundaryPointX());
+            int columnShift = NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL * i;
+            addBoundaryPoint(matrix, rowIndex, columnShift, boundaryPoint.startBoundaryPointX());
+            addBoundaryPoint(matrix, rowIndex + 1, columnShift, boundaryPoint.endBoundaryPointX());
         }
         return matrix;
     }
 
     private void addBoundaryPoint(final RealMatrix matrix, final int rowIndex, final int columnShift, double boundaryPoint) {
-        for (int columnIndex = columnShift; columnIndex < columnShift + NR_OF_COEFFICIENTS_IN_POLYNOMIAL; columnIndex++) {
+        for (int columnIndex = columnShift; columnIndex < columnShift + NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL; columnIndex++) {
             matrix.addToEntry(rowIndex, columnIndex, pow(boundaryPoint, 3.0 - columnIndex + columnShift));
         }
     }
 
     private RealMatrix secondConditionFirstDerivativeMatchInteriorPoints() {
-        RealMatrix matrix = new Array2DRowRealMatrix(polynomials.size() - 1, nrOfMatrixColumns);
-        for (int i = 0; i < polynomials.size() - 1; i++) {
-            final CubicPolynomial polynomialOne = polynomials.get(i);
+        RealMatrix matrix = new Array2DRowRealMatrix(boundaryPoints.size() - 1, nrOfMatrixColumns);
+        for (int i = 0; i < boundaryPoints.size() - 1; i++) {
+            final FunctionBoundary2dPoints boundaryPoint = boundaryPoints.get(i);
             int rowIndex = i;
-            int columnShift = NR_OF_COEFFICIENTS_IN_POLYNOMIAL * i;
-            addFirstDerivativeInteriorPoint(matrix, rowIndex, columnShift, polynomialOne.getEndBoundaryPointX());
+            int columnShift = NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL * i;
+            addFirstDerivativeInteriorPoint(matrix, rowIndex, columnShift, boundaryPoint.endBoundaryPointX());
         }
         return matrix;
     }
 
     private void addFirstDerivativeInteriorPoint(final RealMatrix matrix, final int rowIndex, final int columnShift, final double boundaryPoint) {
-        for (int columnIndex = columnShift; columnIndex < columnShift + NR_OF_COEFFICIENTS_IN_POLYNOMIAL; columnIndex++) {
+        for (int columnIndex = columnShift; columnIndex < columnShift + NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL; columnIndex++) {
             double entryValue = (3.0 - columnIndex + columnShift) * pow(boundaryPoint, 2.0 - columnIndex + columnShift);
             matrix.addToEntry(rowIndex, columnIndex, entryValue);
-            matrix.addToEntry(rowIndex, columnIndex + NR_OF_COEFFICIENTS_IN_POLYNOMIAL, -entryValue);
+            matrix.addToEntry(rowIndex, columnIndex + NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL, -entryValue);
         }
     }
 
     private RealMatrix thirdConditionSecondDerivativeMatchInteriorPoints() {
-        RealMatrix matrix = new Array2DRowRealMatrix(polynomials.size() - 1, nrOfMatrixColumns);
-        for (int i = 0; i < polynomials.size() - 1; i++) {
-            final CubicPolynomial polynomial = polynomials.get(i);
+        RealMatrix matrix = new Array2DRowRealMatrix(boundaryPoints.size() - 1, nrOfMatrixColumns);
+        for (int i = 0; i < boundaryPoints.size() - 1; i++) {
+            final FunctionBoundary2dPoints boundaryPoint = boundaryPoints.get(i);
             int rowIndex = i;
-            int columnShift = NR_OF_COEFFICIENTS_IN_POLYNOMIAL * i;
-            addSecondDerivativeInteriorPoint(matrix, rowIndex, columnShift, polynomial.getEndBoundaryPointX());
+            int columnShift = NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL * i;
+            addSecondDerivativeInteriorPoint(matrix, rowIndex, columnShift, boundaryPoint.endBoundaryPointX());
         }
         return matrix;
     }
@@ -80,20 +79,20 @@ public class CubicSplineLinearSystemBuilder {
     private void addSecondDerivativeInteriorPoint(final RealMatrix matrix, final int rowIndex, final int columnShift, final double boundaryPoint) {
         double firstEntryValue = 6.0 * boundaryPoint;
         matrix.addToEntry(rowIndex, columnShift, firstEntryValue);
-        matrix.addToEntry(rowIndex, columnShift + NR_OF_COEFFICIENTS_IN_POLYNOMIAL, -firstEntryValue);
+        matrix.addToEntry(rowIndex, columnShift + NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL, -firstEntryValue);
 
         double secondEntryValue = 2.0;
         matrix.addToEntry(rowIndex, columnShift + 1, secondEntryValue);
-        matrix.addToEntry(rowIndex, columnShift + NR_OF_COEFFICIENTS_IN_POLYNOMIAL + 1, -secondEntryValue);
+        matrix.addToEntry(rowIndex, columnShift + NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL + 1, -secondEntryValue);
     }
 
     private RealMatrix fourthConditionSecondDerivativeVanishingEndPoints() {
         RealMatrix matrix = new Array2DRowRealMatrix(2, nrOfMatrixColumns);
-        double startPoint = polynomials.get(0).getStartBoundaryPointX();
+        double startPoint = boundaryPoints.get(0).startBoundaryPointX();
         matrix.addToEntry(0, 0, 6 * startPoint);
         matrix.addToEntry(0, 1, 2);
 
-        double endPoint = polynomials.get(polynomials.size() - 1).getEndBoundaryPointX();
+        double endPoint = boundaryPoints.get(boundaryPoints.size() - 1).endBoundaryPointX();
         matrix.addToEntry(1, nrOfMatrixColumns - 4, 6 * endPoint);
         matrix.addToEntry(1, nrOfMatrixColumns - 3, 2);
         return matrix;
@@ -119,11 +118,11 @@ public class CubicSplineLinearSystemBuilder {
     }
 
     private void addFirstConditionConstants(final RealVector vector) {
-        for (int i = 0; i < polynomials.size(); i++) {
-            CubicPolynomial polynomial = polynomials.get(i);
+        for (int i = 0; i < boundaryPoints.size(); i++) {
+            FunctionBoundary2dPoints boundaryPoint = boundaryPoints.get(i);
             int rowIndex = i * 2;
-            vector.addToEntry(rowIndex, polynomial.getStartBoundaryPointY());
-            vector.addToEntry(rowIndex + 1, polynomial.getEndBoundaryPointY());
+            vector.addToEntry(rowIndex, boundaryPoint.startBoundaryPointY());
+            vector.addToEntry(rowIndex + 1, boundaryPoint.endBoundaryPointY());
         }
     }
 }

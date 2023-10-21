@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.math.api;
+package com.herron.exchange.common.api.common.api.math;
 
 public interface CartesianPoint2d {
 

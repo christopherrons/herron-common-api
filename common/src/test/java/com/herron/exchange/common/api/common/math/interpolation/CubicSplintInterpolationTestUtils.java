@@ -1,6 +1,6 @@
 package com.herron.exchange.common.api.common.math.interpolation;
 
-import com.herron.exchange.common.api.common.math.api.CartesianPoint2d;
+import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;
 import com.herron.exchange.common.api.common.math.model.CubicPolynomial;
 import com.herron.exchange.common.api.common.math.model.Point2d;
 
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CubicSplintInterpolationTestUtils {
 
-    public static List<CartesianPoint2d> get3YieldPoints() {
+    public static List<CartesianPoint2d> get3Points() {
         List<CartesianPoint2d> yieldPoints = new ArrayList<>();
         yieldPoints.add(new Point2d(1, 1));
         yieldPoints.add(new Point2d(2, 5));
@@ -17,7 +17,7 @@ public class CubicSplintInterpolationTestUtils {
         return yieldPoints;
     }
 
-    public static List<CartesianPoint2d> get5YieldPoints() {
+    public static List<CartesianPoint2d> get5Points() {
         List<CartesianPoint2d> yieldPoints = new ArrayList<>();
         yieldPoints.add(new Point2d(1, 1));
         yieldPoints.add(new Point2d(2, 5));
@@ -48,13 +48,12 @@ public class CubicSplintInterpolationTestUtils {
         return getCubicFunctionValue(x, 0.08928571428571408, -1.3392857142857113, 5.607142857142844, -3.7142857142856966);
     }
 
-    public static double getCubicFunctionValue(final double x, final double firstCoeff,
-                                               final double secondCoeff, final double thirdCoeff, final double fourthCoeff) {
-        CubicPolynomial polynomial = new CubicPolynomial();
-        polynomial.setFirstCoefficient(firstCoeff);
-        polynomial.setSecondCoefficient(secondCoeff);
-        polynomial.setThirdCoefficient(thirdCoeff);
-        polynomial.setFourthCoefficient(fourthCoeff);
+    public static double getCubicFunctionValue(final double x,
+                                               final double firstCoeff,
+                                               final double secondCoeff,
+                                               final double thirdCoeff,
+                                               final double fourthCoeff) {
+        CubicPolynomial polynomial = new CubicPolynomial(firstCoeff, secondCoeff, thirdCoeff, fourthCoeff);
         return polynomial.getFunctionValue(x);
     }
 

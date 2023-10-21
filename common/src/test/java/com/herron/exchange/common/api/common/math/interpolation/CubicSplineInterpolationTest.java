@@ -9,7 +9,7 @@ class CubicSplineInterpolationTest {
 
     @Test
     void testCubicSplineInterpolation3Points() {
-        CubicSplineInterpolation interpolation = new CubicSplineInterpolation(CubicSplintInterpolationTestUtils.get3YieldPoints());
+        CubicSplineInterpolation interpolation = CubicSplineInterpolation.create(CubicSplintInterpolationTestUtils.get3Points());
         for (int i = 0; i < 10000; i++) {
             double x = ThreadLocalRandom.current().nextDouble(1, 3);
             TestAssertionUtils.assertDouble(CubicSplintInterpolationTestUtils.getFunctionValue3Points(x), interpolation.getFunctionValue(x), 0.0000001);
@@ -19,7 +19,7 @@ class CubicSplineInterpolationTest {
 
     @Test
     void testCubicSplineInterpolation5Points() {
-        CubicSplineInterpolation interpolation = new CubicSplineInterpolation(CubicSplintInterpolationTestUtils.get5YieldPoints());
+        CubicSplineInterpolation interpolation = CubicSplineInterpolation.create(CubicSplintInterpolationTestUtils.get5Points());
         for (int i = 0; i < 10000; i++) {
             double x = ThreadLocalRandom.current().nextDouble(1, 3);
             TestAssertionUtils.assertDouble(CubicSplintInterpolationTestUtils.getFunctionValue5Points(x), interpolation.getFunctionValue(x), 0.0000001);
