@@ -22,6 +22,7 @@ class DefaultFutureInstrumentTest {
                 .firstTradingDate(LocalDate.MIN)
                 .lastTradingDate(LocalDate.MAX)
                 .maturityDate(LocalDate.now())
+                .priceModelParameters(ImmutableBasicFuturePriceModelParameters.builder().build())
                 .product(ImmutableDefaultProduct.builder().currency("eur").productId("product").market(ImmutableDefaultMarket.builder().marketId("market").businessCalendar(DefaultBusinessCalendar.defaultWeekendCalendar()).build()).build())
                 .build();
         var value = messageFactory.serialize(object);

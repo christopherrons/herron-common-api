@@ -76,4 +76,16 @@ class AmountTest {
         assertEquals(MonetaryAmount.create(5.0, "eur"), thatAmount.divide(thisRealAmount));
         assertEquals(MonetaryAmount.create(5.0, "eur"), thatAmount.divide(BigDecimal.valueOf(thisRealAmount)));
     }
+
+
+    @Test
+    void test_percentageChange() {
+        assertEquals(0.8, thatAmount.percentageChange(thisAmount));
+        assertEquals(0.8, thatAmount.percentageChange(thisRealAmount));
+        assertEquals(0.8, thatAmount.percentageChange(BigDecimal.valueOf(thisRealAmount)));
+
+        assertEquals(4, thisAmount.percentageChange(thatAmount));
+        assertEquals(4, thisAmount.percentageChange(thatRealAmount));
+        assertEquals(4, thisAmount.percentageChange(BigDecimal.valueOf(thatRealAmount)));
+    }
 }

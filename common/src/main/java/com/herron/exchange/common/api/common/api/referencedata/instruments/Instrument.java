@@ -1,8 +1,10 @@
 package com.herron.exchange.common.api.common.api.referencedata.instruments;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.api.referencedata.exchange.Product;
 import com.herron.exchange.common.api.common.enums.InstrumentTypeEnum;
+import com.herron.exchange.common.api.common.enums.PriceModels;
 import org.immutables.value.Value;
 
 import java.time.LocalDate;
@@ -33,5 +35,13 @@ public interface Instrument extends Message {
     LocalDate firstTradingDate();
 
     LocalDate lastTradingDate();
+
+    PriceModelParameters priceModelParameters();
+
+    @Value.Derived
+    @JsonIgnore
+    default PriceModels priceModel() {
+        return priceModelParameters().priceModel();
+    }
 
 }

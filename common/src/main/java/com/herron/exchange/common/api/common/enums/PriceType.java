@@ -1,16 +1,19 @@
 package com.herron.exchange.common.api.common.enums;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Map;
 
 import static java.util.Arrays.stream;
 import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public enum PriceType {
     SETTLEMENT("settlement"),
     LAST_PRICE("last price"),
-    BID_PRICE( "bid price"),
-    ASK_PRICE( "ask price"),
+    BID_PRICE("bid price"),
+    ASK_PRICE("ask price"),
     MID_BID_ASK_PRICE("mid bid ask price"),
     VWAP("volume weighted average price"),
     HISTORICAL("historical"),

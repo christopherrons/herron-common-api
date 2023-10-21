@@ -32,6 +32,7 @@ class DefaultOrderbookDataTest {
                 .strikePrice(100)
                 .optionType(CALL)
                 .optionExerciseStyle(AMERICAN)
+                .priceModelParameters(ImmutableBlackScholesPriceModelParameters.builder().build())
                 .product(ImmutableDefaultProduct.builder().currency("eur").productId("product").market(ImmutableDefaultMarket.builder().marketId("market").businessCalendar(DefaultBusinessCalendar.defaultWeekendCalendar()).build()).build())
                 .build();
 

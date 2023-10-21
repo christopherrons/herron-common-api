@@ -18,4 +18,8 @@ public class MathUtils {
     public static double convertToDouble(final double value, final int decimals) {
         return value / ROUNDING_FACTORS[decimals];
     }
+
+    public static double percentageChange(double from, double to) {
+        return Math.abs((to - from) / Math.abs(from));
+    }
 }

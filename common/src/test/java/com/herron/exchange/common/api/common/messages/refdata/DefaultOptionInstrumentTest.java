@@ -27,6 +27,7 @@ class DefaultOptionInstrumentTest {
                 .strikePrice(100)
                 .optionType(OptionTypeEnum.CALL)
                 .optionExerciseStyle(OptionExerciseTyleEnum.AMERICAN)
+                .priceModelParameters(ImmutableBlackScholesPriceModelParameters.builder().build())
                 .product(ImmutableDefaultProduct.builder().currency("eur").productId("product").market(ImmutableDefaultMarket.builder().marketId("market").businessCalendar(DefaultBusinessCalendar.defaultWeekendCalendar()).build()).build())
                 .build();
         var value = messageFactory.serialize(object);

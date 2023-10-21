@@ -94,8 +94,8 @@ public abstract class Amount<T extends Amount<?>> implements Message {
         return divide(otherAmount.value);
     }
 
-    public T divide(BigDecimal otherAmount) {
-        return newInstance(value.divide(otherAmount, RoundingMode.HALF_DOWN));
+    public T divide(BigDecimal otherValue) {
+        return newInstance(value.divide(otherValue, RoundingMode.HALF_DOWN));
     }
 
     public T add(double otherValue) {
@@ -107,8 +107,8 @@ public abstract class Amount<T extends Amount<?>> implements Message {
         return add(otherAmount.value);
     }
 
-    public T add(BigDecimal otherAmount) {
-        return newInstance(value.add(otherAmount));
+    public T add(BigDecimal otherValue) {
+        return newInstance(value.add(otherValue));
     }
 
     public T subtract(double otherValue) {
@@ -120,8 +120,21 @@ public abstract class Amount<T extends Amount<?>> implements Message {
         return subtract(otherAmount.value);
     }
 
-    public T subtract(BigDecimal otherAmount) {
-        return newInstance(value.subtract(otherAmount));
+    public T subtract(BigDecimal otherValue) {
+        return newInstance(value.subtract(otherValue));
+    }
+
+    public double percentageChange(double otherValue) {
+        return percentageChange(BigDecimal.valueOf(otherValue));
+    }
+
+    public double percentageChange(T otherAmount) {
+        validate(otherAmount);
+        return percentageChange(otherAmount.value);
+    }
+
+    public double percentageChange(BigDecimal otherAmount) {
+        return otherAmount.subtract(value).divide(value.abs(), RoundingMode.HALF_EVEN).abs().doubleValue();
     }
 
     public T max(T otherAmount) {

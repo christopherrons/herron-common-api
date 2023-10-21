@@ -18,14 +18,18 @@ class DefaultBondInstrumentTest {
     void test_serialization_and_deserialization() {
         var object = ImmutableDefaultBondInstrument.builder()
                 .instrumentId("instrumendId")
-                .compoundingMethod(CompoundingMethodEnum.COMPOUNDING)
-                .dayCountConvention(DayCountConvetionEnum.ACT365)
                 .couponAnnualFrequency(1)
                 .firstTradingDate(LocalDate.MIN)
                 .lastTradingDate(LocalDate.MAX)
                 .nominalValue(1)
                 .maturityDate(LocalDate.now())
                 .couponRate(1)
+                .priceModelParameters(ImmutableBondDiscountPriceModelParameters.builder().compoundingMethod(CompoundingMethodEnum.COMPOUNDING)
+                        .dayCountConvention(DayCountConvetionEnum.ACT365)
+                        .calculateWithCurve(true)
+                        .yieldCurveId("id")
+                        .build()
+                )
                 .product(ImmutableDefaultProduct.builder().currency("eur").productId("product").market(ImmutableDefaultMarket.builder().marketId("market").businessCalendar(DefaultBusinessCalendar.defaultWeekendCalendar()).build()).build())
                 .build();
         var value = messageFactory.serialize(object);

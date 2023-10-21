@@ -5,6 +5,8 @@ import com.herron.exchange.common.api.common.enums.OptionExerciseTyleEnum;
 import com.herron.exchange.common.api.common.enums.OptionTypeEnum;
 import org.immutables.value.Value;
 
+import static com.herron.exchange.common.api.common.enums.InstrumentTypeEnum.OPTION;
+
 public interface OptionInstrument extends DerivativeInstrument {
 
     double strikePrice();
@@ -13,8 +15,8 @@ public interface OptionInstrument extends DerivativeInstrument {
 
     OptionExerciseTyleEnum optionExerciseStyle();
 
-    @Value.Default
+    @Value.Derived
     default InstrumentTypeEnum instrumentType() {
-        return InstrumentTypeEnum.OPTION;
+        return OPTION;
     }
 }
