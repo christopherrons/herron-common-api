@@ -10,6 +10,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class CubicSplineInterpolation implements Function2d {
@@ -58,6 +59,8 @@ public class CubicSplineInterpolation implements Function2d {
     }
 
     private List<CubicPolynomial> buildPolynomials(List<CartesianPoint2d> points) {
+        points.sort(Comparator.comparing(CartesianPoint2d::x));
+
         final int nrOfBoundaries = points.size() - 1;
         final List<FunctionBoundary2dPoints> boundaryPoints = new ArrayList<>();
         for (int i = 0; i < nrOfBoundaries; i++) {

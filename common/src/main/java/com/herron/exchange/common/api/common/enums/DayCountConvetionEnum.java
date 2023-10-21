@@ -31,5 +31,13 @@ public enum DayCountConvetionEnum {
             default -> ChronoUnit.DAYS.between(startDate, endDate.plusDays(1)) / daysPerYear;
         };
     }
+
+    public double getDaysPerMonth() {
+        return daysPerMonth;
+    }
+
+    public double getDaysPerYear() {
+        return daysPerYear;
+    }
 }
 

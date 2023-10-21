@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-//FIXME: Handle as long instead
 public abstract class Amount<T extends Amount<?>> implements Message {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
@@ -73,40 +72,56 @@ public abstract class Amount<T extends Amount<?>> implements Message {
         return value.compareTo(BigDecimal.valueOf(otherValue)) <= 0;
     }
 
-    public T multiply(T otherAmount) {
-        validate(otherAmount);
-        return newInstance(value.multiply(otherAmount.value));
+    public T multiply(double otherValue) {
+        return multiply(BigDecimal.valueOf(otherValue));
     }
 
-    public T multiply(double otherValue) {
-        return newInstance(value.multiply(BigDecimal.valueOf(otherValue)));
+    public T multiply(T otherAmount) {
+        validate(otherAmount);
+        return multiply(otherAmount.value);
+    }
+
+    public T multiply(BigDecimal otherValue) {
+        return newInstance(value.multiply(otherValue));
+    }
+
+    public T divide(double otherValue) {
+        return divide(BigDecimal.valueOf(otherValue));
     }
 
     public T divide(T otherAmount) {
         validate(otherAmount);
-        return newInstance(value.divide(otherAmount.value, RoundingMode.HALF_DOWN));
+        return divide(otherAmount.value);
     }
 
-    public T divide(double otherValue) {
-        return newInstance(value.divide(BigDecimal.valueOf(otherValue), RoundingMode.HALF_DOWN));
+    public T divide(BigDecimal otherAmount) {
+        return newInstance(value.divide(otherAmount, RoundingMode.HALF_DOWN));
+    }
+
+    public T add(double otherValue) {
+        return add(BigDecimal.valueOf(otherValue));
     }
 
     public T add(T otherAmount) {
         validate(otherAmount);
-        return newInstance(value.add(otherAmount.value));
+        return add(otherAmount.value);
     }
 
-    public T add(double otherValue) {
-        return newInstance(value.add(BigDecimal.valueOf(otherValue)));
+    public T add(BigDecimal otherAmount) {
+        return newInstance(value.add(otherAmount));
+    }
+
+    public T subtract(double otherValue) {
+        return subtract(BigDecimal.valueOf(otherValue));
     }
 
     public T subtract(T otherAmount) {
         validate(otherAmount);
-        return newInstance(value.subtract(otherAmount.value));
+        return subtract(otherAmount.value);
     }
 
-    public T subtract(double otherValue) {
-        return newInstance(value.subtract(BigDecimal.valueOf(otherValue)));
+    public T subtract(BigDecimal otherAmount) {
+        return newInstance(value.subtract(otherAmount));
     }
 
     public T max(T otherAmount) {

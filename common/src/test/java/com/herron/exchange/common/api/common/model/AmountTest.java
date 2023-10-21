@@ -5,6 +5,8 @@ import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.MonetaryAmount;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AmountTest {
@@ -51,23 +53,27 @@ class AmountTest {
     void test_add() {
         assertEquals(MonetaryAmount.create(12.0, "eur"), thisAmount.add(thatAmount));
         assertEquals(MonetaryAmount.create(12.0, "eur"), thisAmount.add(thatRealAmount));
+        assertEquals(MonetaryAmount.create(12.0, "eur"), thisAmount.add(BigDecimal.valueOf(thatRealAmount)));
     }
 
     @Test
     void test_subtract() {
         assertEquals(MonetaryAmount.create(-8.0, "eur"), thisAmount.subtract(thatAmount));
         assertEquals(MonetaryAmount.create(-8.0, "eur"), thisAmount.subtract(thatRealAmount));
+        assertEquals(MonetaryAmount.create(-8.0, "eur"), thisAmount.subtract(BigDecimal.valueOf(thatRealAmount)));
     }
 
     @Test
     void test_multiply() {
         assertEquals(MonetaryAmount.create(20.0, "eur").scale(2), thisAmount.multiply(thatAmount));
         assertEquals(MonetaryAmount.create(20.0, "eur").scale(2), thisAmount.multiply(thatRealAmount));
+        assertEquals(MonetaryAmount.create(20.0, "eur").scale(2), thisAmount.multiply(BigDecimal.valueOf(thatRealAmount)));
     }
 
     @Test
     void test_divide() {
         assertEquals(MonetaryAmount.create(5.0, "eur"), thatAmount.divide(thisAmount));
         assertEquals(MonetaryAmount.create(5.0, "eur"), thatAmount.divide(thisRealAmount));
+        assertEquals(MonetaryAmount.create(5.0, "eur"), thatAmount.divide(BigDecimal.valueOf(thisRealAmount)));
     }
 }

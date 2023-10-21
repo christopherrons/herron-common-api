@@ -5,7 +5,7 @@ import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
 import java.math.BigDecimal;
 
-import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.*;
+import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.PRICE;
 
 public class Price extends Amount<Price> {
     public static final Price ZERO = new Price(0);

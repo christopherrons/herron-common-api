@@ -9,6 +9,10 @@ import static java.util.stream.Collectors.toMap;
 public enum PriceType {
     SETTLEMENT("settlement"),
     LAST_PRICE("last price"),
+    BID_PRICE( "bid price"),
+    ASK_PRICE( "ask price"),
+    MID_BID_ASK_PRICE("mid bid ask price"),
+    VWAP("volume weighted average price"),
     HISTORICAL("historical"),
     THEORETICAL("theoretical");
 

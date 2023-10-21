@@ -5,6 +5,8 @@ import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Price;
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
+
 import static com.herron.exchange.common.api.common.enums.OrderSideEnum.BID;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -17,6 +19,7 @@ class DefaultPriceQuoteTest {
                 .price(Price.create(1))
                 .side(BID)
                 .orderbookId("orderbookid")
+                .timeOfEventMs(Instant.now().toEpochMilli())
                 .build();
 
         var value = messageFactory.serialize(object);
