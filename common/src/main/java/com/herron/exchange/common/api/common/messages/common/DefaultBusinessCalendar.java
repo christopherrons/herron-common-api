@@ -2,12 +2,12 @@ package com.herron.exchange.common.api.common.messages.common;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.referencedata.exchange.BusinessCalendar;
-import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
+import com.herron.exchange.common.api.common.enums.messagetypes.ReferenceDataMessageTypeEnum;
 import org.immutables.value.Value;
 
 import java.util.Set;
 
-import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.DEFAULT_BUSINESS_CALENDAR;
+import static com.herron.exchange.common.api.common.enums.messagetypes.ReferenceDataMessageTypeEnum.DEFAULT_BUSINESS_CALENDAR;
 import static java.time.DayOfWeek.SATURDAY;
 import static java.time.DayOfWeek.SUNDAY;
 
@@ -16,7 +16,7 @@ import static java.time.DayOfWeek.SUNDAY;
 public interface DefaultBusinessCalendar extends BusinessCalendar {
 
     @Value.Derived
-    default MessageTypesEnum messageType() {
+    default ReferenceDataMessageTypeEnum messageType() {
         return DEFAULT_BUSINESS_CALENDAR;
     }
 

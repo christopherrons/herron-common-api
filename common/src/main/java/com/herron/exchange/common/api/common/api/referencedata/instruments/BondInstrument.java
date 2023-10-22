@@ -2,7 +2,7 @@ package com.herron.exchange.common.api.common.api.referencedata.instruments;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.herron.exchange.common.api.common.enums.InstrumentTypeEnum;
-import com.herron.exchange.common.api.common.messages.refdata.BondDiscountPriceModelParameters;
+import com.herron.exchange.common.api.common.messages.pricemodel.BondDiscountPriceModelParameters;
 import org.immutables.value.Value;
 
 import java.time.LocalDate;

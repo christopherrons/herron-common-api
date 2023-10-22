@@ -1,11 +1,11 @@
 package com.herron.exchange.common.api.common.messages.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
+import com.herron.exchange.common.api.common.enums.messagetypes.CommonMessageTypesEnum;
 
 import java.math.BigDecimal;
 
-import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.PRICE;
+import static com.herron.exchange.common.api.common.enums.messagetypes.CommonMessageTypesEnum.PRICE;
 
 public class Price extends Amount<Price> {
     public static final Price ZERO = new Price(0);
@@ -44,7 +44,7 @@ public class Price extends Amount<Price> {
     }
 
     @Override
-    public MessageTypesEnum messageType() {
+    public CommonMessageTypesEnum messageType() {
         return PRICE;
     }
 

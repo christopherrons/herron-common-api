@@ -1,17 +1,17 @@
-package com.herron.exchange.common.api.common.messages.refdata;
+package com.herron.exchange.common.api.common.messages.pricemodel;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.referencedata.instruments.PriceModelParameters;
 import com.herron.exchange.common.api.common.enums.CompoundingMethodEnum;
 import com.herron.exchange.common.api.common.enums.DayCountConvetionEnum;
-import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.enums.PriceModels;
+import com.herron.exchange.common.api.common.enums.messagetypes.PriceModelMessageTypeEnum;
 import io.micrometer.common.util.StringUtils;
 import jakarta.annotation.Nullable;
 import org.immutables.value.Value;
 
-import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.BOND_DISCOUNT_PRICE_MODEL_PARAMETERS;
 import static com.herron.exchange.common.api.common.enums.PriceModels.BOND_DISCOUNT;
+import static com.herron.exchange.common.api.common.enums.messagetypes.PriceModelMessageTypeEnum.BOND_DISCOUNT_PRICE_MODEL_PARAMETERS;
 
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableBondDiscountPriceModelParameters.Builder.class)
@@ -46,7 +46,7 @@ public interface BondDiscountPriceModelParameters extends PriceModelParameters {
     }
 
     @Value.Derived
-    default MessageTypesEnum messageType() {
+    default PriceModelMessageTypeEnum messageType() {
         return BOND_DISCOUNT_PRICE_MODEL_PARAMETERS;
     }
 }

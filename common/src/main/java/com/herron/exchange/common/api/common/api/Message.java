@@ -3,7 +3,6 @@ package com.herron.exchange.common.api.common.api;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -17,6 +16,6 @@ public interface Message {
     }
 
     @JsonIgnore
-    MessageTypesEnum messageType();
+    MessageType messageType();
 
 }

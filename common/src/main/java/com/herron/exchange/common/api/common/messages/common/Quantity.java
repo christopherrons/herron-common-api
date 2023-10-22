@@ -1,11 +1,13 @@
 package com.herron.exchange.common.api.common.messages.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.enums.UnitEnum;
+import com.herron.exchange.common.api.common.enums.messagetypes.CommonMessageTypesEnum;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+
+import static com.herron.exchange.common.api.common.enums.messagetypes.CommonMessageTypesEnum.QUANTITY;
 
 public class Quantity extends Amount<Quantity> {
     public static final Quantity ZERO = new Quantity(0, UnitEnum.UNITLESS);
@@ -65,8 +67,8 @@ public class Quantity extends Amount<Quantity> {
     }
 
     @Override
-    public MessageTypesEnum messageType() {
-        return MessageTypesEnum.QUANTITY;
+    public CommonMessageTypesEnum messageType() {
+        return QUANTITY;
     }
 
     @Override

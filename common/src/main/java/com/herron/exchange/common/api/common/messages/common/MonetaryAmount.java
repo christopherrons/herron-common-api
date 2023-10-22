@@ -1,10 +1,12 @@
 package com.herron.exchange.common.api.common.messages.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
+import com.herron.exchange.common.api.common.enums.messagetypes.CommonMessageTypesEnum;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+
+import static com.herron.exchange.common.api.common.enums.messagetypes.CommonMessageTypesEnum.MONETARY_AMOUNT;
 
 public class MonetaryAmount extends Amount<MonetaryAmount> {
     public static final MonetaryAmount ZERO_AMOUNT = new MonetaryAmount(0, "N/A");
@@ -59,8 +61,8 @@ public class MonetaryAmount extends Amount<MonetaryAmount> {
     }
 
     @Override
-    public MessageTypesEnum messageType() {
-        return MessageTypesEnum.MONETARY_AMOUNT;
+    public CommonMessageTypesEnum messageType() {
+        return MONETARY_AMOUNT;
     }
 
     @Override

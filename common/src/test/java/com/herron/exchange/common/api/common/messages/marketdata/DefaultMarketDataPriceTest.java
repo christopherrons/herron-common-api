@@ -4,6 +4,8 @@ import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.PriceType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Price;
+import com.herron.exchange.common.api.common.messages.marketdata.entries.ImmutableDefaultMarketDataPrice;
+import com.herron.exchange.common.api.common.messages.marketdata.statickeys.ImmutableDefaultMarketDataPriceStaticKey;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

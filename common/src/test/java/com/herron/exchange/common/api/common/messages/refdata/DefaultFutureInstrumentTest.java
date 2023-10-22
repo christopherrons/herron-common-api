@@ -4,6 +4,7 @@ import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.SettlementTypeEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.DefaultBusinessCalendar;
+import com.herron.exchange.common.api.common.messages.pricemodel.ImmutableBasicFuturePriceModelParameters;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

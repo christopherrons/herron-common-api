@@ -1,9 +1,11 @@
 package com.herron.exchange.common.api.common.messages.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
+import com.herron.exchange.common.api.common.enums.messagetypes.CommonMessageTypesEnum;
 
 import java.math.BigDecimal;
+
+import static com.herron.exchange.common.api.common.enums.messagetypes.CommonMessageTypesEnum.VOLUME;
 
 public class Volume extends Amount<Volume> {
     public static final Volume ZERO = new Volume(0);
@@ -41,7 +43,7 @@ public class Volume extends Amount<Volume> {
     }
 
     @Override
-    public MessageTypesEnum messageType() {
-        return MessageTypesEnum.VOLUME;
+    public CommonMessageTypesEnum messageType() {
+        return VOLUME;
     }
 }

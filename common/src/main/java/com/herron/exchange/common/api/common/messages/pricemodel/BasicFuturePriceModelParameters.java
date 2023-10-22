@@ -1,13 +1,13 @@
-package com.herron.exchange.common.api.common.messages.refdata;
+package com.herron.exchange.common.api.common.messages.pricemodel;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.referencedata.instruments.PriceModelParameters;
-import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
 import com.herron.exchange.common.api.common.enums.PriceModels;
+import com.herron.exchange.common.api.common.enums.messagetypes.PriceModelMessageTypeEnum;
 import org.immutables.value.Value;
 
-import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.BASIC_FUTURE_PRICE_MODEL_PARAMETERS;
 import static com.herron.exchange.common.api.common.enums.PriceModels.BASIC_FUTURE_MODEL;
+import static com.herron.exchange.common.api.common.enums.messagetypes.PriceModelMessageTypeEnum.BASIC_FUTURE_PRICE_MODEL_PARAMETERS;
 
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableBasicFuturePriceModelParameters.Builder.class)
@@ -19,7 +19,7 @@ public interface BasicFuturePriceModelParameters extends PriceModelParameters {
     }
 
     @Value.Derived
-    default MessageTypesEnum messageType() {
+    default PriceModelMessageTypeEnum messageType() {
         return BASIC_FUTURE_PRICE_MODEL_PARAMETERS;
     }
 }

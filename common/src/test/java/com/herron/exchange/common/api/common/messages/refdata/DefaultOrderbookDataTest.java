@@ -1,20 +1,19 @@
 package com.herron.exchange.common.api.common.messages.refdata;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
-import com.herron.exchange.common.api.common.enums.*;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.DefaultBusinessCalendar;
+import com.herron.exchange.common.api.common.messages.pricemodel.ImmutableBlackScholesPriceModelParameters;
 import com.herron.exchange.common.api.common.messages.trading.DefaultTradingCalendar;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static com.herron.exchange.common.api.common.enums.AuctionAlgorithmEnum.*;
-import static com.herron.exchange.common.api.common.enums.MatchingAlgorithmEnum.*;
-import static com.herron.exchange.common.api.common.enums.OptionExerciseTyleEnum.*;
+import static com.herron.exchange.common.api.common.enums.AuctionAlgorithmEnum.DUTCH;
+import static com.herron.exchange.common.api.common.enums.MatchingAlgorithmEnum.PRO_RATA;
 import static com.herron.exchange.common.api.common.enums.OptionExerciseTyleEnum.AMERICAN;
-import static com.herron.exchange.common.api.common.enums.OptionTypeEnum.*;
-import static com.herron.exchange.common.api.common.enums.SettlementTypeEnum.*;
+import static com.herron.exchange.common.api.common.enums.OptionTypeEnum.CALL;
+import static com.herron.exchange.common.api.common.enums.SettlementTypeEnum.PHYSICAL;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class DefaultOrderbookDataTest {

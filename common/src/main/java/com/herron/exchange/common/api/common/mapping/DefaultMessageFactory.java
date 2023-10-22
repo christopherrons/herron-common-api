@@ -11,14 +11,13 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.api.MessageFactory;
-import com.herron.exchange.common.api.common.enums.MessageTypesEnum;
+import com.herron.exchange.common.api.common.enums.messagetypes.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
-import java.util.Arrays;
+import java.util.Map;
 
-import static com.herron.exchange.common.api.common.enums.MessageTypesEnum.INVALID_MESSAGE_TYPE;
 
 public class DefaultMessageFactory implements MessageFactory {
 
@@ -27,14 +26,21 @@ public class DefaultMessageFactory implements MessageFactory {
     private final ObjectMapper objectMapper;
 
     public DefaultMessageFactory() {
-        registerDefaultTypes();
+        this(Map.of());
+    }
+
+    public DefaultMessageFactory(Map<String, Class<? extends Message>> idToClassImplementation) {
+        registerMessageTypes(idToClassImplementation);
         this.objectMapper = configure(Jackson2ObjectMapperBuilder.json()).build();
     }
 
-    private void registerDefaultTypes() {
-        Arrays.stream(MessageTypesEnum.values())
-                .filter(messageTypesEnum -> messageTypesEnum != INVALID_MESSAGE_TYPE)
-                .forEach(messageType -> registerSubtype(messageType.getMessageTypeId(), messageType.getClassToBeDeserialized()));
+    private void registerMessageTypes(Map<String, Class<? extends Message>> idToClassImplementation) {
+        CommonMessageTypesEnum.getIdToClassImplementation().forEach(this::registerSubtype);
+        MarketDataMessageTypeEnum.getIdToClassImplementation().forEach(this::registerSubtype);
+        PriceModelMessageTypeEnum.getIdToClassImplementation().forEach(this::registerSubtype);
+        ReferenceDataMessageTypeEnum.getIdToClassImplementation().forEach(this::registerSubtype);
+        TradingMessageTypeEnum.getIdToClassImplementation().forEach(this::registerSubtype);
+        idToClassImplementation.forEach(this::registerSubtype);
     }
 
     private void registerSubtype(String typeId, Class<? extends Message> implementationClazz) {
