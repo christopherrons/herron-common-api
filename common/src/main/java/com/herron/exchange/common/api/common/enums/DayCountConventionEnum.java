@@ -3,7 +3,7 @@ package com.herron.exchange.common.api.common.enums;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public enum DayCountConvetionEnum {
+public enum DayCountConventionEnum {
     ACT365(0, 365),
     ACT360(0, 360),
     BOND_BASIS_30360(30, 360);
@@ -11,7 +11,7 @@ public enum DayCountConvetionEnum {
     private final double daysPerMonth;
     private final double daysPerYear;
 
-    DayCountConvetionEnum(double daysPerMonth, double daysPerYear) {
+    DayCountConventionEnum(double daysPerMonth, double daysPerYear) {
         this.daysPerMonth = daysPerMonth;
         this.daysPerYear = daysPerYear;
     }

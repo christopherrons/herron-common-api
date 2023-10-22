@@ -1,6 +1,7 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
+import com.herron.exchange.common.api.common.enums.EventType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Participant;
 import com.herron.exchange.common.api.common.messages.common.Price;
@@ -23,6 +24,7 @@ class TradeExecutionTest {
                 .orderbookId("orderbookid")
                 .isBidSideAggressor(true)
                 .timeOfEventMs(1)
+                .eventType(EventType.SYSTEM)
                 .price(Price.create(1))
                 .askParticipant(new Participant("member", "user"))
                 .bidParticipant(new Participant("member", "user"))
@@ -34,6 +36,7 @@ class TradeExecutionTest {
                 .timeOfEventMs(1)
                 .addAllMessages(List.of(trade))
                 .orderbookId("orderbookid")
+                .eventType(EventType.SYSTEM)
                 .build();
         var value = messageFactory.serialize(object);
         assertNotNull(value);

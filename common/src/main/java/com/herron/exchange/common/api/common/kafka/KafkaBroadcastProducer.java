@@ -2,6 +2,7 @@ package com.herron.exchange.common.api.common.kafka;
 
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.enums.DataStreamEnum;
+import com.herron.exchange.common.api.common.enums.EventType;
 import com.herron.exchange.common.api.common.logging.EventLogger;
 import com.herron.exchange.common.api.common.messages.ImmutableBroadcastMessage;
 import com.herron.exchange.common.api.common.messages.common.DataStreamState;
@@ -14,6 +15,10 @@ import org.springframework.kafka.core.KafkaTemplate;
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
+
+import static com.herron.exchange.common.api.common.enums.DataStreamEnum.DONE;
+import static com.herron.exchange.common.api.common.enums.DataStreamEnum.START;
+import static com.herron.exchange.common.api.common.enums.EventType.SYSTEM;
 
 public class KafkaBroadcastProducer {
 
@@ -33,7 +38,8 @@ public class KafkaBroadcastProducer {
     public void startBroadcasting() {
         isBroadCasting.set(true);
         DataStreamState start = ImmutableDataStreamState.builder().timeOfEventMs(Instant.now().toEpochMilli())
-                .state(DataStreamEnum.START)
+                .state(START)
+                .eventType(SYSTEM)
                 .build();
         broadcastMessage(start);
         logger.info("Broadcasting started for partition {}", partitionKey);
@@ -41,7 +47,8 @@ public class KafkaBroadcastProducer {
 
     public void endBroadcasting() {
         DataStreamState done = ImmutableDataStreamState.builder().timeOfEventMs(Instant.now().toEpochMilli())
-                .state(DataStreamEnum.DONE)
+                .state(DONE)
+                .eventType(SYSTEM)
                 .build();
         broadcastMessage(done);
         isBroadCasting.set(false);

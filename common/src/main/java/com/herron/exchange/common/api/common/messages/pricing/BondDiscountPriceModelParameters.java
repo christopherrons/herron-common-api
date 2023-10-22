@@ -3,7 +3,7 @@ package com.herron.exchange.common.api.common.messages.pricing;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.referencedata.instruments.PriceModelParameters;
 import com.herron.exchange.common.api.common.enums.CompoundingMethodEnum;
-import com.herron.exchange.common.api.common.enums.DayCountConvetionEnum;
+import com.herron.exchange.common.api.common.enums.DayCountConventionEnum;
 import com.herron.exchange.common.api.common.enums.PriceModels;
 import com.herron.exchange.common.api.common.enums.messagetypes.PricingMessageTypeEnum;
 import io.micrometer.common.util.StringUtils;
@@ -19,7 +19,7 @@ public interface BondDiscountPriceModelParameters extends PriceModelParameters {
 
     CompoundingMethodEnum compoundingMethod();
 
-    DayCountConvetionEnum dayCountConvention();
+    DayCountConventionEnum dayCountConvention();
 
     @Nullable
     Double constantYield();

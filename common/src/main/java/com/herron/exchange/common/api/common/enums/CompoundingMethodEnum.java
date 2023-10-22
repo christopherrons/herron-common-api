@@ -25,4 +25,19 @@ public enum CompoundingMethodEnum {
     public String getValue() {
         return value;
     }
+
+    public double calculateValue(double interest, double time, int frequency) {
+        return CompoundingMethodEnum.calculateValue(this, interest, time, frequency);
+    }
+
+    public static double calculateValue(CompoundingMethodEnum compoundingMethodEnum,
+                                        double interest,
+                                        double time,
+                                        int frequency) {
+        return switch (compoundingMethodEnum) {
+            case SIMPLE -> (interest / frequency) * time;
+            case COMPOUNDING -> Math.pow(1 + (interest / frequency), time * frequency);
+            case CONTINUOUS -> Math.exp(interest * time);
+        };
+    }
 }

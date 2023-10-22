@@ -1,6 +1,7 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
+import com.herron.exchange.common.api.common.enums.EventType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,7 @@ class StateChangeTest {
                 .tradeState(OPEN_AUCTION_RUN)
                 .timeOfEventMs(1)
                 .orderbookId("obid")
+                .eventType(EventType.SYSTEM)
                 .build();
         var value = messageFactory.serialize(object);
         assertNotNull(value);

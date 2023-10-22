@@ -1,6 +1,7 @@
 package com.herron.exchange.common.api.common.messages;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
+import com.herron.exchange.common.api.common.enums.EventType;
 import com.herron.exchange.common.api.common.enums.KafkaTopicEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.BusinessCalendar;
@@ -31,6 +32,7 @@ class BroadcastMessageTest {
         var object = ImmutableBroadcastMessage.builder()
                 .sequenceNumber(1)
                 .message(product)
+                .eventType(EventType.SYSTEM)
                 .timeOfEventMs(1)
                 .partitionKey(new PartitionKey(KafkaTopicEnum.AUDIT_TRAIL, 1))
                 .build();

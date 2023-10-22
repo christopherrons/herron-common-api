@@ -42,6 +42,10 @@ public class MonetaryAmount extends Amount<MonetaryAmount> {
         }
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
     @Override
     protected MonetaryAmount emptyAmount() {
         return ZERO_AMOUNT;

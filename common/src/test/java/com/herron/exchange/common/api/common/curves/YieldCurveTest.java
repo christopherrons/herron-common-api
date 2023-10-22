@@ -1,6 +1,6 @@
 package com.herron.exchange.common.api.common.curves;
 
-import com.herron.exchange.common.api.common.enums.DayCountConvetionEnum;
+import com.herron.exchange.common.api.common.enums.DayCountConventionEnum;
 import com.herron.exchange.common.api.common.enums.InterpolationMethod;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ class YieldCurveTest {
     @Test
     void testYieldCurve5Points() {
         LocalDate startDate = LocalDate.parse("2000-01-01");
-        var dayCountConvention = DayCountConvetionEnum.ACT365;
+        var dayCountConvention = DayCountConventionEnum.ACT365;
         List<LocalDate> maturityDates = new ArrayList<>();
         maturityDates.add(startDate.plusDays((long) dayCountConvention.getDaysPerYear()));
         maturityDates.add(startDate.plusDays((long) dayCountConvention.getDaysPerYear() * 2));

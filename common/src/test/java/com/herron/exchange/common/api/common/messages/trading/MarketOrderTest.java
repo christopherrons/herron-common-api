@@ -1,6 +1,7 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
+import com.herron.exchange.common.api.common.enums.EventType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Participant;
 import com.herron.exchange.common.api.common.messages.common.Volume;
@@ -26,6 +27,7 @@ class MarketOrderTest {
                 .orderbookId("orderbookid")
                 .orderSide(BID)
                 .timeOfEventMs(1)
+                .eventType(EventType.SYSTEM)
                 .participant(new Participant("member", "user"))
                 .build();
 

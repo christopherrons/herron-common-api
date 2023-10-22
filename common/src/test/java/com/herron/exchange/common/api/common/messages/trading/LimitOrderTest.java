@@ -1,6 +1,7 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
+import com.herron.exchange.common.api.common.enums.EventType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Participant;
 import com.herron.exchange.common.api.common.messages.common.Price;
@@ -28,6 +29,7 @@ class LimitOrderTest {
                 .orderbookId("orderbookid")
                 .timeInForce(FAK)
                 .orderSide(BID)
+                .eventType(EventType.SYSTEM)
                 .timeOfEventMs(1)
                 .price(Price.create(1))
                 .participant(new Participant("member", "user"))

@@ -1,6 +1,7 @@
 package com.herron.exchange.common.api.common.messages.trading;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
+import com.herron.exchange.common.api.common.enums.EventType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Price;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ class PriceQuoteTest {
                 .price(Price.create(1))
                 .side(BID)
                 .orderbookId("orderbookid")
+                .eventType(EventType.SYSTEM)
                 .timeOfEventMs(Instant.now().toEpochMilli())
                 .build();
 

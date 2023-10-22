@@ -2,6 +2,7 @@ package com.herron.exchange.common.api.common.messages.common;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.DataStreamEnum;
+import com.herron.exchange.common.api.common.enums.EventType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ class DataStreamStateTest {
 
     @Test
     void test_serialization_and_deserialization() {
-        var object = ImmutableDataStreamState.builder().state(DataStreamEnum.DONE).timeOfEventMs(1).build();
+        var object = ImmutableDataStreamState.builder().eventType(EventType.SYSTEM).state(DataStreamEnum.DONE).timeOfEventMs(1).build();
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
