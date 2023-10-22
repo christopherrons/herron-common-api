@@ -21,7 +21,7 @@ class MessageTypesEnumTest {
             assertFalse(foundMessageTypes.contains(messageType.getMessageTypeId()));
             foundMessageTypes.add(messageType.getMessageTypeId());
         }
-        for (var messageType : PriceModelMessageTypeEnum.values()) {
+        for (var messageType : PricingMessageTypeEnum.values()) {
             assertFalse(foundMessageTypes.contains(messageType.getMessageTypeId()));
             foundMessageTypes.add(messageType.getMessageTypeId());
         }

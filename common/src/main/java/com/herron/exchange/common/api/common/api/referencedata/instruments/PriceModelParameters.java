@@ -21,7 +21,7 @@ public interface PriceModelParameters extends Message {
     }
 
     @Value.Default
-    default List<PriceType> SettlementPricePriority() {
+    default List<PriceType> settlementPricePriority() {
         return List.of(
                 PriceType.VWAP,
                 PriceType.LAST_PRICE,

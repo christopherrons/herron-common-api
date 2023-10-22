@@ -37,7 +37,7 @@ public class DefaultMessageFactory implements MessageFactory {
     private void registerMessageTypes(Map<String, Class<? extends Message>> idToClassImplementation) {
         CommonMessageTypesEnum.getIdToClassImplementation().forEach(this::registerSubtype);
         MarketDataMessageTypeEnum.getIdToClassImplementation().forEach(this::registerSubtype);
-        PriceModelMessageTypeEnum.getIdToClassImplementation().forEach(this::registerSubtype);
+        PricingMessageTypeEnum.getIdToClassImplementation().forEach(this::registerSubtype);
         ReferenceDataMessageTypeEnum.getIdToClassImplementation().forEach(this::registerSubtype);
         TradingMessageTypeEnum.getIdToClassImplementation().forEach(this::registerSubtype);
         idToClassImplementation.forEach(this::registerSubtype);

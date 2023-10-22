@@ -5,8 +5,8 @@ import com.herron.exchange.common.api.common.enums.OptionExerciseTyleEnum;
 import com.herron.exchange.common.api.common.enums.OptionTypeEnum;
 import com.herron.exchange.common.api.common.enums.SettlementTypeEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
-import com.herron.exchange.common.api.common.messages.common.DefaultBusinessCalendar;
-import com.herron.exchange.common.api.common.messages.pricemodel.ImmutableBlackScholesPriceModelParameters;
+import com.herron.exchange.common.api.common.messages.common.BusinessCalendar;
+import com.herron.exchange.common.api.common.messages.pricing.ImmutableBlackScholesPriceModelParameters;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -29,7 +29,7 @@ class DefaultOptionInstrumentTest {
                 .optionType(OptionTypeEnum.CALL)
                 .optionExerciseStyle(OptionExerciseTyleEnum.AMERICAN)
                 .priceModelParameters(ImmutableBlackScholesPriceModelParameters.builder().build())
-                .product(ImmutableDefaultProduct.builder().currency("eur").productId("product").market(ImmutableDefaultMarket.builder().marketId("market").businessCalendar(DefaultBusinessCalendar.defaultWeekendCalendar()).build()).build())
+                .product(ImmutableProduct.builder().currency("eur").productId("product").market(ImmutableMarket.builder().marketId("market").businessCalendar(BusinessCalendar.defaultWeekendCalendar()).build()).build())
                 .build();
         var value = messageFactory.serialize(object);
         assertNotNull(value);

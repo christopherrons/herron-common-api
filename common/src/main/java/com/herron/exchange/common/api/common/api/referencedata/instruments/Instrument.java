@@ -2,9 +2,9 @@ package com.herron.exchange.common.api.common.api.referencedata.instruments;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.herron.exchange.common.api.common.api.Message;
-import com.herron.exchange.common.api.common.api.referencedata.exchange.Product;
 import com.herron.exchange.common.api.common.enums.InstrumentTypeEnum;
 import com.herron.exchange.common.api.common.enums.PriceModels;
+import com.herron.exchange.common.api.common.messages.refdata.Product;
 import org.immutables.value.Value;
 
 import java.time.LocalDate;

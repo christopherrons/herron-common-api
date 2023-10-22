@@ -2,9 +2,8 @@ package com.herron.exchange.common.api.common.enums.messagetypes;
 
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.api.MessageType;
-import com.herron.exchange.common.api.common.messages.common.DefaultBusinessCalendar;
+import com.herron.exchange.common.api.common.messages.common.BusinessCalendar;
 import com.herron.exchange.common.api.common.messages.refdata.*;
-import com.herron.exchange.common.api.common.messages.trading.DefaultStateChange;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,13 +13,11 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum ReferenceDataMessageTypeEnum implements MessageType {
-    DEFAULT_MARKET("DFMA", DefaultMarket.class),
+    MARKET("MARK", Market.class),
 
-    DEFAULT_ORDERBOOK_STATE_CHANGE("DFSC", DefaultStateChange.class),
+    BUSINESS_CALENDAR("BUCA", BusinessCalendar.class),
 
-    DEFAULT_BUSINESS_CALENDAR("DFBC", DefaultBusinessCalendar.class),
-
-    DEFAULT_PRODUCT("DFPR", DefaultProduct.class),
+    PRODUCT("PROD", Product.class),
 
     DEFAULT_ORDERBOOK_DATA("DFOB", DefaultOrderbookData.class),
 

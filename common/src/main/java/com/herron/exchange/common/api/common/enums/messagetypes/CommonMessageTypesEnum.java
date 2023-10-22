@@ -3,7 +3,7 @@ package com.herron.exchange.common.api.common.enums.messagetypes;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.api.MessageType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
-import com.herron.exchange.common.api.common.messages.DefaultBroadcastMessage;
+import com.herron.exchange.common.api.common.messages.BroadcastMessage;
 import com.herron.exchange.common.api.common.messages.common.*;
 
 import java.util.Map;
@@ -18,8 +18,8 @@ public enum CommonMessageTypesEnum implements MessageType {
     VOLUME("V", Volume.class),
     QUANTITY("Q", Quantity.class),
     PRICE("P", Price.class),
-    DEFAULT_BROADCAST_MESSAGE("DEBM", DefaultBroadcastMessage.class),
-    DEFAULT_DATA_STREAM_STATE("DFDL", DefaultDataStreamState.class);
+    BROADCAST_MESSAGE("BRME", BroadcastMessage.class),
+    DATA_STREAM_STATE("DASS", DataStreamState.class);
 
     private static final Map<String, CommonMessageTypesEnum> VALUES_BY_IDENTIFIER = stream(CommonMessageTypesEnum.values())
             .collect(toMap(CommonMessageTypesEnum::getMessageTypeId, identity()));

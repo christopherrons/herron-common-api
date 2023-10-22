@@ -3,8 +3,8 @@ package com.herron.exchange.common.api.common.messages.refdata;
 import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.SettlementTypeEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
-import com.herron.exchange.common.api.common.messages.common.DefaultBusinessCalendar;
-import com.herron.exchange.common.api.common.messages.pricemodel.ImmutableBasicFuturePriceModelParameters;
+import com.herron.exchange.common.api.common.messages.common.BusinessCalendar;
+import com.herron.exchange.common.api.common.messages.pricing.ImmutableBasicFuturePriceModelParameters;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -24,7 +24,7 @@ class DefaultFutureInstrumentTest {
                 .lastTradingDate(LocalDate.MAX)
                 .maturityDate(LocalDate.now())
                 .priceModelParameters(ImmutableBasicFuturePriceModelParameters.builder().build())
-                .product(ImmutableDefaultProduct.builder().currency("eur").productId("product").market(ImmutableDefaultMarket.builder().marketId("market").businessCalendar(DefaultBusinessCalendar.defaultWeekendCalendar()).build()).build())
+                .product(ImmutableProduct.builder().currency("eur").productId("product").market(ImmutableMarket.builder().marketId("market").businessCalendar(BusinessCalendar.defaultWeekendCalendar()).build()).build())
                 .build();
         var value = messageFactory.serialize(object);
         assertNotNull(value);

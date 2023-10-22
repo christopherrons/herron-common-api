@@ -12,13 +12,13 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum TradingMessageTypeEnum implements MessageType {
-    DEFAULT_STATE_CHANGE("DFSTC", DefaultStateChange.class),
-    DEFAULT_TRADING_CALENDAR("DFTC", DefaultTradingCalendar.class),
-    DEFAULT_LIMIT_ORDER("DFLO", DefaultLimitOrder.class),
-    DEFAULT_PRICE_QUOTE("DFPQ", DefaultPriceQuote.class),
-    DEFAULT_MARKET_ORDER("DFMO", DefaultMarketOrder.class),
-    DEFAULT_TRADE("DFTR", DefaultTrade.class),
-    DEFAULT_TRADE_EXECUTION("DFEX", DefaultTradeExecution.class);
+    STATE_CHANGE("STCH", StateChange.class),
+    TRADING_CALENDAR("TRCA", TradingCalendar.class),
+    LIMIT_ORDER("LIOR", LimitOrder.class),
+    PRICE_QUOTE("PRQU", PriceQuote.class),
+    MARKET_ORDER("MAOR", MarketOrder.class),
+    TRADE("TRAD", Trade.class),
+    TRADE_EXECUTION("TREX", TradeExecution.class);
 
     private static final Map<String, TradingMessageTypeEnum> VALUES_BY_IDENTIFIER = stream(TradingMessageTypeEnum.values())
             .collect(toMap(TradingMessageTypeEnum::getMessageTypeId, identity()));

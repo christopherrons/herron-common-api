@@ -1,8 +1,8 @@
 package com.herron.exchange.common.api.common.kafka;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
-import com.herron.exchange.common.api.common.api.broadcasts.BroadcastMessage;
 import com.herron.exchange.common.api.common.logging.EventLogger;
+import com.herron.exchange.common.api.common.messages.BroadcastMessage;
 import com.herron.exchange.common.api.common.messages.common.PartitionKey;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;

@@ -1,10 +1,10 @@
 package com.herron.exchange.common.api.common.api.referencedata.orderbook;
 
 import com.herron.exchange.common.api.common.api.Message;
-import com.herron.exchange.common.api.common.api.referencedata.exchange.TradingCalendar;
 import com.herron.exchange.common.api.common.api.referencedata.instruments.Instrument;
 import com.herron.exchange.common.api.common.enums.AuctionAlgorithmEnum;
 import com.herron.exchange.common.api.common.enums.MatchingAlgorithmEnum;
+import com.herron.exchange.common.api.common.messages.trading.TradingCalendar;
 import org.immutables.value.Value;
 
 import java.time.LocalDate;

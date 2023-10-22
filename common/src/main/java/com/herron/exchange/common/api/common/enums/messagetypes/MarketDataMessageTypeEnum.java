@@ -3,12 +3,12 @@ package com.herron.exchange.common.api.common.enums.messagetypes;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.api.MessageType;
 import com.herron.exchange.common.api.common.messages.marketdata.DefaultTimeComponentKey;
-import com.herron.exchange.common.api.common.messages.marketdata.entries.DefaultMarketDataPrice;
-import com.herron.exchange.common.api.common.messages.marketdata.entries.DefaultMarketDataYieldCurve;
-import com.herron.exchange.common.api.common.messages.marketdata.requests.DefaultMarketDataYieldCurveRequest;
-import com.herron.exchange.common.api.common.messages.marketdata.response.DefaultMarketDataYieldCurveResponse;
-import com.herron.exchange.common.api.common.messages.marketdata.statickeys.DefaultMarketDataPriceStaticKey;
-import com.herron.exchange.common.api.common.messages.marketdata.statickeys.DefaultMarketDataYieldCurveStaticKey;
+import com.herron.exchange.common.api.common.messages.marketdata.entries.MarketDataPrice;
+import com.herron.exchange.common.api.common.messages.marketdata.entries.MarketDataYieldCurve;
+import com.herron.exchange.common.api.common.messages.marketdata.requests.MarketDataYieldCurveRequest;
+import com.herron.exchange.common.api.common.messages.marketdata.response.MarketDataYieldCurveResponse;
+import com.herron.exchange.common.api.common.messages.marketdata.statickeys.MarketDataPriceStaticKey;
+import com.herron.exchange.common.api.common.messages.marketdata.statickeys.MarketDataYieldCurveStaticKey;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -18,12 +18,12 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum MarketDataMessageTypeEnum implements MessageType {
-    DEFAULT_MARKET_DATA_PRICE("DMDP", DefaultMarketDataPrice.class),
-    DEFAULT_MARKET_DATA_PRICE_STATIC_KEY("DMDPSK", DefaultMarketDataPriceStaticKey.class),
-    DEFAULT_MARKET_DATA_YIELD_CURVE("DMDYC", DefaultMarketDataYieldCurve.class),
-    DEFAULT_MARKET_DATA_YIELD_CURVE_STATIC_KEY("DMDYCSK", DefaultMarketDataYieldCurveStaticKey.class),
-    DEFAULT_MARKET_DATA_YIELD_CURVE_REQUEST("DMDYCREQ", DefaultMarketDataYieldCurveRequest.class),
-    DEFAULT_MARKET_DATA_YIELD_CURVE_RESPONSE("DMDYCRES", DefaultMarketDataYieldCurveResponse.class),
+    MARKET_DATA_PRICE("MDP", MarketDataPrice.class),
+    MARKET_DATA_PRICE_STATIC_KEY("MDPSK", MarketDataPriceStaticKey.class),
+    MARKET_DATA_YIELD_CURVE("MDYC", MarketDataYieldCurve.class),
+    MARKET_DATA_YIELD_CURVE_STATIC_KEY("MDYCSK", MarketDataYieldCurveStaticKey.class),
+    MARKET_DATA_YIELD_CURVE_REQUEST("MDYCREQ", MarketDataYieldCurveRequest.class),
+    MARKET_DATA_YIELD_CURVE_RESPONSE("MDYCRES", MarketDataYieldCurveResponse.class),
     DEFAULT_TIME_COMPONENT_KEY("DTCK", DefaultTimeComponentKey.class);
 
     private static final Map<String, MarketDataMessageTypeEnum> VALUES_BY_IDENTIFIER = stream(MarketDataMessageTypeEnum.values())
