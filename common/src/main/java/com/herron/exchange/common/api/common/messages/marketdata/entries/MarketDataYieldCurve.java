@@ -4,8 +4,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.marketdata.MarketDataEntry;
 import com.herron.exchange.common.api.common.curves.YieldCurve;
 import com.herron.exchange.common.api.common.enums.messagetypes.MarketDataMessageTypeEnum;
+import com.herron.exchange.common.api.common.messages.marketdata.ImmutableDefaultTimeComponentKey;
+import com.herron.exchange.common.api.common.messages.marketdata.statickeys.ImmutableMarketDataYieldCurveStaticKey;
 import com.herron.exchange.common.api.common.messages.marketdata.statickeys.MarketDataYieldCurveStaticKey;
 import org.immutables.value.Value;
+
+import java.time.LocalDateTime;
 
 import static com.herron.exchange.common.api.common.enums.messagetypes.MarketDataMessageTypeEnum.MARKET_DATA_YIELD_CURVE;
 
@@ -22,6 +26,21 @@ public interface MarketDataYieldCurve extends MarketDataEntry {
     @Value.Derived
     default MarketDataMessageTypeEnum messageType() {
         return MARKET_DATA_YIELD_CURVE;
+    }
+
+    @Value.Check
+    default void checkCurveId() {
+        if (!yieldCurve().getId().equals(staticKey().curveId())) {
+            throw new IllegalArgumentException(String.format("Curve id %s does not match static key id %s", yieldCurve().getId(), staticKey().curveId()));
+        }
+    }
+
+    static MarketDataYieldCurve create(LocalDateTime dateTime, String id, YieldCurve curve) {
+        return ImmutableMarketDataYieldCurve.builder()
+                .timeComponentKey(ImmutableDefaultTimeComponentKey.builder().timeOfEvent(dateTime).build())
+                .staticKey(ImmutableMarketDataYieldCurveStaticKey.builder().curveId(id).build())
+                .yieldCurve(curve)
+                .build();
     }
 
 }

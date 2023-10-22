@@ -1,6 +1,5 @@
 package com.herron.exchange.common.api.common.curves;
 
-import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;
 import com.herron.exchange.common.api.common.enums.DayCountConventionEnum;
 import com.herron.exchange.common.api.common.enums.InterpolationMethod;
 
@@ -14,7 +13,7 @@ public record YieldCurveModelParameters(DayCountConventionEnum dayCountConventio
                                         InterpolationMethod interpolationMethod,
                                         LocalDate startDate,
                                         LocalDate endDate,
-                                        List<CartesianPoint2d> yieldPoints) {
+                                        List<YieldPoint> yieldPoints) {
 
     public static YieldCurveModelParameters create(DayCountConventionEnum dayCountConventionEnum,
                                                    InterpolationMethod interpolationMethod,
@@ -26,11 +25,11 @@ public record YieldCurveModelParameters(DayCountConventionEnum dayCountConventio
         return new YieldCurveModelParameters(dayCountConventionEnum, interpolationMethod, startDate, endDate, createYieldPoints(dayCountConventionEnum, startDate, maturityDates, yields));
     }
 
-    private static List<CartesianPoint2d> createYieldPoints(DayCountConventionEnum dayCountConventionEnum,
-                                                            LocalDate startDate,
-                                                            LocalDate[] maturityDates,
-                                                            double[] yields) {
-        List<CartesianPoint2d> yieldPoints = new ArrayList<>();
+    private static List<YieldPoint> createYieldPoints(DayCountConventionEnum dayCountConventionEnum,
+                                                      LocalDate startDate,
+                                                      LocalDate[] maturityDates,
+                                                      double[] yields) {
+        List<YieldPoint> yieldPoints = new ArrayList<>();
         for (int i = 0; i < yields.length; i++) {
             var maturity = DAYS.between(startDate, maturityDates[i]) / dayCountConventionEnum.getDaysPerYear();
             yieldPoints.add(new YieldPoint(maturity, yields[i]));

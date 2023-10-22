@@ -1,6 +1,8 @@
 package com.herron.exchange.common.api.common.curves;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;
 import com.herron.exchange.common.api.common.api.math.Function2d;
 import com.herron.exchange.common.api.common.math.interpolation.CubicSplineInterpolation;
 
@@ -10,7 +12,7 @@ public class YieldCurve {
     public final YieldCurveModelParameters yieldCurveModelParameters;
     private final Function2d yieldFunction;
 
-    private YieldCurve(String id, YieldCurveModelParameters yieldCurveModelParameters) {
+    private YieldCurve(@JsonProperty("id") String id, @JsonProperty("yieldCurveModelParameters") YieldCurveModelParameters yieldCurveModelParameters) {
         this.id = id;
         this.yieldCurveModelParameters = yieldCurveModelParameters;
         this.yieldFunction = createYieldFunction();
@@ -21,8 +23,9 @@ public class YieldCurve {
     }
 
     private Function2d createYieldFunction() {
+        var points = yieldCurveModelParameters.yieldPoints().stream().map(CartesianPoint2d.class::cast).toList();
         return switch (yieldCurveModelParameters.interpolationMethod()) {
-            case CUBIC_SPLINE -> CubicSplineInterpolation.create(yieldCurveModelParameters.yieldPoints());
+            case CUBIC_SPLINE -> CubicSplineInterpolation.create(points);
             default -> throw new IllegalArgumentException("Other methods are not supported");
         };
     }
@@ -45,5 +48,9 @@ public class YieldCurve {
 
     public double getEndBoundaryYield() {
         return yieldFunction.getEndBoundaryY();
+    }
+
+    public String getId() {
+        return id;
     }
 }

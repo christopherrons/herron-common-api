@@ -7,6 +7,7 @@ import com.herron.exchange.common.api.common.messages.marketdata.entries.MarketD
 import jakarta.annotation.Nullable;
 import org.immutables.value.Value;
 
+import static com.herron.exchange.common.api.common.enums.Status.ERROR;
 import static com.herron.exchange.common.api.common.enums.messagetypes.MarketDataMessageTypeEnum.MARKET_DATA_YIELD_CURVE_RESPONSE;
 
 @Value.Immutable
@@ -20,4 +21,12 @@ public interface MarketDataYieldCurveResponse extends MarketDataResponse {
     default MarketDataMessageTypeEnum messageType() {
         return MARKET_DATA_YIELD_CURVE_RESPONSE;
     }
+
+    static MarketDataYieldCurveResponse createErrorResponse(String errorMessage) {
+        return ImmutableMarketDataYieldCurveResponse.builder()
+                .status(ERROR)
+                .error(errorMessage)
+                .build();
+    }
+
 }

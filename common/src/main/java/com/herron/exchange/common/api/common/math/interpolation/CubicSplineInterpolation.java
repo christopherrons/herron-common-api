@@ -59,16 +59,17 @@ public class CubicSplineInterpolation implements Function2d {
     }
 
     private List<CubicPolynomial> buildPolynomials(List<CartesianPoint2d> points) {
+        points = new ArrayList<>(points);
         points.sort(Comparator.comparing(CartesianPoint2d::x));
 
         final int nrOfBoundaries = points.size() - 1;
         final List<FunctionBoundary2dPoints> boundaryPoints = new ArrayList<>();
         for (int i = 0; i < nrOfBoundaries; i++) {
             boundaryPoints.add(new FunctionBoundary2dPoints(
-                    points.get(i).x(),
-                    points.get(i + 1).x(),
-                    points.get(i).y(),
-                    points.get(i + 1).y()
+                            points.get(i).x(),
+                            points.get(i + 1).x(),
+                            points.get(i).y(),
+                            points.get(i + 1).y()
                     )
             );
         }
