@@ -35,7 +35,7 @@ public abstract class KafkaTopicSubscription {
     }
 
     public void stop() {
-        logger.info("Stopping kafka subscription {}.", consumer.subscription());
+        logger.info("Stopping kafka subscription {}, total events consumed {}.", consumer.subscription(), eventLogger.totalNrOfEvents());
         isConsume.set(false);
         service.shutdown();
     }
