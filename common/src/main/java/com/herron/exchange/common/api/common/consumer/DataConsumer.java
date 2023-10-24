@@ -52,7 +52,7 @@ public abstract class DataConsumer {
         } catch (InterruptedException e) {
 
         }
-        logger.info("Consumer {} completed.", id);
+        logger.info("Finished waiting for consumer {} which has completed.", id);
     }
 
     protected void shutdown() {
