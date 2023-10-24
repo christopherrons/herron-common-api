@@ -1,6 +1,7 @@
 package com.herron.exchange.common.api.common.kafka;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
+import com.herron.exchange.common.api.common.kafka.model.KafkaSubscriptionRequest;
 import com.herron.exchange.common.api.common.messages.common.PartitionKey;
 import org.apache.kafka.common.TopicPartition;
 import org.slf4j.Logger;
@@ -23,15 +24,15 @@ public class KafkaConsumerClient {
     }
 
     public synchronized KafkaBroadcastSubscription subscribeToBroadcastTopic(KafkaSubscriptionRequest request) {
-        var partitionKey = request.partitionKey();
+        var partitionKey = request.details().partitionKey();
         return keyToSubscription.computeIfAbsent(partitionKey, k -> {
 
             TopicPartition topicPartition = new TopicPartition(partitionKey.topicEnum().getTopicName(), partitionKey.partitionId());
-            try (var consumer = consumerFactory.createConsumer(request.groupId())) {
+            try (var consumer = consumerFactory.createConsumer(request.details().groupId())) {
                 consumer.assign(List.of(topicPartition));
 
-                if (request.offset() != null) {
-                    consumer.seek(topicPartition, request.offset());
+                if (request.details().offset() != null) {
+                    consumer.seek(topicPartition, request.details().offset());
                 }
 
                 var subscription = new KafkaBroadcastSubscription(messageFactory, consumer, request);

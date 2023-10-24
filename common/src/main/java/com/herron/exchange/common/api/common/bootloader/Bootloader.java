@@ -5,24 +5,21 @@ import com.herron.exchange.common.api.common.wrappers.ThreadWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static com.herron.exchange.common.api.common.enums.BootloaderStatus.INITIALIZED;
+import static com.herron.exchange.common.api.common.enums.BootloaderStatus.INITIALIZING;
 import static com.herron.exchange.common.api.common.enums.BootloaderStatus.UNDEFINED;
 
 public abstract class Bootloader {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final String id;
-    private final CountDownLatch countDownLatch;
-    private ExecutorService service;
+    private final ExecutorService service;
     protected BootloaderStatus bootloaderStatus = UNDEFINED;
 
-    protected Bootloader(String id, CountDownLatch countDownLatch) {
+    protected Bootloader(String id) {
         this.id = id;
-        this.countDownLatch = countDownLatch;
         this.service = Executors.newSingleThreadExecutor(new ThreadWrapper(id));
     }
 
@@ -34,20 +31,14 @@ public abstract class Bootloader {
         service.execute(this::run);
     }
 
-    public void run() {
-        bootloaderStatus = INITIALIZED;
+    private void run() {
+        logger.info("Bootloader {} started", id);
+        bootloaderStatus = INITIALIZING;
         bootloaderInit();
     }
 
-    public void await() {
-        logger.info("Waiting for bootloader {}", id);
-        try {
-            countDownLatch.await();
-        } catch (InterruptedException e) {
-
-        }
-        logger.info("Done waiting for bootloader {}", id);
+    protected void shutdown() {
+        service.shutdown();
+        logger.info("Bootloader {} shutdown", id);
     }
-
-
 }

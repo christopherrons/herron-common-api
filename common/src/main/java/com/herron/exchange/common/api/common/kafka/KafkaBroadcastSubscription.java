@@ -2,6 +2,7 @@ package com.herron.exchange.common.api.common.kafka;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.api.kafka.KafkaMessageHandler;
+import com.herron.exchange.common.api.common.kafka.model.KafkaSubscriptionRequest;
 import com.herron.exchange.common.api.common.logging.EventLogger;
 import com.herron.exchange.common.api.common.messages.BroadcastMessage;
 import org.apache.kafka.clients.consumer.Consumer;
@@ -17,7 +18,7 @@ public class KafkaBroadcastSubscription extends KafkaTopicSubscription {
     protected KafkaBroadcastSubscription(MessageFactory messageFactory,
                                          Consumer<String, String> consumer,
                                          KafkaSubscriptionRequest request) {
-        super(consumer, new EventLogger(request.partitionKey().toString(), request.eventLoggingRate()));
+        super(consumer, new EventLogger(request.details().partitionKey().toString(), request.details().eventLoggingRate()));
         this.messageFactory = messageFactory;
         this.messageHandler = request.messageHandler();
     }
