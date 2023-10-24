@@ -3,22 +3,18 @@ package com.herron.exchange.common.api.common.kafka;
 import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.api.kafka.KafkaMessageHandler;
 import com.herron.exchange.common.api.common.kafka.model.KafkaSubscriptionRequest;
-import com.herron.exchange.common.api.common.logging.EventLogger;
 import com.herron.exchange.common.api.common.messages.BroadcastMessage;
-import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import java.util.concurrent.atomic.AtomicLong;
 
 public class KafkaBroadcastSubscription extends KafkaTopicSubscription {
-    private final AtomicLong sequenceNumber = new AtomicLong();
+    private final AtomicLong sequenceNumber = new AtomicLong(1);
     private final MessageFactory messageFactory;
     private final KafkaMessageHandler messageHandler;
 
-    protected KafkaBroadcastSubscription(MessageFactory messageFactory,
-                                         Consumer<String, String> consumer,
-                                         KafkaSubscriptionRequest request) {
-        super(consumer, new EventLogger(request.details().partitionKey().toString(), request.details().eventLoggingRate()));
+    protected KafkaBroadcastSubscription(MessageFactory messageFactory, KafkaSubscriptionRequest request) {
+        super(request.details());
         this.messageFactory = messageFactory;
         this.messageHandler = request.messageHandler();
     }

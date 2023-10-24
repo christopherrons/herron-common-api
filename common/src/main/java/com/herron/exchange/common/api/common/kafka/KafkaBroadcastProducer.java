@@ -22,7 +22,7 @@ import static com.herron.exchange.common.api.common.enums.DataStreamEnum.START;
 import static com.herron.exchange.common.api.common.enums.EventType.SYSTEM;
 
 public class KafkaBroadcastProducer {
-    private final Logger logger = LoggerFactory.getLogger(KafkaBroadcastProducer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaBroadcastProducer.class);
     private final PartitionKey partitionKey;
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final AtomicLong sequenceNumberHandler = new AtomicLong(1);
@@ -31,11 +31,15 @@ public class KafkaBroadcastProducer {
     private final BlockingQueue<BroadcastMessage> eventQueue = new LinkedBlockingDeque<>();
     private final ExecutorService service;
 
-    protected KafkaBroadcastProducer(PartitionKey partitionKey, KafkaTemplate<String, Object> kafkaTemplate, EventLogger eventLogger) {
+    public KafkaBroadcastProducer(PartitionKey partitionKey, KafkaTemplate<String, Object> kafkaTemplate, EventLogger eventLogger) {
         this.partitionKey = partitionKey;
         this.kafkaTemplate = kafkaTemplate;
         this.eventLogger = eventLogger;
-        this.service = Executors.newSingleThreadExecutor(new ThreadWrapper(partitionKey.toString()));
+        this.service = Executors.newSingleThreadExecutor(new ThreadWrapper("KAFKA-PRODUCER" + "-" + partitionKey.toString()));
+    }
+
+    public PartitionKey getPartitionKey() {
+        return partitionKey;
     }
 
     public void startBroadcasting() {
@@ -45,7 +49,7 @@ public class KafkaBroadcastProducer {
                 .eventType(SYSTEM)
                 .build();
         broadcastMessage(start);
-        logger.info("Broadcasting started for partition {}", partitionKey);
+        LOGGER.info("Broadcasting started for partition {}", partitionKey);
         service.execute(this::broadcastMessage);
     }
 
@@ -56,13 +60,11 @@ public class KafkaBroadcastProducer {
                 .build();
         broadcastMessage(done);
         isBroadCasting.set(false);
-        service.shutdown();
-        logger.info("Broadcasting stopped for partition {}. Total messages {}.", partitionKey, eventLogger.totalNrOfEvents());
     }
 
     public synchronized boolean broadcastMessage(Message message) {
         if (!isBroadCasting.get() || message == null) {
-            logger.warn("Attempting to broadcast message {} but broadcasting not started for {}.", message, partitionKey);
+            LOGGER.warn("Attempting to broadcast message {} but broadcasting not started for {}.", message, partitionKey);
             return false;
         }
 
@@ -91,6 +93,9 @@ public class KafkaBroadcastProducer {
             eventLogger.logEvent();
             kafkaTemplate.send(partitionKey.topicEnum().getTopicName(), partitionKey.partitionId(), broadCast.messageType().getMessageTypeId(), broadCast);
         }
+
+        LOGGER.info("Broadcasting stopped for partition {}. Total messages {}.", partitionKey, eventLogger.totalNrOfEvents());
+        service.shutdown();
     }
 
     private BroadcastMessage poll() {

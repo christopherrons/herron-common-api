@@ -12,20 +12,20 @@ public class KafkaBroadcastHandler {
 
     private final Map<PartitionKey, KafkaBroadcastProducer> keyToProducer = new ConcurrentHashMap<>();
     private final KafkaTemplate<String, Object> kafkaTemplate;
-    private final Map<PartitionKey, Integer> keyToMessageUpdateInterval;
 
     public KafkaBroadcastHandler(KafkaTemplate<String, Object> kafkaTemplate) {
         this(kafkaTemplate, Map.of());
     }
 
-    public KafkaBroadcastHandler(KafkaTemplate<String, Object> kafkaTemplate, Map<PartitionKey, Integer> keyToMessageUpdateInterval) {
+    public KafkaBroadcastHandler(KafkaTemplate<String, Object> kafkaTemplate, Map<PartitionKey, KafkaBroadcastProducer> initialKeyToProducer) {
         this.kafkaTemplate = kafkaTemplate;
-        this.keyToMessageUpdateInterval = keyToMessageUpdateInterval;
+        initialKeyToProducer.values().forEach(KafkaBroadcastProducer::startBroadcasting);
+        keyToProducer.putAll(initialKeyToProducer);
     }
 
     public boolean broadcastMessage(PartitionKey partitionKey, Message message) {
         return keyToProducer.computeIfAbsent(partitionKey, k -> {
-                    var producer = new KafkaBroadcastProducer(partitionKey, kafkaTemplate, new EventLogger(partitionKey.toString(), keyToMessageUpdateInterval.getOrDefault(partitionKey, 1000)));
+                    var producer = new KafkaBroadcastProducer(partitionKey, kafkaTemplate, new EventLogger(partitionKey.toString()));
                     producer.startBroadcasting();
                     return producer;
                 }

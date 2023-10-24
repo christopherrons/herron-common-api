@@ -1,5 +1,6 @@
 package com.herron.exchange.common.api.common.logging;
 
+import io.micrometer.common.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,15 +9,19 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class EventLogger {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(EventLogger.class);
     private static final double MILLI_TO_SEK = 1 / 1000.0;
     private static final int MESSAGE_UPDATE_INTERVAL = 1000;
-    private final AtomicLong totalNrOfEvents = new AtomicLong();
+    private final AtomicLong totalNrOfEvents = new AtomicLong(0);
     private final Instant startTime = Instant.now();
     private final int messageUpdateInterval;
     private final String id;
     private Instant lastLogUpdateTime = Instant.now();
-    private AtomicLong lastUpdateTimeNrOfEvents = new AtomicLong();
+    private AtomicLong lastUpdateTimeNrOfEvents = new AtomicLong(0);
+
+    public EventLogger() {
+        this("");
+    }
 
     public EventLogger(String id) {
         this(id, MESSAGE_UPDATE_INTERVAL);
@@ -24,7 +29,7 @@ public class EventLogger {
 
     public EventLogger(String id, int messageUpdateInterval) {
         this.messageUpdateInterval = messageUpdateInterval;
-        this.id = id;
+        this.id = StringUtils.isEmpty(id) ? id : id + ":";
     }
 
     public void logEvent() {
@@ -32,7 +37,7 @@ public class EventLogger {
             long currentNrOfEvents = totalNrOfEvents.incrementAndGet();
             if (currentNrOfEvents % messageUpdateInterval == 0) {
                 Instant currentTime = Instant.now();
-                logger.info("{}: Message count: {}. Current event rate {}/s, average event rate {}/s", id, totalNrOfEvents.get(), (long) getCurrentEventsPerSecond(currentTime), (long) getAverageEventsPerSecond(currentTime));
+                LOGGER.info("{} Message count: {}. Current event rate {}/s, average event rate {}/s", id, totalNrOfEvents.get(), (long) getCurrentEventsPerSecond(currentTime), (long) getAverageEventsPerSecond(currentTime));
                 lastLogUpdateTime = currentTime;
                 lastUpdateTimeNrOfEvents = new AtomicLong(currentNrOfEvents);
             }
