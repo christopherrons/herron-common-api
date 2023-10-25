@@ -2,12 +2,14 @@ package com.herron.exchange.common.api.common.messages.trading;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.EventType;
+import com.herron.exchange.common.api.common.enums.TradeType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Participant;
 import com.herron.exchange.common.api.common.messages.common.Price;
 import com.herron.exchange.common.api.common.messages.common.Volume;
 import org.junit.jupiter.api.Test;
 
+import static com.herron.exchange.common.api.common.enums.TradeType.AUTOMATCH;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TradeTest {
@@ -28,6 +30,7 @@ class TradeTest {
                 .bidParticipant(new Participant("member", "user"))
                 .askOrderId("askorderid")
                 .bidOrderId("bidorderid")
+                .tradeType(AUTOMATCH)
                 .build();
 
         var value = messageFactory.serialize(object);

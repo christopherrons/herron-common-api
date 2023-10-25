@@ -13,11 +13,11 @@ public class EventLogger {
     private static final double MILLI_TO_SEK = 1 / 1000.0;
     private static final int MESSAGE_UPDATE_INTERVAL = 1000;
     private final AtomicLong totalNrOfEvents = new AtomicLong(0);
-    private final Instant startTime = Instant.now();
     private final int messageUpdateInterval;
     private final String id;
-    private Instant lastLogUpdateTime = Instant.now();
-    private AtomicLong lastUpdateTimeNrOfEvents = new AtomicLong(0);
+    private final AtomicLong lastUpdateTimeNrOfEvents = new AtomicLong(0);
+    private Instant startTime;
+    private Instant lastLogUpdateTime;
 
     public EventLogger() {
         this("");
@@ -33,13 +33,17 @@ public class EventLogger {
     }
 
     public void logEvent() {
+        if (totalNrOfEvents.get() == 0) {
+            startTime = Instant.now();
+            lastLogUpdateTime = startTime;
+        }
         try {
             long currentNrOfEvents = totalNrOfEvents.incrementAndGet();
             if (currentNrOfEvents % messageUpdateInterval == 0) {
                 Instant currentTime = Instant.now();
                 LOGGER.info("{} Message count: {}. Current event rate {}/s, average event rate {}/s", id, totalNrOfEvents.get(), (long) getCurrentEventsPerSecond(currentTime), (long) getAverageEventsPerSecond(currentTime));
                 lastLogUpdateTime = currentTime;
-                lastUpdateTimeNrOfEvents = new AtomicLong(currentNrOfEvents);
+                lastUpdateTimeNrOfEvents.set(currentNrOfEvents);
             }
         } catch (ArithmeticException ignore) {
         }

@@ -29,7 +29,8 @@ public class KafkaBroadcastSubscription extends KafkaTopicSubscription {
         }
 
         if (broadcastMessage != null && broadcastMessage.sequenceNumber() != expected) {
-            logger.warn("GAP detected: Expected={}, Incoming={}", expected, broadcastMessage.sequenceNumber());
+            logger.warn("GAP detected: Expected={}, Incoming={}. Syncing sequence number", expected, broadcastMessage.sequenceNumber());
+            sequenceNumber.set(expected);
         }
 
         messageHandler.onMessage(broadcastMessage);

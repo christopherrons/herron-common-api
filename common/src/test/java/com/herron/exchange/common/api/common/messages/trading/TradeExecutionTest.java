@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.herron.exchange.common.api.common.enums.TradeType.AUTOMATCH;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TradeExecutionTest {
@@ -29,6 +30,7 @@ class TradeExecutionTest {
                 .askParticipant(new Participant("member", "user"))
                 .bidParticipant(new Participant("member", "user"))
                 .askOrderId("askorderid")
+                .tradeType(AUTOMATCH)
                 .bidOrderId("bidorderid")
 
                 .build();
