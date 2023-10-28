@@ -3,6 +3,7 @@ package com.herron.exchange.common.api.common.messages.refdata;
 import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.BusinessCalendar;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.pricing.ImmutableBlackScholesPriceModelParameters;
 import com.herron.exchange.common.api.common.messages.trading.TradingCalendar;
 import org.junit.jupiter.api.Test;
@@ -25,9 +26,9 @@ class DefaultOrderbookDataTest {
                 .instrumentId("instrumendId")
                 .underlyingInstrumentId("underlying")
                 .settlementType(PHYSICAL)
-                .firstTradingDate(LocalDate.MIN)
-                .lastTradingDate(LocalDate.MAX)
-                .maturityDate(LocalDate.now())
+                .firstTradingDate(Timestamp.from(LocalDate.MIN))
+                .lastTradingDate(Timestamp.from(LocalDate.MAX))
+                .maturityDate(Timestamp.now())
                 .strikePrice(100)
                 .optionType(CALL)
                 .optionExerciseStyle(AMERICAN)

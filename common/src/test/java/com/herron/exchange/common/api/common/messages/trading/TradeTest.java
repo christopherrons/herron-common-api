@@ -2,10 +2,10 @@ package com.herron.exchange.common.api.common.messages.trading;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.EventType;
-import com.herron.exchange.common.api.common.enums.TradeType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Participant;
 import com.herron.exchange.common.api.common.messages.common.Price;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.common.Volume;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ class TradeTest {
                 .tradeId("tradeid")
                 .orderbookId("orderbookid")
                 .isBidSideAggressor(true)
-                .timeOfEventMs(1)
+                .timeOfEvent(Timestamp.from(1))
                 .eventType(EventType.SYSTEM)
                 .price(Price.create(1))
                 .askParticipant(new Participant("member", "user"))

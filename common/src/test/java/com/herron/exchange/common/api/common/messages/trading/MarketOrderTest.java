@@ -4,6 +4,7 @@ import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.EventType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Participant;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.common.Volume;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,7 @@ class MarketOrderTest {
                 .orderId("orderid")
                 .orderbookId("orderbookid")
                 .orderSide(BID)
-                .timeOfEventMs(1)
+                .timeOfEvent(Timestamp.from(1))
                 .eventType(EventType.SYSTEM)
                 .participant(new Participant("member", "user"))
                 .build();

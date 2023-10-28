@@ -1,7 +1,6 @@
 package com.herron.exchange.common.api.common.api.trading;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.herron.exchange.common.api.common.api.trading.OrderbookEvent;
 import com.herron.exchange.common.api.common.enums.*;
 import com.herron.exchange.common.api.common.messages.common.Participant;
 import com.herron.exchange.common.api.common.messages.common.Price;

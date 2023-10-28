@@ -11,19 +11,19 @@ import java.util.PriorityQueue;
 
 public class TimeBoundPriorityQueue<T extends Event> extends PriorityQueue<T> {
     private static final Logger LOGGER = LoggerFactory.getLogger(TimeBoundPriorityQueue.class);
-    private final int timeInMs;
+    private final int maxTimeInMs;
     private final transient PriorityQueue<T> timeBoundQueue;
 
-    public TimeBoundPriorityQueue(int timeInMs) {
-        this(timeInMs, Comparator.comparing(Event::timeOfEventMs));
+    public TimeBoundPriorityQueue(int maxTimeInMs) {
+        this(maxTimeInMs, Comparator.comparing(Event::timeOfEvent));
     }
 
-    public TimeBoundPriorityQueue(int timeInMs, Comparator<T> comparator) {
-        this(timeInMs, new PriorityQueue<>(comparator));
+    public TimeBoundPriorityQueue(int maxTimeInMs, Comparator<T> comparator) {
+        this(maxTimeInMs, new PriorityQueue<>(comparator));
     }
 
-    public TimeBoundPriorityQueue(int timeInMs, PriorityQueue<T> queue) {
-        this.timeInMs = timeInMs;
+    public TimeBoundPriorityQueue(int maxTimeInMs, PriorityQueue<T> queue) {
+        this.maxTimeInMs = maxTimeInMs;
         this.timeBoundQueue = queue;
     }
 
@@ -44,6 +44,6 @@ public class TimeBoundPriorityQueue<T extends Event> extends PriorityQueue<T> {
     }
 
     private boolean isTimeExceeded(T currentItem, T item) {
-        return currentItem.timeOfEventMs() - item.timeOfEventMs() > timeInMs;
+        return currentItem.timeOfEvent().timeBetweenMs(item.timeOfEvent()) > maxTimeInMs;
     }
 }

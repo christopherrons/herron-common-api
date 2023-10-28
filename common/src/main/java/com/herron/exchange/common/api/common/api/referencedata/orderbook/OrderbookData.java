@@ -4,6 +4,7 @@ import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.api.referencedata.instruments.Instrument;
 import com.herron.exchange.common.api.common.enums.AuctionAlgorithmEnum;
 import com.herron.exchange.common.api.common.enums.MatchingAlgorithmEnum;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.trading.TradingCalendar;
 import org.immutables.value.Value;
 
@@ -33,12 +34,12 @@ public interface OrderbookData extends Message {
     Instrument instrument();
 
     @Value.Default
-    default LocalDate firstTradingDate() {
+    default Timestamp firstTradingDate() {
         return instrument().firstTradingDate();
     }
 
     @Value.Default
-    default LocalDate lastTradingDate() {
+    default Timestamp lastTradingDate() {
         return instrument().lastTradingDate();
     }
 

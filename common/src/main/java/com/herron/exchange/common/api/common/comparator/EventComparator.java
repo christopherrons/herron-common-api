@@ -7,7 +7,7 @@ import java.util.Comparator;
 public class EventComparator<T extends Event> implements Comparator<T> {
     @Override
     public int compare(T event, T otherEvent) {
-        return Long.compare(event.timeOfEventMs(), otherEvent.timeOfEventMs());
+        return event.timeOfEvent().compareTo(otherEvent.timeOfEvent());
 
     }
 }

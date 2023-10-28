@@ -6,6 +6,7 @@ import com.herron.exchange.common.api.common.enums.KafkaTopicEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.BusinessCalendar;
 import com.herron.exchange.common.api.common.messages.common.PartitionKey;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.refdata.ImmutableMarket;
 import com.herron.exchange.common.api.common.messages.refdata.ImmutableProduct;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class BroadcastMessageTest {
                 .sequenceNumber(1)
                 .message(product)
                 .eventType(EventType.SYSTEM)
-                .timeOfEventMs(1)
+                .timeOfEvent(Timestamp.from(1))
                 .partitionKey(new PartitionKey(KafkaTopicEnum.AUDIT_TRAIL, 1))
                 .build();
         var value = messageFactory.serialize(object);

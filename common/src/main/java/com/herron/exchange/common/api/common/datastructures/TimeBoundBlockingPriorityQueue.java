@@ -8,19 +8,19 @@ import java.util.List;
 import java.util.concurrent.PriorityBlockingQueue;
 
 public class TimeBoundBlockingPriorityQueue<T extends Event> extends PriorityBlockingQueue<T> {
-    private final int timeInMs;
+    private final int timeStamp;
     private final transient PriorityBlockingQueue<T> timeBoundQueue;
 
-    public TimeBoundBlockingPriorityQueue(int timeInMs) {
-        this(timeInMs, Comparator.comparing(Event::timeOfEventMs));
+    public TimeBoundBlockingPriorityQueue(int timeStamp) {
+        this(timeStamp, Comparator.comparing(Event::timeOfEvent));
     }
 
-    public TimeBoundBlockingPriorityQueue(int timeInMs, Comparator<T> comparator) {
-        this(timeInMs, new PriorityBlockingQueue<>(100, comparator));
+    public TimeBoundBlockingPriorityQueue(int timeStamp, Comparator<T> comparator) {
+        this(timeStamp, new PriorityBlockingQueue<>(100, comparator));
     }
 
-    public TimeBoundBlockingPriorityQueue(int timeInMs, PriorityBlockingQueue<T> queue) {
-        this.timeInMs = timeInMs;
+    public TimeBoundBlockingPriorityQueue(int timeStamp, PriorityBlockingQueue<T> queue) {
+        this.timeStamp = timeStamp;
         this.timeBoundQueue = queue;
     }
 
@@ -38,6 +38,6 @@ public class TimeBoundBlockingPriorityQueue<T extends Event> extends PriorityBlo
     }
 
     private boolean isTimeExceeded(T currentItem, T item) {
-        return currentItem.timeOfEventMs() - item.timeOfEventMs() > timeInMs;
+        return currentItem.timeOfEvent().timeBetweenMs(item.timeOfEvent()) > timeStamp;
     }
 }

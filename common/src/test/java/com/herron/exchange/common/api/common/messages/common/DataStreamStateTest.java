@@ -14,7 +14,7 @@ class DataStreamStateTest {
 
     @Test
     void test_serialization_and_deserialization() {
-        var object = ImmutableDataStreamState.builder().eventType(EventType.SYSTEM).state(DataStreamEnum.DONE).timeOfEventMs(1).build();
+        var object = ImmutableDataStreamState.builder().eventType(EventType.SYSTEM).state(DataStreamEnum.DONE).timeOfEvent(Timestamp.now()).build();
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));

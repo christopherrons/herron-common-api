@@ -1,12 +1,11 @@
 package com.herron.exchange.common.api.common.api.referencedata.instruments;
 
 import com.herron.exchange.common.api.common.enums.SettlementTypeEnum;
-
-import java.time.LocalDate;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
 
 public interface DerivativeInstrument extends Instrument {
 
-    LocalDate maturityDate();
+    Timestamp maturityDate();
 
     String underlyingInstrumentId();
 

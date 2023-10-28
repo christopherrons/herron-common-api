@@ -5,6 +5,7 @@ import com.herron.exchange.common.api.common.enums.EventType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Participant;
 import com.herron.exchange.common.api.common.messages.common.Price;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.common.Volume;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ class TradeExecutionTest {
                 .tradeId("tradeid")
                 .orderbookId("orderbookid")
                 .isBidSideAggressor(true)
-                .timeOfEventMs(1)
+                .timeOfEvent(Timestamp.from(1))
                 .eventType(EventType.SYSTEM)
                 .price(Price.create(1))
                 .askParticipant(new Participant("member", "user"))
@@ -35,7 +36,7 @@ class TradeExecutionTest {
 
                 .build();
         var object = ImmutableTradeExecution.builder()
-                .timeOfEventMs(1)
+                .timeOfEvent(Timestamp.from(1))
                 .addAllMessages(List.of(trade))
                 .orderbookId("orderbookid")
                 .eventType(EventType.SYSTEM)

@@ -7,12 +7,12 @@ import com.herron.exchange.common.api.common.messages.ImmutableBroadcastMessage;
 import com.herron.exchange.common.api.common.messages.common.DataStreamState;
 import com.herron.exchange.common.api.common.messages.common.ImmutableDataStreamState;
 import com.herron.exchange.common.api.common.messages.common.PartitionKey;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.wrappers.ThreadWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 
-import java.time.Instant;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
@@ -44,7 +44,7 @@ public class KafkaBroadcastProducer {
 
     public void startBroadcasting() {
         isBroadCasting.set(true);
-        DataStreamState start = ImmutableDataStreamState.builder().timeOfEventMs(Instant.now().toEpochMilli())
+        DataStreamState start = ImmutableDataStreamState.builder().timeOfEvent(Timestamp.now())
                 .state(START)
                 .eventType(SYSTEM)
                 .build();
@@ -54,7 +54,7 @@ public class KafkaBroadcastProducer {
     }
 
     public void endBroadcasting() {
-        DataStreamState done = ImmutableDataStreamState.builder().timeOfEventMs(Instant.now().toEpochMilli())
+        DataStreamState done = ImmutableDataStreamState.builder().timeOfEvent(Timestamp.now())
                 .state(DONE)
                 .eventType(SYSTEM)
                 .build();
@@ -71,7 +71,7 @@ public class KafkaBroadcastProducer {
         var broadcast = ImmutableBroadcastMessage.builder()
                 .message(message)
                 .sequenceNumber(sequenceNumberHandler.getAndIncrement())
-                .timeOfEventMs(Instant.now().toEpochMilli())
+                .timeOfEvent(Timestamp.now())
                 .partitionKey(partitionKey)
                 .eventType(SYSTEM)
                 .build();

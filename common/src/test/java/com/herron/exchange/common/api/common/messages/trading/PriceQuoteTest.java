@@ -4,6 +4,7 @@ import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.EventType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Price;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
@@ -21,7 +22,7 @@ class PriceQuoteTest {
                 .side(BID)
                 .orderbookId("orderbookid")
                 .eventType(EventType.SYSTEM)
-                .timeOfEventMs(Instant.now().toEpochMilli())
+                .timeOfEvent(Timestamp.now())
                 .build();
 
         var value = messageFactory.serialize(object);

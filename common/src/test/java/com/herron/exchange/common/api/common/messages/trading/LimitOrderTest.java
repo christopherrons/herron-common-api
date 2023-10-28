@@ -5,6 +5,7 @@ import com.herron.exchange.common.api.common.enums.EventType;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Participant;
 import com.herron.exchange.common.api.common.messages.common.Price;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.common.Volume;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +31,7 @@ class LimitOrderTest {
                 .timeInForce(FAK)
                 .orderSide(BID)
                 .eventType(EventType.SYSTEM)
-                .timeOfEventMs(1)
+                .timeOfEvent(Timestamp.from(1))
                 .price(Price.create(1))
                 .participant(new Participant("member", "user"))
                 .build();
