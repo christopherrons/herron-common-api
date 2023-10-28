@@ -23,7 +23,7 @@ class DefaultOrderbookDataTest {
     @Test
     void test_serialization_and_deserialization() {
         var instrument = ImmutableDefaultOptionInstrument.builder()
-                .instrumentId("instrumendId")
+                .instrumentId("instrumentId")
                 .underlyingInstrumentId("underlying")
                 .settlementType(PHYSICAL)
                 .firstTradingDate(Timestamp.from(LocalDate.MIN))

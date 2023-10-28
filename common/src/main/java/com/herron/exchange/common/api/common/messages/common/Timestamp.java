@@ -49,6 +49,18 @@ public record Timestamp(long timeStampMs, ZoneId zoneId) implements Comparable<T
         return from(localDate, ZoneId.of("UTC"));
     }
 
+    public LocalDate toLocalDate() {
+        return Instant.ofEpochMilli(timeStampMs).atZone(zoneId).toLocalDate();
+    }
+
+    public LocalDateTime toLocalDateTime() {
+        return Instant.ofEpochMilli(timeStampMs).atZone(zoneId).toLocalDateTime();
+    }
+
+    public Instant toInstant() {
+        return Instant.ofEpochMilli(timeStampMs);
+    }
+
     public boolean isBeforeOrAt(Timestamp other) {
         return this.compareTo(other) <= 0;
     }
