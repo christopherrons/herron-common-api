@@ -1,5 +1,7 @@
 package com.herron.exchange.common.api.common.enums;
 
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -14,6 +16,10 @@ public enum DayCountConventionEnum {
     DayCountConventionEnum(double daysPerMonth, double daysPerYear) {
         this.daysPerMonth = daysPerMonth;
         this.daysPerYear = daysPerYear;
+    }
+
+    public double calculateDayCountFraction(Timestamp startDate, Timestamp endDate) {
+        return calculateDayCountFraction(startDate.toLocalDate(), endDate.toLocalDate());
     }
 
     public double calculateDayCountFraction(LocalDate startDate, LocalDate endDate) {

@@ -23,6 +23,10 @@ public class EventLogger {
         this("");
     }
 
+    public EventLogger(int messageUpdateInterval) {
+        this("", messageUpdateInterval);
+    }
+
     public EventLogger(String id) {
         this(id, MESSAGE_UPDATE_INTERVAL);
     }

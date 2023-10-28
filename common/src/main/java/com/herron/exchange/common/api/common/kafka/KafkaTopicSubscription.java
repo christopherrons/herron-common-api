@@ -25,7 +25,7 @@ public abstract class KafkaTopicSubscription {
 
     protected KafkaTopicSubscription(KafkaSubscriptionDetails details) {
         this.details = details;
-        this.eventLogger = new EventLogger("", details.eventLoggingRate());
+        this.eventLogger = new EventLogger(details.eventLoggingRate());
         this.service = Executors.newSingleThreadExecutor(new ThreadWrapper("KAFKA-SUB" + "-" + details.partitionKey()));
     }
 
