@@ -67,7 +67,7 @@ public class HttpRequestHandler {
 
     public static <T> T mapResponse(String response, Class<T> responseClass) {
         try {
-            response = handleSpecialCharacters(response);
+            //response = handleSpecialCharacters(response);
             return MAPPER.readValue(response, responseClass);
         } catch (IOException e) {
             LOGGER.error("Error while mapping response.", e);
