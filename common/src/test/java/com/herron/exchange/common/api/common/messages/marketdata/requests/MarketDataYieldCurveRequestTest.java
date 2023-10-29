@@ -3,11 +3,10 @@ package com.herron.exchange.common.api.common.messages.marketdata.requests;
 import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.MarketDataRequestTimeFilter;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.marketdata.ImmutableDefaultTimeComponentKey;
 import com.herron.exchange.common.api.common.messages.marketdata.statickeys.ImmutableMarketDataYieldCurveStaticKey;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -18,7 +17,7 @@ class MarketDataYieldCurveRequestTest {
     void test_serialization_and_deserialization() {
         var object = ImmutableMarketDataYieldCurveRequest.builder()
                 .staticKey(ImmutableMarketDataYieldCurveStaticKey.builder().curveId("curveId").build())
-                .timeComponentKey(ImmutableDefaultTimeComponentKey.builder().timeOfEvent(LocalDateTime.now()).build())
+                .timeComponentKey(ImmutableDefaultTimeComponentKey.builder().timeOfEvent(Timestamp.now()).build())
                 .timeFilter(MarketDataRequestTimeFilter.MATCH_TIME)
                 .build();
 

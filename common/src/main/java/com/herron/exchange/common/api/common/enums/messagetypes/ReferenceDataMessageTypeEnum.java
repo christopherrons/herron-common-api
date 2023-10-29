@@ -45,15 +45,15 @@ public enum ReferenceDataMessageTypeEnum implements MessageType {
         return VALUES_BY_IDENTIFIER.getOrDefault(messageTypeId, null);
     }
 
+    public static Map<String, Class<? extends Message>> getIdToClassImplementation() {
+        return stream(ReferenceDataMessageTypeEnum.values()).collect(Collectors.toMap(ReferenceDataMessageTypeEnum::getMessageTypeId, ReferenceDataMessageTypeEnum::getClassToBeDeserialized));
+    }
+
     public String getMessageTypeId() {
         return messageTypeId;
     }
 
     public Class<? extends Message> getClassToBeDeserialized() {
         return classToBeDeserialized;
-    }
-
-    public static Map<String, Class<? extends Message>> getIdToClassImplementation() {
-        return stream(ReferenceDataMessageTypeEnum.values()).collect(Collectors.toMap(ReferenceDataMessageTypeEnum::getMessageTypeId, ReferenceDataMessageTypeEnum::getClassToBeDeserialized));
     }
 }

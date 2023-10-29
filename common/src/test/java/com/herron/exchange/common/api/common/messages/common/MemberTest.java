@@ -1,11 +1,10 @@
 package com.herron.exchange.common.api.common.messages.common;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
-import com.herron.exchange.common.api.common.enums.DataStreamEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MemberTest {
     private final MessageFactory messageFactory = new DefaultMessageFactory();

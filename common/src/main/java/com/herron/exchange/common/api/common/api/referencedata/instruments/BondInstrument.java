@@ -7,8 +7,6 @@ import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.pricing.BondDiscountPriceModelParameters;
 import org.immutables.value.Value;
 
-import java.time.LocalDate;
-
 public interface BondInstrument extends Instrument {
 
     MonetaryAmount nominalValue();

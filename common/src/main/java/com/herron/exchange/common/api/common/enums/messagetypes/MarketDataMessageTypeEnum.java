@@ -41,15 +41,15 @@ public enum MarketDataMessageTypeEnum implements MessageType {
         return VALUES_BY_IDENTIFIER.getOrDefault(messageTypeId, null);
     }
 
+    public static Map<String, Class<? extends Message>> getIdToClassImplementation() {
+        return stream(MarketDataMessageTypeEnum.values()).collect(Collectors.toMap(MarketDataMessageTypeEnum::getMessageTypeId, MarketDataMessageTypeEnum::getClassToBeDeserialized));
+    }
+
     public String getMessageTypeId() {
         return messageTypeId;
     }
 
     public Class<? extends Message> getClassToBeDeserialized() {
         return classToBeDeserialized;
-    }
-
-    public static Map<String, Class<? extends Message>> getIdToClassImplementation() {
-        return stream(MarketDataMessageTypeEnum.values()).collect(Collectors.toMap(MarketDataMessageTypeEnum::getMessageTypeId, MarketDataMessageTypeEnum::getClassToBeDeserialized));
     }
 }

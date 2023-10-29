@@ -14,19 +14,19 @@ import static com.herron.exchange.common.api.common.enums.messagetypes.MarketDat
 @JsonDeserialize(builder = ImmutableMarketDataYieldCurveResponse.Builder.class)
 @SuppressWarnings("immutables:from")
 public interface MarketDataYieldCurveResponse extends MarketDataResponse {
+    static MarketDataYieldCurveResponse createErrorResponse(String errorMessage) {
+        return ImmutableMarketDataYieldCurveResponse.builder()
+                .status(ERROR)
+                .error(errorMessage)
+                .build();
+    }
+
     @Nullable
     MarketDataYieldCurve yieldCurveEntry();
 
     @Value.Derived
     default MarketDataMessageTypeEnum messageType() {
         return MARKET_DATA_YIELD_CURVE_RESPONSE;
-    }
-
-    static MarketDataYieldCurveResponse createErrorResponse(String errorMessage) {
-        return ImmutableMarketDataYieldCurveResponse.builder()
-                .status(ERROR)
-                .error(errorMessage)
-                .build();
     }
 
 }

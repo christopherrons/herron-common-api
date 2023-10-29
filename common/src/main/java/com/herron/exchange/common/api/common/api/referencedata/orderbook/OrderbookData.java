@@ -8,8 +8,6 @@ import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.trading.TradingCalendar;
 import org.immutables.value.Value;
 
-import java.time.LocalDate;
-
 public interface OrderbookData extends Message {
 
     TradingCalendar tradingCalendar();

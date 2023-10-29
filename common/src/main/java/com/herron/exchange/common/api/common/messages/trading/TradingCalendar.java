@@ -17,6 +17,20 @@ import static com.herron.exchange.common.api.common.enums.messagetypes.TradingMe
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableTradingCalendar.Builder.class)
 public interface TradingCalendar extends Message {
+    static TradingCalendar twentyFourSevenTradingCalendar() {
+        return ImmutableTradingCalendar.builder()
+                .calendarId("24/7 trading calendar")
+                .continuousTradingHours(new TradingHours(LocalTime.MIDNIGHT, LocalTime.MAX))
+                .build();
+    }
+
+    static TradingCalendar nineToFiveTradingCalendar() {
+        return ImmutableTradingCalendar.builder()
+                .calendarId("9 to 17 trading calendar")
+                .continuousTradingHours(new TradingHours(LocalTime.of(9, 0), LocalTime.of(17, 0)))
+                .build();
+    }
+
     String calendarId();
 
     @Nullable
@@ -46,6 +60,11 @@ public interface TradingCalendar extends Message {
         return Map.of();
     }
 
+    @Value.Derived
+    default TradingMessageTypeEnum messageType() {
+        return TRADING_CALENDAR;
+    }
+
     @JsonIgnoreProperties(ignoreUnknown = true)
     record TradingHours(LocalTime start, LocalTime end) {
         public TradingHours(int startHour, int endHour) {
@@ -55,25 +74,5 @@ public interface TradingCalendar extends Message {
         boolean isOpen(LocalTime time) {
             return !time.isBefore(start) && !time.isAfter(end);
         }
-    }
-
-    @Value.Derived
-    default TradingMessageTypeEnum messageType() {
-        return TRADING_CALENDAR;
-    }
-
-
-    static TradingCalendar twentyFourSevenTradingCalendar() {
-        return ImmutableTradingCalendar.builder()
-                .calendarId("24/7 trading calendar")
-                .continuousTradingHours(new TradingHours(LocalTime.MIDNIGHT, LocalTime.MAX))
-                .build();
-    }
-
-    static TradingCalendar nineToFiveTradingCalendar() {
-        return ImmutableTradingCalendar.builder()
-                .calendarId("9 to 17 trading calendar")
-                .continuousTradingHours(new TradingHours(LocalTime.of(9, 0), LocalTime.of(17, 0)))
-                .build();
     }
 }

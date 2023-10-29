@@ -16,8 +16,8 @@ import static com.herron.exchange.common.api.common.enums.DataStreamEnum.START;
 public abstract class DataConsumer {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final String id;
     protected final CountDownLatch countDownLatch;
+    private final String id;
     private final ExecutorService service;
     protected DataStreamEnum consumerStatus;
 

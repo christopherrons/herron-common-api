@@ -5,7 +5,7 @@ import com.herron.exchange.common.api.common.enums.UnitEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class QuantityTest {
     private final MessageFactory messageFactory = new DefaultMessageFactory();

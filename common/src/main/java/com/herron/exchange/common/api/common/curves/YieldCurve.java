@@ -8,8 +8,8 @@ import com.herron.exchange.common.api.common.math.interpolation.CubicSplineInter
 
 public class YieldCurve {
 
-    private final String id;
     public final YieldCurveModelParameters yieldCurveModelParameters;
+    private final String id;
     private final Function2d yieldFunction;
 
     private YieldCurve(@JsonProperty("id") String id, @JsonProperty("yieldCurveModelParameters") YieldCurveModelParameters yieldCurveModelParameters) {

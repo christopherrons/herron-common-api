@@ -18,6 +18,10 @@ public class Volume extends Amount<Volume> {
         super(volume);
     }
 
+    public static Volume create(double volume) {
+        return new Volume(volume);
+    }
+
     @Override
     protected Volume newInstance(BigDecimal volume) {
         return new Volume(volume);
@@ -36,10 +40,6 @@ public class Volume extends Amount<Volume> {
     @Override
     protected Volume emptyAmount() {
         return ZERO;
-    }
-
-    public static Volume create(double volume) {
-        return new Volume(volume);
     }
 
     @Override

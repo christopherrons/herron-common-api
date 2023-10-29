@@ -19,6 +19,10 @@ public class Price extends Amount<Price> {
         super(price);
     }
 
+    public static Price create(double price) {
+        return new Price(price);
+    }
+
     @Override
     protected Price newInstance(double price) {
         return new Price(price);
@@ -37,10 +41,6 @@ public class Price extends Amount<Price> {
     @Override
     protected Price emptyAmount() {
         return ZERO;
-    }
-
-    public static Price create(double price) {
-        return new Price(price);
     }
 
     @Override

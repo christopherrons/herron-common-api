@@ -37,16 +37,16 @@ public enum CommonMessageTypesEnum implements MessageType {
         return VALUES_BY_IDENTIFIER.getOrDefault(messageTypeId, null);
     }
 
+    public static Map<String, Class<? extends Message>> getIdToClassImplementation() {
+        return stream(CommonMessageTypesEnum.values()).collect(Collectors.toMap(CommonMessageTypesEnum::getMessageTypeId, CommonMessageTypesEnum::getClassToBeDeserialized));
+    }
+
     public String getMessageTypeId() {
         return messageTypeId;
     }
 
     public Class<? extends Message> getClassToBeDeserialized() {
         return classToBeDeserialized;
-    }
-
-    public static Map<String, Class<? extends Message>> getIdToClassImplementation() {
-        return stream(CommonMessageTypesEnum.values()).collect(Collectors.toMap(CommonMessageTypesEnum::getMessageTypeId, CommonMessageTypesEnum::getClassToBeDeserialized));
     }
 
 }

@@ -18,6 +18,24 @@ import static java.time.DayOfWeek.SUNDAY;
 @JsonDeserialize(builder = ImmutableBusinessCalendar.Builder.class)
 public interface BusinessCalendar extends Message {
 
+    static BusinessCalendar noHolidayCalendar() {
+        return ImmutableBusinessCalendar.builder()
+                .calendarId("noHolidayCalendar")
+                .holidays(Set.of())
+                .weekends(Set.of())
+                .reoccurringHolidays(Set.of())
+                .build();
+    }
+
+    static BusinessCalendar defaultWeekendCalendar() {
+        return ImmutableBusinessCalendar.builder()
+                .calendarId("weekendCalendar")
+                .holidays(Set.of())
+                .weekends(Set.of(SATURDAY, SUNDAY))
+                .reoccurringHolidays(Set.of())
+                .build();
+    }
+
     String calendarId();
 
     @Value.Default
@@ -51,7 +69,6 @@ public interface BusinessCalendar extends Message {
         return preHolidayDate;
     }
 
-
     default boolean isHolidayOrWeekend(LocalDate date) {
         return holidays().contains(date) ||
                 reoccurringHolidays().contains(MonthDay.from(date)) ||
@@ -61,23 +78,5 @@ public interface BusinessCalendar extends Message {
     @Value.Derived
     default ReferenceDataMessageTypeEnum messageType() {
         return BUSINESS_CALENDAR;
-    }
-
-    static BusinessCalendar noHolidayCalendar() {
-        return ImmutableBusinessCalendar.builder()
-                .calendarId("noHolidayCalendar")
-                .holidays(Set.of())
-                .weekends(Set.of())
-                .reoccurringHolidays(Set.of())
-                .build();
-    }
-
-    static BusinessCalendar defaultWeekendCalendar() {
-        return ImmutableBusinessCalendar.builder()
-                .calendarId("weekendCalendar")
-                .holidays(Set.of())
-                .weekends(Set.of(SATURDAY, SUNDAY))
-                .reoccurringHolidays(Set.of())
-                .build();
     }
 }
