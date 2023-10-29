@@ -55,7 +55,7 @@ public interface BusinessCalendar extends Message {
 
     default LocalDate getFirstDateBeforeHoliday(LocalDate date) {
         LocalDate preHolidayDate = date;
-        while (isHolidayOrWeekend(date)) {
+        while (isHolidayOrWeekend(preHolidayDate)) {
             preHolidayDate = preHolidayDate.minusDays(1);
         }
         return preHolidayDate;
@@ -63,7 +63,7 @@ public interface BusinessCalendar extends Message {
 
     default LocalDate getFirstDateAfterHoliday(LocalDate date) {
         LocalDate preHolidayDate = date;
-        while (isHolidayOrWeekend(date)) {
+        while (isHolidayOrWeekend(preHolidayDate)) {
             preHolidayDate = preHolidayDate.plusDays(1);
         }
         return preHolidayDate;

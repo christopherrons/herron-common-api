@@ -15,6 +15,15 @@ import static com.herron.exchange.common.api.common.enums.messagetypes.PricingMe
 @JsonDeserialize(builder = ImmutableFailedPriceModelResult.Builder.class)
 public interface FailedPriceModelResult extends PriceModelResult {
 
+    static FailedPriceModelResult createFailedResult(String reason) {
+        return ImmutableFailedPriceModelResult.builder()
+                .failReason(reason)
+                .eventType(SYSTEM)
+                .price(Price.ZERO)
+                .timeOfEvent(Timestamp.now())
+                .build();
+    }
+
     String failReason();
 
     @Value.Derived
@@ -25,14 +34,5 @@ public interface FailedPriceModelResult extends PriceModelResult {
     @Value.Derived
     default PricingMessageTypeEnum messageType() {
         return FAILED_PRICE_MODEL_RESULT;
-    }
-
-    static FailedPriceModelResult createFailedResult(String reason) {
-        return ImmutableFailedPriceModelResult.builder()
-                .failReason(reason)
-                .eventType(SYSTEM)
-                .price(Price.ZERO)
-                .timeOfEvent(Timestamp.now())
-                .build();
     }
 }

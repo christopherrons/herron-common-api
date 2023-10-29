@@ -5,7 +5,10 @@ import com.herron.exchange.common.api.common.api.MessageType;
 import com.herron.exchange.common.api.common.messages.marketdata.DefaultTimeComponentKey;
 import com.herron.exchange.common.api.common.messages.marketdata.entries.MarketDataPrice;
 import com.herron.exchange.common.api.common.messages.marketdata.entries.MarketDataYieldCurve;
+import com.herron.exchange.common.api.common.messages.marketdata.requests.MarketDataPriceRequest;
 import com.herron.exchange.common.api.common.messages.marketdata.requests.MarketDataYieldCurveRequest;
+import com.herron.exchange.common.api.common.messages.marketdata.response.MarketDataErrorResponse;
+import com.herron.exchange.common.api.common.messages.marketdata.response.MarketDataPriceResponse;
 import com.herron.exchange.common.api.common.messages.marketdata.response.MarketDataYieldCurveResponse;
 import com.herron.exchange.common.api.common.messages.marketdata.statickeys.MarketDataPriceStaticKey;
 import com.herron.exchange.common.api.common.messages.marketdata.statickeys.MarketDataYieldCurveStaticKey;
@@ -24,6 +27,9 @@ public enum MarketDataMessageTypeEnum implements MessageType {
     MARKET_DATA_YIELD_CURVE_STATIC_KEY("MDYCSK", MarketDataYieldCurveStaticKey.class),
     MARKET_DATA_YIELD_CURVE_REQUEST("MDYCREQ", MarketDataYieldCurveRequest.class),
     MARKET_DATA_YIELD_CURVE_RESPONSE("MDYCRES", MarketDataYieldCurveResponse.class),
+    MARKET_DATA_PRICE_REQUEST("MDPRREQ", MarketDataPriceRequest.class),
+    MARKET_DATA_PRICE_RESPONSE("MDPRRES", MarketDataPriceResponse.class),
+    MARKET_DATA_ERROR_RESPONSE("MDERRES", MarketDataErrorResponse.class),
     DEFAULT_TIME_COMPONENT_KEY("DTCK", DefaultTimeComponentKey.class);
 
     private static final Map<String, MarketDataMessageTypeEnum> VALUES_BY_IDENTIFIER = stream(MarketDataMessageTypeEnum.values())
