@@ -6,6 +6,7 @@ import com.herron.exchange.common.api.common.enums.OptionTypeEnum;
 import com.herron.exchange.common.api.common.enums.SettlementTypeEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.BusinessCalendar;
+import com.herron.exchange.common.api.common.messages.common.Price;
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.pricing.ImmutableBlackScholesPriceModelParameters;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ class DefaultOptionInstrumentTest {
                 .firstTradingDate(Timestamp.from(LocalDate.MIN))
                 .lastTradingDate(Timestamp.from(LocalDate.MAX))
                 .maturityDate(Timestamp.now())
-                .strikePrice(100)
+                .strikePrice(Price.create(100))
                 .optionType(OptionTypeEnum.CALL)
                 .optionExerciseStyle(OptionExerciseTyleEnum.AMERICAN)
                 .priceModelParameters(ImmutableBlackScholesPriceModelParameters.builder().build())

@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 
 
 public record Timestamp(long timeStampMs, ZoneId zoneId) implements Comparable<Timestamp> {
@@ -79,6 +80,10 @@ public record Timestamp(long timeStampMs, ZoneId zoneId) implements Comparable<T
 
     public long timeBetweenMs(Timestamp other) {
         return this.timeStampMs - other.timeStampMs;
+    }
+
+    public double timeBetween(Timestamp other, ChronoUnit unit) {
+        return unit.between(this.toLocalDate(), other.toLocalDate());
     }
 
     @Override
