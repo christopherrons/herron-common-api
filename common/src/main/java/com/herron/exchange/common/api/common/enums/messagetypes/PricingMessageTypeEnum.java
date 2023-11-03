@@ -15,6 +15,7 @@ import static java.util.stream.Collectors.toMap;
 public enum PricingMessageTypeEnum implements MessageType {
     FAILED_PRICE_MODEL_RESULT("FAPMR", FailedPriceModelResult.class),
     BLACK_SCHOLES_PRICE_MODEL_PARAMETERS("BSPMP", BlackScholesPriceModelParameters.class),
+    BLACK_SCHOLES_PRICE_MODEL_RESULT("BSPMR", BlackScholesPriceModelResult.class),
     BOND_DISCOUNT_PRICE_MODEL_PARAMETERS("BDPMP", BondDiscountPriceModelParameters.class),
     BOND_DISCOUNT_PRICE_MODEL_RESULT("BDPMR", BondDiscountPriceModelResult.class),
     BASIC_FUTURE_PRICE_MODEL_PARAMETERS("BFPMP", BasicFuturePriceModelParameters.class),
