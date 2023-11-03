@@ -6,6 +6,7 @@ import com.herron.exchange.common.api.common.enums.DayCountConventionEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.BusinessCalendar;
 import com.herron.exchange.common.api.common.messages.common.MonetaryAmount;
+import com.herron.exchange.common.api.common.messages.common.PureNumber;
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.pricing.ImmutableBondDiscountPriceModelParameters;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ class DefaultBondInstrumentTest {
                 .lastTradingDate(Timestamp.from(LocalDate.MAX))
                 .nominalValue(MonetaryAmount.create(1, "eur"))
                 .maturityDate(Timestamp.now())
-                .couponRate(1)
+                .couponRate(PureNumber.create(1))
                 .priceModelParameters(ImmutableBondDiscountPriceModelParameters.builder().compoundingMethod(CompoundingMethodEnum.COMPOUNDING)
                         .dayCountConvention(DayCountConventionEnum.ACT365)
                         .calculateWithCurve(true)

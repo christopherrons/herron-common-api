@@ -14,6 +14,7 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 public enum CommonMessageTypesEnum implements MessageType {
+    PURE_NUMBER("PA", PureNumber.class),
     MONETARY_AMOUNT("MA", MonetaryAmount.class),
     VOLUME("V", Volume.class),
     QUANTITY("Q", Quantity.class),

@@ -4,6 +4,7 @@ import com.herron.exchange.common.api.common.api.Event;
 import com.herron.exchange.common.api.common.enums.Status;
 import com.herron.exchange.common.api.common.messages.common.Price;
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
+import org.immutables.value.Value;
 
 public interface PriceModelResult extends Event {
 
@@ -13,6 +14,9 @@ public interface PriceModelResult extends Event {
 
     Timestamp marketTime();
 
-    Timestamp calculationTime();
+    @Value.Derived
+    default Timestamp calculationTime() {
+        return timeOfEvent();
+    }
 
 }

@@ -9,6 +9,7 @@ import java.math.RoundingMode;
 import java.util.Objects;
 
 public abstract class Amount<T extends Amount<?>> implements Message {
+    private static final int DIVISOR_SCALE = 12;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     protected final BigDecimal value;
@@ -95,7 +96,7 @@ public abstract class Amount<T extends Amount<?>> implements Message {
     }
 
     public T divide(BigDecimal otherValue) {
-        return newInstance(value.divide(otherValue, RoundingMode.HALF_DOWN));
+        return newInstance(value.divide(otherValue, DIVISOR_SCALE, RoundingMode.HALF_UP));
     }
 
     public T add(double otherValue) {
@@ -134,7 +135,7 @@ public abstract class Amount<T extends Amount<?>> implements Message {
     }
 
     public double percentageChange(BigDecimal otherAmount) {
-        return otherAmount.subtract(value).divide(value.abs(), RoundingMode.HALF_EVEN).abs().doubleValue();
+        return otherAmount.subtract(value).divide(value.abs(), DIVISOR_SCALE, RoundingMode.HALF_EVEN).abs().doubleValue();
     }
 
     public T max(T otherAmount) {
@@ -147,6 +148,10 @@ public abstract class Amount<T extends Amount<?>> implements Message {
 
     public T scale(int decimals) {
         return newInstance(value.setScale(decimals, RoundingMode.HALF_EVEN));
+    }
+
+    public T pow(int n) {
+        return newInstance(value.pow(n));
     }
 
     public int signum() {

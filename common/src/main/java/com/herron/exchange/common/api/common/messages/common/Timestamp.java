@@ -90,4 +90,12 @@ public record Timestamp(long timeStampMs, ZoneId zoneId) implements Comparable<T
     public int compareTo(Timestamp other) {
         return Long.compare(this.timeStampMs, other.timeStampMs);
     }
+
+    @Override
+    public String toString() {
+        return "Timestamp{" +
+                "localTime=" + toLocalDateTime() +
+                ", zoneId=" + zoneId +
+                '}';
+    }
 }
