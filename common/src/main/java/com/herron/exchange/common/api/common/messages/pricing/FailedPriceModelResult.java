@@ -21,6 +21,7 @@ public interface FailedPriceModelResult extends PriceModelResult {
                 .eventType(SYSTEM)
                 .price(Price.ZERO)
                 .timeOfEvent(Timestamp.now())
+                .marketTime(Timestamp.now())
                 .build();
     }
 

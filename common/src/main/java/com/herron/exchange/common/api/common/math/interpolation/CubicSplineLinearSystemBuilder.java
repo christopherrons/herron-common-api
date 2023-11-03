@@ -1,6 +1,6 @@
 package com.herron.exchange.common.api.common.math.interpolation;
 
-import com.herron.exchange.common.api.common.math.model.FunctionBoundary2dPoints;
+import com.herron.exchange.common.api.common.math.model.Interval2d;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -12,10 +12,10 @@ import static java.lang.Math.pow;
 
 public class CubicSplineLinearSystemBuilder {
     public static final int NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL = 4;
-    private final List<FunctionBoundary2dPoints> boundaryPoints;
+    private final List<Interval2d> boundaryPoints;
     private final int nrOfMatrixColumns;
 
-    public CubicSplineLinearSystemBuilder(List<FunctionBoundary2dPoints> boundaryPoints) {
+    public CubicSplineLinearSystemBuilder(List<Interval2d> boundaryPoints) {
         this.boundaryPoints = boundaryPoints;
         this.nrOfMatrixColumns = boundaryPoints.size() * NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL;
     }
@@ -31,7 +31,7 @@ public class CubicSplineLinearSystemBuilder {
     private RealMatrix firstConditionPolynomialPassesThroughRespectiveBoundaryPoints() {
         RealMatrix matrix = new Array2DRowRealMatrix(boundaryPoints.size() * 2, nrOfMatrixColumns);
         for (int i = 0; i < boundaryPoints.size(); i++) {
-            final FunctionBoundary2dPoints boundaryPoint = boundaryPoints.get(i);
+            final Interval2d boundaryPoint = boundaryPoints.get(i);
             int rowIndex = i * 2;
             int columnShift = NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL * i;
             addBoundaryPoint(matrix, rowIndex, columnShift, boundaryPoint.startBoundaryPointX());
@@ -49,7 +49,7 @@ public class CubicSplineLinearSystemBuilder {
     private RealMatrix secondConditionFirstDerivativeMatchInteriorPoints() {
         RealMatrix matrix = new Array2DRowRealMatrix(boundaryPoints.size() - 1, nrOfMatrixColumns);
         for (int i = 0; i < boundaryPoints.size() - 1; i++) {
-            final FunctionBoundary2dPoints boundaryPoint = boundaryPoints.get(i);
+            final Interval2d boundaryPoint = boundaryPoints.get(i);
             int rowIndex = i;
             int columnShift = NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL * i;
             addFirstDerivativeInteriorPoint(matrix, rowIndex, columnShift, boundaryPoint.endBoundaryPointX());
@@ -68,7 +68,7 @@ public class CubicSplineLinearSystemBuilder {
     private RealMatrix thirdConditionSecondDerivativeMatchInteriorPoints() {
         RealMatrix matrix = new Array2DRowRealMatrix(boundaryPoints.size() - 1, nrOfMatrixColumns);
         for (int i = 0; i < boundaryPoints.size() - 1; i++) {
-            final FunctionBoundary2dPoints boundaryPoint = boundaryPoints.get(i);
+            final Interval2d boundaryPoint = boundaryPoints.get(i);
             int rowIndex = i;
             int columnShift = NR_OF_COEFFICIENTS_IN_CUBIC_POLYNOMIAL * i;
             addSecondDerivativeInteriorPoint(matrix, rowIndex, columnShift, boundaryPoint.endBoundaryPointX());
@@ -119,7 +119,7 @@ public class CubicSplineLinearSystemBuilder {
 
     private void addFirstConditionConstants(final RealVector vector) {
         for (int i = 0; i < boundaryPoints.size(); i++) {
-            FunctionBoundary2dPoints boundaryPoint = boundaryPoints.get(i);
+            Interval2d boundaryPoint = boundaryPoints.get(i);
             int rowIndex = i * 2;
             vector.addToEntry(rowIndex, boundaryPoint.startBoundaryPointY());
             vector.addToEntry(rowIndex + 1, boundaryPoint.endBoundaryPointY());

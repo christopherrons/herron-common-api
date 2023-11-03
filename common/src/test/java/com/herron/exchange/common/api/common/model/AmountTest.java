@@ -72,9 +72,9 @@ class AmountTest {
 
     @Test
     void test_divide() {
-        assertEquals(MonetaryAmount.create(5.0, "eur"), thatAmount.divide(thisAmount));
-        assertEquals(MonetaryAmount.create(5.0, "eur"), thatAmount.divide(thisRealAmount));
-        assertEquals(MonetaryAmount.create(5.0, "eur"), thatAmount.divide(BigDecimal.valueOf(thisRealAmount)));
+        assertEquals(MonetaryAmount.create(5.0, "eur"), thatAmount.divide(thisAmount).scale(1));
+        assertEquals(MonetaryAmount.create(5.0, "eur"), thatAmount.divide(thisRealAmount).scale(1));
+        assertEquals(MonetaryAmount.create(5.0, "eur"), thatAmount.divide(BigDecimal.valueOf(thisRealAmount)).scale(1));
     }
 
 

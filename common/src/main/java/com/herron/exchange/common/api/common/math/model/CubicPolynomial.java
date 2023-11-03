@@ -6,7 +6,7 @@ public record CubicPolynomial(double firstCoefficient,
                               double secondCoefficient,
                               double thirdCoefficient,
                               double fourthCoefficient,
-                              FunctionBoundary2dPoints boundaryPoints) {
+                              Interval2d boundaryPoints) {
 
     public CubicPolynomial(double firstCoefficient,
                            double secondCoefficient,
@@ -16,7 +16,7 @@ public record CubicPolynomial(double firstCoefficient,
                 secondCoefficient,
                 thirdCoefficient,
                 fourthCoefficient,
-                new FunctionBoundary2dPoints(Double.MIN_VALUE, Double.MAX_VALUE, Double.MIN_VALUE, Double.MAX_VALUE)
+                new Interval2d(new Point2d(Double.MIN_VALUE, Double.MAX_VALUE), new Point2d(Double.MIN_VALUE, Double.MAX_VALUE))
         );
     }
 

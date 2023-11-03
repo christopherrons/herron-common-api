@@ -4,7 +4,7 @@ package com.herron.exchange.common.api.common.math.interpolation;
 import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;
 import com.herron.exchange.common.api.common.api.math.Function2d;
 import com.herron.exchange.common.api.common.math.model.CubicPolynomial;
-import com.herron.exchange.common.api.common.math.model.FunctionBoundary2dPoints;
+import com.herron.exchange.common.api.common.math.model.Interval2d;
 import com.herron.exchange.common.api.common.math.solver.LinearEquationSolver;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
@@ -63,20 +63,18 @@ public class CubicSplineInterpolation implements Function2d {
         points.sort(Comparator.comparing(CartesianPoint2d::x));
 
         final int nrOfBoundaries = points.size() - 1;
-        final List<FunctionBoundary2dPoints> boundaryPoints = new ArrayList<>();
+        final List<Interval2d> boundaryPoints = new ArrayList<>();
         for (int i = 0; i < nrOfBoundaries; i++) {
-            boundaryPoints.add(new FunctionBoundary2dPoints(
-                            points.get(i).x(),
-                            points.get(i + 1).x(),
-                            points.get(i).y(),
-                            points.get(i + 1).y()
+            boundaryPoints.add(new Interval2d(
+                            points.get(i),
+                            points.get(i + 1)
                     )
             );
         }
         return createPolynomials(boundaryPoints);
     }
 
-    private List<CubicPolynomial> createPolynomials(List<FunctionBoundary2dPoints> boundaryPoints) {
+    private List<CubicPolynomial> createPolynomials(List<Interval2d> boundaryPoints) {
         RealVector coefficients = getCoefficients(boundaryPoints);
         final List<CubicPolynomial> polynomials = new ArrayList<>();
         for (int i = 0; i < boundaryPoints.size(); i++) {
@@ -93,7 +91,7 @@ public class CubicSplineInterpolation implements Function2d {
         return polynomials;
     }
 
-    private RealVector getCoefficients(List<FunctionBoundary2dPoints> boundaryPoints) {
+    private RealVector getCoefficients(List<Interval2d> boundaryPoints) {
         final CubicSplineLinearSystemBuilder linearSystemBuilder = new CubicSplineLinearSystemBuilder(boundaryPoints);
         final RealMatrix A = linearSystemBuilder.createCoefficientMatrix();
         final RealVector b = linearSystemBuilder.createConstantVector();

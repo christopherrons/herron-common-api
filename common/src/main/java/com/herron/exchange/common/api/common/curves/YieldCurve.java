@@ -4,7 +4,9 @@ package com.herron.exchange.common.api.common.curves;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;
 import com.herron.exchange.common.api.common.api.math.Function2d;
+import com.herron.exchange.common.api.common.math.interpolation.ConstantIntervalCurve;
 import com.herron.exchange.common.api.common.math.interpolation.CubicSplineInterpolation;
+import com.herron.exchange.common.api.common.math.interpolation.LinearInterpolationCurve;
 
 public class YieldCurve {
 
@@ -26,6 +28,8 @@ public class YieldCurve {
         var points = yieldCurveModelParameters.yieldPoints().stream().map(CartesianPoint2d.class::cast).toList();
         return switch (yieldCurveModelParameters.interpolationMethod()) {
             case CUBIC_SPLINE -> CubicSplineInterpolation.create(points);
+            case CONSTANT -> ConstantIntervalCurve.create(points);
+            case LINEAR -> LinearInterpolationCurve.create(points);
             default -> throw new IllegalArgumentException("Other methods are not supported");
         };
     }
