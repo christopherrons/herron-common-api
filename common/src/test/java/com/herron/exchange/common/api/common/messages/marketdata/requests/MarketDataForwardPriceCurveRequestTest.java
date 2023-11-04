@@ -17,7 +17,7 @@ class MarketDataForwardPriceCurveRequestTest {
     @Test
     void test_serialization_and_deserialization() {
         var object = ImmutableMarketDataForwardPriceCurveRequest.builder()
-                .staticKey(ImmutableMarketDataForwardPriceCurveStaticKey.builder().instrumentId("curveId").strikePrice(PureNumber.ZERO).build())
+                .staticKey(ImmutableMarketDataForwardPriceCurveStaticKey.builder().instrumentId("curveId").build())
                 .timeComponentKey(ImmutableDefaultTimeComponentKey.builder().timeOfEvent(Timestamp.now()).build())
                 .timeFilter(MarketDataRequestTimeFilter.MATCH_TIME)
                 .build();

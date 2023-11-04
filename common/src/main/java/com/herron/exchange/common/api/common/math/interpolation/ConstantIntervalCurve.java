@@ -5,6 +5,7 @@ import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;
 import com.herron.exchange.common.api.common.api.math.Function2d;
 import com.herron.exchange.common.api.common.math.model.Interval2d;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -15,6 +16,7 @@ public class ConstantIntervalCurve implements Function2d {
     private ConstantIntervalCurve(List<CartesianPoint2d> points) {
         this.intervals = IntStream.range(0, points.size() - 1)
                 .mapToObj(i -> new Interval2d(points.get(i), points.get(i + 1)))
+                .sorted(Comparator.comparing(Interval2d::startBoundaryPointX))
                 .toList();
     }
 

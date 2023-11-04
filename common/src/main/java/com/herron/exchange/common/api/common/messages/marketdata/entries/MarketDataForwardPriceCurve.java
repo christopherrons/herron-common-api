@@ -3,7 +3,6 @@ package com.herron.exchange.common.api.common.messages.marketdata.entries;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.marketdata.MarketDataEntry;
 import com.herron.exchange.common.api.common.enums.messagetypes.MarketDataMessageTypeEnum;
-import com.herron.exchange.common.api.common.messages.common.PureNumber;
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.marketdata.ImmutableDefaultTimeComponentKey;
 import com.herron.exchange.common.api.common.messages.marketdata.statickeys.ImmutableMarketDataForwardPriceCurveStaticKey;
@@ -20,11 +19,10 @@ public interface MarketDataForwardPriceCurve extends MarketDataEntry {
 
     static MarketDataForwardPriceCurve create(Timestamp timeStamp,
                                               String id,
-                                              PureNumber strikePrice,
                                               ForwardPriceCurve curve) {
         return ImmutableMarketDataForwardPriceCurve.builder()
                 .timeComponentKey(ImmutableDefaultTimeComponentKey.builder().timeOfEvent(timeStamp).build())
-                .staticKey(ImmutableMarketDataForwardPriceCurveStaticKey.builder().instrumentId(id).strikePrice(strikePrice).build())
+                .staticKey(ImmutableMarketDataForwardPriceCurveStaticKey.builder().instrumentId(id).build())
                 .forwardPriceCurve(curve)
                 .build();
     }

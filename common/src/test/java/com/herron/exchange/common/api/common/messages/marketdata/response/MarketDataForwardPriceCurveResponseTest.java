@@ -39,7 +39,7 @@ class MarketDataForwardPriceCurveResponseTest {
                 .status(Status.OK)
                 .forwardPriceCurveEntry(ImmutableMarketDataForwardPriceCurve.builder()
                         .forwardPriceCurve(forwardPriceCurve)
-                        .staticKey(ImmutableMarketDataForwardPriceCurveStaticKey.builder().instrumentId("curveId").strikePrice(PureNumber.ZERO).build())
+                        .staticKey(ImmutableMarketDataForwardPriceCurveStaticKey.builder().instrumentId("curveId").build())
                         .timeComponentKey(ImmutableDefaultTimeComponentKey.builder().timeOfEvent(Timestamp.now()).build())
                         .build())
                 .build();

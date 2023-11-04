@@ -33,7 +33,7 @@ class MarketDataForwardPriceCurveTest {
         );
         var object = ImmutableMarketDataForwardPriceCurve.builder()
                 .forwardPriceCurve(forwardPriceCurve)
-                .staticKey(ImmutableMarketDataForwardPriceCurveStaticKey.builder().instrumentId("instrumentId").strikePrice(PureNumber.ZERO).build())
+                .staticKey(ImmutableMarketDataForwardPriceCurveStaticKey.builder().instrumentId("instrumentId").build())
                 .timeComponentKey(ImmutableDefaultTimeComponentKey.builder().timeOfEvent(Timestamp.now()).build())
                 .build();
         var value = messageFactory.serialize(object);
