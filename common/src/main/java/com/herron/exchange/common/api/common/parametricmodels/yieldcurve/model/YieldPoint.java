@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.parametricmodels.yieldcurve;
+package com.herron.exchange.common.api.common.parametricmodels.yieldcurve.model;
 
 
 import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;
@@ -7,11 +7,11 @@ public record YieldPoint(double maturity, double yieldInDecimalForm) implements 
 
     @Override
     public double x() {
-        return this.maturity;
+        return maturity;
     }
 
     @Override
     public double y() {
-        return this.yieldInDecimalForm;
+        return yieldInDecimalForm;
     }
 }

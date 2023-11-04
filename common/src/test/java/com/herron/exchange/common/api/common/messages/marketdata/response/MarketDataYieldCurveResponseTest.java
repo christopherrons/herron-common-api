@@ -10,8 +10,8 @@ import com.herron.exchange.common.api.common.messages.marketdata.ImmutableDefaul
 import com.herron.exchange.common.api.common.messages.marketdata.entries.ImmutableMarketDataYieldCurve;
 import com.herron.exchange.common.api.common.messages.marketdata.statickeys.ImmutableMarketDataYieldCurveStaticKey;
 import com.herron.exchange.common.api.common.parametricmodels.yieldcurve.YieldCurve;
-import com.herron.exchange.common.api.common.parametricmodels.yieldcurve.YieldCurveModelParameters;
-import com.herron.exchange.common.api.common.parametricmodels.yieldcurve.YieldPoint;
+import com.herron.exchange.common.api.common.parametricmodels.yieldcurve.model.YieldCurveModelParameters;
+import com.herron.exchange.common.api.common.parametricmodels.yieldcurve.model.YieldPoint;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
