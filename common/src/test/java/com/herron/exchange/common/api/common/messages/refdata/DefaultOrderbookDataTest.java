@@ -1,6 +1,7 @@
 package com.herron.exchange.common.api.common.messages.refdata;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
+import com.herron.exchange.common.api.common.enums.OptionSubTypeEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.BusinessCalendar;
 import com.herron.exchange.common.api.common.messages.common.Price;
@@ -33,8 +34,9 @@ class DefaultOrderbookDataTest {
                 .maturityDate(Timestamp.now())
                 .strikePrice(PureNumber.create(100))
                 .optionType(CALL)
+                .optionSubType(OptionSubTypeEnum.OOE)
                 .optionExerciseStyle(AMERICAN)
-                .priceModelParameters(ImmutableBlackScholesPriceModelParameters.builder().build())
+                .priceModelParameters(ImmutableBlackScholesPriceModelParameters.builder().yieldCurveId("id").build())
                 .product(ImmutableProduct.builder().currency("eur").productId("product").market(ImmutableMarket.builder().marketId("market").businessCalendar(BusinessCalendar.defaultWeekendCalendar()).build()).build())
                 .build();
 

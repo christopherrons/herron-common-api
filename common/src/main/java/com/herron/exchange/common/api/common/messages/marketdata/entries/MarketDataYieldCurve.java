@@ -2,7 +2,7 @@ package com.herron.exchange.common.api.common.messages.marketdata.entries;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.marketdata.MarketDataEntry;
-import com.herron.exchange.common.api.common.curves.YieldCurve;
+import com.herron.exchange.common.api.common.parametricmodels.yieldcurve.YieldCurve;
 import com.herron.exchange.common.api.common.enums.messagetypes.MarketDataMessageTypeEnum;
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.marketdata.ImmutableDefaultTimeComponentKey;

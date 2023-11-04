@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.curves;
+package com.herron.exchange.common.api.common.parametricmodels.yieldcurve;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

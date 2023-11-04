@@ -1,7 +1,9 @@
-package com.herron.exchange.common.api.common.curves;
+package com.herron.exchange.common.api.common.parametricmodels;
 
 import com.herron.exchange.common.api.common.enums.DayCountConventionEnum;
 import com.herron.exchange.common.api.common.enums.InterpolationMethod;
+import com.herron.exchange.common.api.common.parametricmodels.yieldcurve.YieldCurve;
+import com.herron.exchange.common.api.common.parametricmodels.yieldcurve.YieldCurveModelParameters;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

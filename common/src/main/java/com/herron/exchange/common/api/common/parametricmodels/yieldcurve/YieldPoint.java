@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.curves;
+package com.herron.exchange.common.api.common.parametricmodels.yieldcurve;
 
 
 import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;
