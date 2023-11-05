@@ -7,7 +7,6 @@ import com.herron.exchange.common.api.common.api.math.Function2d;
 import com.herron.exchange.common.api.common.math.interpolation.ConstantIntervalCurve;
 import com.herron.exchange.common.api.common.math.interpolation.CubicSplineInterpolation;
 import com.herron.exchange.common.api.common.math.interpolation.LinearInterpolationCurve;
-import com.herron.exchange.common.api.common.messages.common.PureNumber;
 import com.herron.exchange.common.api.common.parametricmodels.forwardcurve.model.ForwardCurveModelParameters;
 
 public class ForwardPriceCurve {
