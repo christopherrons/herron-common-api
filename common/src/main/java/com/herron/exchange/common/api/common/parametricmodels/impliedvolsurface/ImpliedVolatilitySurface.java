@@ -15,8 +15,8 @@ public class ImpliedVolatilitySurface {
         this.underlyingPrice = underlyingPrice;
     }
 
-    public static ImpliedVolatilitySurface create(String id, double value) {
-        return new ImpliedVolatilitySurface(id, value);
+    public static ImpliedVolatilitySurface create(String id, double underlyingPrice) {
+        return new ImpliedVolatilitySurface(id, underlyingPrice);
     }
 
     public double getImpliedVolatility(double timeToMaturity, double strikePrice, OptionTypeEnum optionType) {

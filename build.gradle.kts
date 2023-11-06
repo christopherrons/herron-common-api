@@ -8,16 +8,8 @@ plugins {
 // Project Configs
 allprojects {
     repositories {
-        //  mavenCentral() use if no access to bytesafe artifactory
+        mavenCentral()
         mavenLocal()
-        maven {
-            name = "bytesafe"
-            url = uri("https://herron.bytesafe.dev/maven/herron/")
-            credentials {
-                username = extra["username"] as String?
-                password = extra["password"] as String?
-            }
-        }
     }
 
     apply(plugin = "maven-publish")
@@ -44,14 +36,6 @@ allprojects {
             }
             repositories {
                 mavenLocal()
-                maven {
-                    name = "bytesafe"
-                    url = uri("https://herron.bytesafe.dev/maven/herron/")
-                    credentials {
-                        username = extra["username"] as String?
-                        password = extra["password"] as String?
-                    }
-                }
             }
         }
     }
@@ -74,6 +58,12 @@ dependencies {
     testImplementation(testlibs.spring.boot.starter.test)
     testImplementation(testlibs.spring.kafka.test)
     testImplementation(testlibs.podam.random)
+}
+
+tasks {
+    named("build") {
+        dependsOn(named("publishToMavenLocal"))
+    }
 }
 
 // Tasks
