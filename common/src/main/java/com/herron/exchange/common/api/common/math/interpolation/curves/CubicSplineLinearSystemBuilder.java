@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.math.interpolation;
+package com.herron.exchange.common.api.common.math.interpolation.curves;
 
 import com.herron.exchange.common.api.common.math.model.Interval2d;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;

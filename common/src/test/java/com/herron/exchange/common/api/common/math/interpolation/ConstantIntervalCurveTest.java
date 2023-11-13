@@ -1,6 +1,7 @@
 package com.herron.exchange.common.api.common.math.interpolation;
 
 import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;
+import com.herron.exchange.common.api.common.math.interpolation.curves.ConstantIntervalCurve;
 import com.herron.exchange.common.api.common.math.model.Point2d;
 import org.junit.jupiter.api.Test;
 

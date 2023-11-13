@@ -19,4 +19,9 @@ public record Interval2d(CartesianPoint2d p1, CartesianPoint2d p2) {
     public double endBoundaryPointY() {
         return p2.y();
     }
+
+    public boolean isInInterval(double x, double y) {
+        return startBoundaryPointX() <= x && x <= endBoundaryPointX() &&
+                startBoundaryPointY() <= y && y <= endBoundaryPointY();
+    }
 }

@@ -22,4 +22,8 @@ public class MathUtils {
     public static double percentageChange(double from, double to) {
         return Math.abs((to - from) / Math.abs(from));
     }
+
+    public static double scaleValue(double value, double minValue, double maxValue, double scaleMin, double scaleMax) {
+        return scaleMin + ((value - minValue) / (maxValue - minValue)) * (scaleMax - scaleMin);
+    }
 }

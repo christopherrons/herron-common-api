@@ -1,5 +1,6 @@
 package com.herron.exchange.common.api.common.math.interpolation;
 
+import com.herron.exchange.common.api.common.math.interpolation.curves.CubicSplineInterpolation;
 import com.herron.exchange.common.api.common.testutils.TestAssertionUtils;
 import org.junit.jupiter.api.Test;
 

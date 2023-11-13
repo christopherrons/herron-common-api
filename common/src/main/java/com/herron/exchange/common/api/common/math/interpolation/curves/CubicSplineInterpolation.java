@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.math.interpolation;
+package com.herron.exchange.common.api.common.math.interpolation.curves;
 
 
 import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;

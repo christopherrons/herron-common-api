@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.math.interpolation;
+package com.herron.exchange.common.api.common.math.interpolation.curves;
 
 
 import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;
@@ -9,31 +9,26 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class LinearInterpolationCurve implements Function2d {
+public class ConstantIntervalCurve implements Function2d {
 
     private final List<Interval2d> intervals;
 
-    private LinearInterpolationCurve(List<CartesianPoint2d> points) {
+    private ConstantIntervalCurve(List<CartesianPoint2d> points) {
         this.intervals = IntStream.range(0, points.size() - 1)
                 .mapToObj(i -> new Interval2d(points.get(i), points.get(i + 1)))
                 .sorted(Comparator.comparing(Interval2d::startBoundaryPointX))
                 .toList();
     }
 
-    public static LinearInterpolationCurve create(List<CartesianPoint2d> points) {
-        return new LinearInterpolationCurve(points);
+    public static ConstantIntervalCurve create(List<CartesianPoint2d> points) {
+        return new ConstantIntervalCurve(points);
     }
 
     public double getFunctionValue(double x) {
         x = checkInputValue(x);
         for (Interval2d interval : intervals) {
             if (x < interval.endBoundaryPointX()) {
-                var y1 = interval.p1().y();
-                var y2 = interval.p2().y();
-                var x1 = interval.p1().x();
-                var x2 = interval.p2().x();
-                var k = (y2 - y1) / (x2 - x1);
-                return y1 + k * (x - x1);
+                return interval.p1().y();
             }
         }
         return Double.NaN;
