@@ -3,13 +3,17 @@ package com.herron.exchange.common.api.common.messages.marketdata.response;
 import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.OptionTypeEnum;
 import com.herron.exchange.common.api.common.enums.Status;
+import com.herron.exchange.common.api.common.enums.SurfaceConstructionMethod;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.marketdata.ImmutableDefaultTimeComponentKey;
 import com.herron.exchange.common.api.common.messages.marketdata.entries.ImmutableMarketDataImpliedVolatilitySurface;
 import com.herron.exchange.common.api.common.messages.marketdata.statickeys.ImmutableMarketDataImpliedVolatilitySurfaceStaticKey;
 import com.herron.exchange.common.api.common.parametricmodels.impliedvolsurface.ImpliedVolatilitySurface;
+import com.herron.exchange.common.api.common.parametricmodels.impliedvolsurface.model.ImpliedVolatilitySurfaceModelParameters;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -19,7 +23,8 @@ class MarketDataImpliedVolatilitySurfaceResponseTest {
 
     @Test
     void test_serialization_and_deserialization() {
-        var surface = ImpliedVolatilitySurface.create("id", 10);
+        var parameters = new ImpliedVolatilitySurfaceModelParameters(SurfaceConstructionMethod.HERMITE_BICUBIC, List.of());
+        var surface = ImpliedVolatilitySurface.create("id", 10, parameters);
         var value1 = surface.getImpliedVolatility(0, 0, OptionTypeEnum.CALL);
         var object = ImmutableMarketDataImpliedVolatilitySurfaceResponse.builder()
                 .impliedVolatilitySurfaceEntry(ImmutableMarketDataImpliedVolatilitySurface.builder()

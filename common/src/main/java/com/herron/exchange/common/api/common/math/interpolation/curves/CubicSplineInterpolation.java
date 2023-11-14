@@ -35,6 +35,16 @@ public class CubicSplineInterpolation implements Function2d {
         return polynomials.get(polynomials.size() - 1).getFunctionValue(x);
     }
 
+    public double getFirstDerivative(double x) {
+        x = checkInputValue(x);
+        for (CubicPolynomial polynomial : polynomials) {
+            if (x < polynomial.getEndBoundaryPointX()) {
+                return polynomial.getFirstDerivative(x);
+            }
+        }
+        return polynomials.get(polynomials.size() - 1).getFirstDerivative(x);
+    }
+
     public double getStartBoundaryX() {
         return polynomials.get(0).getStartBoundaryPointX();
     }

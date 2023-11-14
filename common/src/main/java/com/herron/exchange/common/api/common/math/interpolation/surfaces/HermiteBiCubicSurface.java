@@ -1,8 +1,11 @@
 package com.herron.exchange.common.api.common.math.interpolation.surfaces;
 
+import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;
 import com.herron.exchange.common.api.common.api.math.CartesianPoint3d;
 import com.herron.exchange.common.api.common.api.math.Function3d;
+import com.herron.exchange.common.api.common.math.interpolation.curves.CubicSplineInterpolation;
 import com.herron.exchange.common.api.common.math.model.Interval;
+import com.herron.exchange.common.api.common.math.model.Point2d;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -98,21 +101,110 @@ public class HermiteBiCubicSurface implements Function3d {
                 int column = yValues.indexOf(point.y());
                 grid[row][column] = point;
             }
+            row++;
         }
 
         return grid;
     }
 
     private double[][] buildXDerivativeGrid(CartesianPoint3d[][] grid) {
-        return new double[][]{};
+        int nrOfRows = grid.length;
+        int nrOfColumns = grid[0].length;
+        double[][] xDerivativeGrid = new double[nrOfRows][nrOfColumns];
+
+        for (int column = 0; column < nrOfColumns; column++) {
+            List<CartesianPoint2d> points = new ArrayList<>();
+            for (int row = 0; row < nrOfRows; row++) {
+                var point = grid[row][column];
+                points.add(new Point2d(point.x(), point.z()));
+            }
+
+            var spline = CubicSplineInterpolation.create(points);
+            for (int row = 0; row < nrOfRows; row++) {
+                var point = grid[row][column];
+                xDerivativeGrid[row][column] = spline.getFirstDerivative(point.x());
+            }
+        }
+
+        return xDerivativeGrid;
     }
 
     private double[][] buildYDerivativeGrid(CartesianPoint3d[][] grid) {
-        return new double[][]{};
+        int nrOfRows = grid.length;
+        int nrOfColumns = grid[0].length;
+        double[][] yDerivativeGrid = new double[nrOfRows][nrOfColumns];
+        for (int row = 0; row < nrOfRows; row++) {
+            List<CartesianPoint2d> points = new ArrayList<>();
+            for (int column = 0; column < nrOfColumns; column++) {
+                var point = grid[row][column];
+                points.add(new Point2d(point.y(), point.z()));
+            }
+
+            var spline = CubicSplineInterpolation.create(points);
+            for (int column = 0; column < nrOfColumns; column++) {
+                var point = grid[row][column];
+                yDerivativeGrid[row][column] = spline.getFirstDerivative(point.y());
+            }
+        }
+
+        return yDerivativeGrid;
     }
 
     private double[][] buildXYDerivativeGrid(CartesianPoint3d[][] grid) {
-        return new double[][]{};
+        int nrOfRows = grid.length;
+        int nrOfColumns = grid[0].length;
+        double[][] xyDerivativeGrid = new double[nrOfRows][nrOfColumns];
+        for (int row = 0; row < nrOfRows; row++) {
+            for (int column = 0; column < nrOfColumns; column++) {
+                double xyFiniteDifference;
+                double x_current = grid[row][column].x();
+                double y_current = grid[row][column].y();
+                double z_current_xy = grid[row][column].z();
+
+                if ((row == 0 && column == 0) || (row == 0 && column == nrOfColumns - 1) || (row == nrOfRows - 1 && column == 0) || (row == nrOfRows - 1 && column == nrOfColumns - 1)) {
+                    xyFiniteDifference = 0.0;
+
+                } else if ((row == 0 && column != nrOfColumns - 1) || (column == 0 && row != nrOfRows - 1)) {
+                    double x_next = grid[row + 1][column].x();
+                    double x_diff = x_next - x_current;
+
+                    double y_next = grid[row][column + 1].y();
+                    double y_diff = y_next - y_current;
+
+                    double z_next_xy = grid[row + 1][column + 1].z();
+                    xyFiniteDifference = (z_next_xy - z_current_xy) / (x_diff * y_diff);
+
+                } else if ((row == nrOfRows - 1 && column != 0) || (column == nrOfColumns - 1 && row != 0)) {
+                    double x_previous = grid[row - 1][column].x();
+                    double x_diff = x_current - x_previous;
+
+                    double y_previous = grid[row][column - 1].y();
+                    double y_diff = y_current - y_previous;
+
+                    double z_previous_xy = grid[row - 1][column - 1].z();
+                    xyFiniteDifference = (z_current_xy - z_previous_xy) / (x_diff * y_diff);
+
+                } else {
+                    double x_previous = grid[row - 1][column].x();
+                    double x_next = grid[row + 1][column].x();
+                    double x_diff = x_next - x_previous;
+
+                    double y_previous = grid[row][column - 1].y();
+                    double y_next = grid[row][column + 1].y();
+                    double y_diff = y_next - y_previous;
+
+                    double z_previous_xy = grid[row - 1][column - 1].z();
+                    double z_next_x_previous_y = grid[row + 1][column - 1].z();
+                    double z_next_y_previous_x = grid[row - 1][column + 1].z();
+                    double z_next_xy = grid[row + 1][column + 1].z();
+
+                    xyFiniteDifference = (z_next_xy - z_next_x_previous_y - z_next_y_previous_x + z_previous_xy) / (4 * x_diff * y_diff);
+                }
+
+                xyDerivativeGrid[row][column] = xyFiniteDifference;
+            }
+        }
+        return xyDerivativeGrid;
     }
 
     @Override
@@ -146,8 +238,8 @@ public class HermiteBiCubicSurface implements Function3d {
         }
 
         public double getFunctionValue(double x, double y) {
-            double u = scaleValue(x, xInterval.startBoundaryPoint(), xInterval.startBoundaryPoint(), 0, 1);
-            double v = scaleValue(y, yInterval.startBoundaryPoint(), yInterval.startBoundaryPoint(), 0, 1);
+            double u = scaleValue(x, xInterval.startBoundaryPoint(), xInterval.endBoundaryPoint(), 0, 1);
+            double v = scaleValue(y, yInterval.startBoundaryPoint(), yInterval.endBoundaryPoint(), 0, 1);
             RealVector U = createVectorU(u);
             RealVector V = createVectorV(v);
             return U.dotProduct(H.multiply(P.multiply(HT)).operate(V));
