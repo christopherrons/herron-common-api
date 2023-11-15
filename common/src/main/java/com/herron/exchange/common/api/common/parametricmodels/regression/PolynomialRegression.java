@@ -64,7 +64,6 @@ public class PolynomialRegression implements FunctionNd {
 
                 double otherPredictors = predictors[j];
             //    polynomials.add(currentPredictors * otherPredictors);
-
              /*   for (int degree = 1; degree < polynomialDegree; degree++) {
                     polynomials.add(Math.pow(currentPredictors, degree) * otherPredictors);
                 }*/

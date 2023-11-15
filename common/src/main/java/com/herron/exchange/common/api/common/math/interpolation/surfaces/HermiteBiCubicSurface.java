@@ -6,19 +6,24 @@ import com.herron.exchange.common.api.common.api.math.Function3d;
 import com.herron.exchange.common.api.common.math.interpolation.curves.CubicSplineInterpolation;
 import com.herron.exchange.common.api.common.math.model.Interval;
 import com.herron.exchange.common.api.common.math.model.Point2d;
+import com.herron.exchange.common.api.common.math.model.Point3d;
+import com.herron.exchange.common.api.common.parametricmodels.regression.PolynomialRegression;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import static com.herron.exchange.common.api.common.math.MathUtils.scaleValue;
 
 public class HermiteBiCubicSurface implements Function3d {
 
-    private final List<BiCupicPatch> patches;
+    private final List<BiCubicPatch> patches;
 
     private HermiteBiCubicSurface(List<CartesianPoint3d> points) {
         this.patches = buildPatches(points);
@@ -28,7 +33,7 @@ public class HermiteBiCubicSurface implements Function3d {
         return new HermiteBiCubicSurface(points);
     }
 
-    private List<BiCupicPatch> buildPatches(List<CartesianPoint3d> points) {
+    private List<BiCubicPatch> buildPatches(List<CartesianPoint3d> points) {
         CartesianPoint3d[][] grid = buildGrid(points);
         double[][] xDerivatives = buildXDerivativeGrid(grid);
         double[][] yDerivatives = buildYDerivativeGrid(grid);
@@ -36,11 +41,11 @@ public class HermiteBiCubicSurface implements Function3d {
         return buildPatches(grid, xDerivatives, yDerivatives, xyDerivatives);
     }
 
-    private List<BiCupicPatch> buildPatches(CartesianPoint3d[][] grid,
+    private List<BiCubicPatch> buildPatches(CartesianPoint3d[][] grid,
                                             double[][] xDerivatives,
                                             double[][] yDerivatives,
                                             double[][] xyDerivatives) {
-        List<BiCupicPatch> biCupicPatches = new ArrayList<>();
+        List<BiCubicPatch> biCubicPatches = new ArrayList<>();
         for (int row = 0; row < grid.length - 1; row++) {
             for (int column = 0; column < grid[row].length - 1; column++) {
                 Interval xInterval = new Interval(grid[row][column].x(), grid[row + 1][column].x());
@@ -72,7 +77,7 @@ public class HermiteBiCubicSurface implements Function3d {
                         {px00, px01, pxy00, pxy01},
                         {px10, px11, pxy10, pxy11}
                 };
-                biCupicPatches.add(new BiCupicPatch(
+                biCubicPatches.add(new BiCubicPatch(
                         xInterval,
                         yInterval,
                         coefficients
@@ -80,26 +85,39 @@ public class HermiteBiCubicSurface implements Function3d {
             }
         }
 
-        return biCupicPatches;
+        return biCubicPatches;
     }
 
     private CartesianPoint3d[][] buildGrid(List<CartesianPoint3d> points) {
-        Map<Double, List<CartesianPoint3d>> xValueToPoints = points.stream().collect(Collectors.groupingBy(CartesianPoint3d::x));
-        Map<Double, List<CartesianPoint3d>> yValueToPoints = points.stream().collect(Collectors.groupingBy(CartesianPoint3d::y));
-        xValueToPoints = new TreeMap<>(xValueToPoints);
-        yValueToPoints = new TreeMap<>(yValueToPoints);
-        List<Double> yValues = new ArrayList<>(yValueToPoints.keySet());
-        yValues.sort(Double::compare);
+        Map<Double, List<CartesianPoint3d>> xValueToPoints = new TreeMap<>();
+        Map<Double, List<CartesianPoint3d>> yValueToPoints = new TreeMap<>();
+        double[] labels = new double[points.size()];
+        double[][] predictors = new double[points.size()][2];
+        int item = 0;
+        for (var point : points) {
+            xValueToPoints.computeIfAbsent(point.x(), k -> new ArrayList<>()).add(point);
+            yValueToPoints.computeIfAbsent(point.y(), k -> new ArrayList<>()).add(point);
+            labels[item] = point.z();
+            predictors[item][0] = point.x();
+            predictors[item][1] = point.y();
+            item++;
+        }
+
+        PolynomialRegression regressionSurface = PolynomialRegression.create(labels, predictors, 3);
 
         CartesianPoint3d[][] grid = new CartesianPoint3d[xValueToPoints.size()][yValueToPoints.size()];
-
         int row = 0;
         for (var entry : xValueToPoints.entrySet()) {
-            List<CartesianPoint3d> pointsAtX = entry.getValue();
-            pointsAtX.sort(Comparator.comparing(CartesianPoint3d::y));
-            for (var point : pointsAtX) {
-                int column = yValues.indexOf(point.y());
-                grid[row][column] = point;
+            double x = entry.getKey();
+            Map<Double, List<CartesianPoint3d>> pointsAtX = entry.getValue().stream().collect(Collectors.groupingBy(CartesianPoint3d::y));
+            int column = 0;
+            for (double y : yValueToPoints.keySet()) {
+                if (pointsAtX.containsKey(y)) {
+                    grid[row][column] = pointsAtX.get(y).get(0);
+                } else {
+                    grid[row][column] = new Point3d(x, y, regressionSurface.getFunctionValue(x, y));
+                }
+                column++;
             }
             row++;
         }
@@ -217,7 +235,7 @@ public class HermiteBiCubicSurface implements Function3d {
         return patch.getFunctionValue(x, y);
     }
 
-    private static class BiCupicPatch {
+    private static class BiCubicPatch {
         private static final RealMatrix H = new Array2DRowRealMatrix(new double[][]{
                 {2, -2, 1, 1},
                 {-3, 3, -2, -1},
@@ -225,16 +243,17 @@ public class HermiteBiCubicSurface implements Function3d {
                 {1, 0, 0, 0}
         });
         private static final RealMatrix HT = H.transpose();
-        private final RealMatrix P;
+        private final RealMatrix coefficients;
         private final Interval xInterval;
         private final Interval yInterval;
 
-        public BiCupicPatch(Interval xInterval,
+        public BiCubicPatch(Interval xInterval,
                             Interval yInterval,
                             double[][] coefficients) {
             this.xInterval = xInterval;
             this.yInterval = yInterval;
-            this.P = new Array2DRowRealMatrix(coefficients);
+            var P = new Array2DRowRealMatrix(coefficients);
+            this.coefficients = H.multiply(P.multiply(HT));
         }
 
         public double getFunctionValue(double x, double y) {
@@ -242,7 +261,7 @@ public class HermiteBiCubicSurface implements Function3d {
             double v = scaleValue(y, yInterval.startBoundaryPoint(), yInterval.endBoundaryPoint(), 0, 1);
             RealVector U = createVectorU(u);
             RealVector V = createVectorV(v);
-            return U.dotProduct(H.multiply(P.multiply(HT)).operate(V));
+            return U.dotProduct(coefficients.operate(V));
         }
 
         boolean isInPatch(double x, double y) {

@@ -3,11 +3,8 @@ package com.herron.exchange.common.api.common.parametricmodels.impliedvolsurface
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.herron.exchange.common.api.common.api.math.CartesianPoint3d;
 import com.herron.exchange.common.api.common.api.math.Function3d;
-import com.herron.exchange.common.api.common.enums.OptionTypeEnum;
 import com.herron.exchange.common.api.common.math.interpolation.surfaces.HermiteBiCubicSurface;
 import com.herron.exchange.common.api.common.parametricmodels.impliedvolsurface.model.ImpliedVolatilitySurfaceModelParameters;
-
-import static com.herron.exchange.common.api.common.enums.OptionTypeEnum.CALL;
 
 public class ImpliedVolatilitySurface {
 
@@ -37,8 +34,8 @@ public class ImpliedVolatilitySurface {
         };
     }
 
-    public double getImpliedVolatility(double timeToMaturity, double strikePrice, OptionTypeEnum optionType) {
-        double logMoneyness = optionType == CALL ? Math.log(underlyingPrice / strikePrice) : Math.log(strikePrice / underlyingPrice);
+    public double getImpliedVolatility(double timeToMaturity, double strikePrice) {
+        double logMoneyness = Math.log(strikePrice / underlyingPrice);
         return impliedVolFunction.getFunctionValue(timeToMaturity, logMoneyness);
     }
 

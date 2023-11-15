@@ -1,7 +1,6 @@
 package com.herron.exchange.common.api.common.messages.marketdata.response;
 
 import com.herron.exchange.common.api.common.api.MessageFactory;
-import com.herron.exchange.common.api.common.enums.OptionTypeEnum;
 import com.herron.exchange.common.api.common.enums.Status;
 import com.herron.exchange.common.api.common.enums.SurfaceConstructionMethod;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
@@ -25,7 +24,7 @@ class MarketDataImpliedVolatilitySurfaceResponseTest {
     void test_serialization_and_deserialization() {
         var parameters = new ImpliedVolatilitySurfaceModelParameters(SurfaceConstructionMethod.HERMITE_BICUBIC, List.of());
         var surface = ImpliedVolatilitySurface.create("id", 10, parameters);
-        var value1 = surface.getImpliedVolatility(0, 0, OptionTypeEnum.CALL);
+        var value1 = surface.getImpliedVolatility(0, 0);
         var object = ImmutableMarketDataImpliedVolatilitySurfaceResponse.builder()
                 .impliedVolatilitySurfaceEntry(ImmutableMarketDataImpliedVolatilitySurface.builder()
                         .timeComponentKey(ImmutableDefaultTimeComponentKey.builder().timeOfEvent(Timestamp.now()).build())
@@ -37,7 +36,7 @@ class MarketDataImpliedVolatilitySurfaceResponseTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
-        var value2 = messageFactory.deserializeMessage(value, MarketDataImpliedVolatilitySurfaceResponse.class).impliedVolatilitySurfaceEntry().impliedVolatilitySurface().getImpliedVolatility(0, 0, OptionTypeEnum.CALL);
+        var value2 = messageFactory.deserializeMessage(value, MarketDataImpliedVolatilitySurfaceResponse.class).impliedVolatilitySurfaceEntry().impliedVolatilitySurface().getImpliedVolatility(0, 0);
         assertEquals(value1, value2);
     }
 }
