@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.parametricmodels.impliedvolsurface.model;
+package com.herron.exchange.common.api.common.math.parametricmodels.impliedvolsurface.model;
 
 import com.herron.exchange.common.api.common.enums.SurfaceConstructionMethod;
 

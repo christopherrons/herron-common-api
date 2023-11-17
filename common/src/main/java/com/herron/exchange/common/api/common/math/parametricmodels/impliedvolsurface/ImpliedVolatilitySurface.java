@@ -1,10 +1,10 @@
-package com.herron.exchange.common.api.common.parametricmodels.impliedvolsurface;
+package com.herron.exchange.common.api.common.math.parametricmodels.impliedvolsurface;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.herron.exchange.common.api.common.api.math.CartesianPoint3d;
 import com.herron.exchange.common.api.common.api.math.Function3d;
 import com.herron.exchange.common.api.common.math.interpolation.surfaces.HermiteBiCubicSurface;
-import com.herron.exchange.common.api.common.parametricmodels.impliedvolsurface.model.ImpliedVolatilitySurfaceModelParameters;
+import com.herron.exchange.common.api.common.math.parametricmodels.impliedvolsurface.model.ImpliedVolatilitySurfaceModelParameters;
 
 public class ImpliedVolatilitySurface {
 

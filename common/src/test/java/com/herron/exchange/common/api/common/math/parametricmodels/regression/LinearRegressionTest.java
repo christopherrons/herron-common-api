@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.parametricmodels.regression;
+package com.herron.exchange.common.api.common.math.parametricmodels.regression;
 
 import org.junit.jupiter.api.Test;
 

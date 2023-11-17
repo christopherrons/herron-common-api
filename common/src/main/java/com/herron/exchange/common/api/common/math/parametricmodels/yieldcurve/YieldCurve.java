@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.parametricmodels.yieldcurve;
+package com.herron.exchange.common.api.common.math.parametricmodels.yieldcurve;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,7 +7,7 @@ import com.herron.exchange.common.api.common.api.math.Function2d;
 import com.herron.exchange.common.api.common.math.interpolation.curves.ConstantIntervalCurve;
 import com.herron.exchange.common.api.common.math.interpolation.curves.CubicSplineInterpolation;
 import com.herron.exchange.common.api.common.math.interpolation.curves.LinearInterpolationCurve;
-import com.herron.exchange.common.api.common.parametricmodels.yieldcurve.model.YieldCurveModelParameters;
+import com.herron.exchange.common.api.common.math.parametricmodels.yieldcurve.model.YieldCurveModelParameters;
 
 public class YieldCurve {
 

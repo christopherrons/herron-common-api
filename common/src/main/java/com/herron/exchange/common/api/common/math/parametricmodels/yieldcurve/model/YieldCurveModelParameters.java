@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.parametricmodels.yieldcurve.model;
+package com.herron.exchange.common.api.common.math.parametricmodels.yieldcurve.model;
 
 import com.herron.exchange.common.api.common.enums.DayCountConventionEnum;
 import com.herron.exchange.common.api.common.enums.InterpolationMethod;

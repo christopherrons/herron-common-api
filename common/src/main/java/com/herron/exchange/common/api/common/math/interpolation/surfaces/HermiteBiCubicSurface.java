@@ -7,7 +7,7 @@ import com.herron.exchange.common.api.common.math.interpolation.curves.CubicSpli
 import com.herron.exchange.common.api.common.math.model.Interval;
 import com.herron.exchange.common.api.common.math.model.Point2d;
 import com.herron.exchange.common.api.common.math.model.Point3d;
-import com.herron.exchange.common.api.common.parametricmodels.regression.PolynomialRegression;
+import com.herron.exchange.common.api.common.math.parametricmodels.regression.PolynomialRegression;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealMatrix;

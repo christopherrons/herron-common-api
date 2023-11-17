@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.parametricmodels;
+package com.herron.exchange.common.api.common.math.parametricmodels;
 
 import com.herron.exchange.common.api.common.api.math.CartesianPoint2d;
 import com.herron.exchange.common.api.common.math.model.CubicPolynomial;

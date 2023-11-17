@@ -1,4 +1,4 @@
-package com.herron.exchange.common.api.common.parametricmodels.forwardcurve.model;
+package com.herron.exchange.common.api.common.math.parametricmodels.forwardcurve.model;
 
 import com.herron.exchange.common.api.common.enums.InterpolationMethod;
 

@@ -1,8 +1,6 @@
-package com.herron.exchange.common.api.common.parametricmodels.regression;
+package com.herron.exchange.common.api.common.math.parametricmodels.regression;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PolynomialRegressionTest {
     @Test
@@ -32,7 +30,7 @@ class PolynomialRegressionTest {
         double[] labels = {4, 5, 6, 5, 6, 7, 6, 7, 8, 7, 8, 9, 8, 9, 10};
 
         var regression = PolynomialRegression.create(labels, predictors, 1);
-     //   assertEquals(4, regression.getFunctionValue(1, 2), 0.01);
-     //   assertEquals(5, regression.getFunctionValue(2, 2), 0.01);
+        //   assertEquals(4, regression.getFunctionValue(1, 2), 0.01);
+        //   assertEquals(5, regression.getFunctionValue(2, 2), 0.01);
     }
 }

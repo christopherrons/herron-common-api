@@ -3,13 +3,12 @@ package com.herron.exchange.common.api.common.messages.marketdata.entries;
 import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.InterpolationMethod;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
-import com.herron.exchange.common.api.common.messages.common.PureNumber;
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.marketdata.ImmutableDefaultTimeComponentKey;
 import com.herron.exchange.common.api.common.messages.marketdata.statickeys.ImmutableMarketDataForwardPriceCurveStaticKey;
-import com.herron.exchange.common.api.common.parametricmodels.forwardcurve.ForwardPriceCurve;
-import com.herron.exchange.common.api.common.parametricmodels.forwardcurve.model.ForwardCurveModelParameters;
-import com.herron.exchange.common.api.common.parametricmodels.forwardcurve.model.ForwardPricePoint;
+import com.herron.exchange.common.api.common.math.parametricmodels.forwardcurve.ForwardPriceCurve;
+import com.herron.exchange.common.api.common.math.parametricmodels.forwardcurve.model.ForwardCurveModelParameters;
+import com.herron.exchange.common.api.common.math.parametricmodels.forwardcurve.model.ForwardPricePoint;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
