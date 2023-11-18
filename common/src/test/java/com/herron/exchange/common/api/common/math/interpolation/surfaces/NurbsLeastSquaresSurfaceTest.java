@@ -8,8 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class HermiteBiCubicSurfaceTest {
-
+class NurbsLeastSquaresSurfaceTest {
     @Test
     void test_surface_construction_regular_grid() {
         List<CartesianPoint3d> points = List.of(
@@ -34,7 +33,7 @@ class HermiteBiCubicSurfaceTest {
                 new Point3d(3, 3, 5)
         );
 
-        var surface = HermiteBiCubicSurface.create(points);
+        var surface = NurbsLeastSquaresSurface.create(points, 2);
 
         assertEquals(5, surface.getFunctionValue(0, 0), 0.001);
         assertEquals(6, surface.getFunctionValue(1, 0), 0.001);
@@ -56,4 +55,5 @@ class HermiteBiCubicSurfaceTest {
         assertEquals(3, surface.getFunctionValue(2, 3), 0.001);
         assertEquals(5, surface.getFunctionValue(3, 3), 0.001);
     }
+
 }

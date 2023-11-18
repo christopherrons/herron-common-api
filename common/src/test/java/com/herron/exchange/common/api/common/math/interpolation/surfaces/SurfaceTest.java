@@ -70,12 +70,12 @@ public class SurfaceTest {
     private static void createPoints(List<CartesianPoint3d> points) {
         writeRandomDoublesToCSV("/home/christopher/test_points.csv", points);
         double[] randomX = generateRandomDoubles(
-                5000,
+                500,
                 points.stream().min(Comparator.comparing(CartesianPoint3d::x)).get().x(),
                 points.stream().max(Comparator.comparing(CartesianPoint3d::x)).get().x()
         );
         double[] randomY = generateRandomDoubles(
-                5000,
+                500,
                 points.stream().min(Comparator.comparing(CartesianPoint3d::y)).get().y(),
                 points.stream().max(Comparator.comparing(CartesianPoint3d::y)).get().y()
         );
@@ -109,6 +109,17 @@ public class SurfaceTest {
             }
         }
         writeRandomDoublesToCSV("/home/christopher/regression.csv", randomX, randomY, z);
+
+        var nurbs = NurbsLeastSquaresSurface.create(points, 3);
+        z = new double[randomY.length * randomX.length];
+        i = 0;
+        for (var x : randomX) {
+            for (var y : randomY) {
+                z[i] = nurbs.getFunctionValue(x, y);
+                i++;
+            }
+        }
+        writeRandomDoublesToCSV("/home/christopher/nurbs.csv", randomX, randomY, z);
     }
 
     private static double[] generateRandomDoubles(int count, double min, double max) {
