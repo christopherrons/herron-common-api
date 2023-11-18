@@ -33,7 +33,7 @@ class NurbsLeastSquaresSurfaceTest {
                 new Point3d(3, 3, 5)
         );
 
-        var surface = NurbsLeastSquaresSurface.create(points, 2);
+        var surface = NurbsLeastSquaresSurface.create(points, 3);
 
         assertEquals(5, surface.getFunctionValue(0, 0), 0.001);
         assertEquals(6, surface.getFunctionValue(1, 0), 0.001);

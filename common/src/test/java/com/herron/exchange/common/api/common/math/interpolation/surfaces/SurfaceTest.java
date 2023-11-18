@@ -69,6 +69,7 @@ public class SurfaceTest {
 
     private static void createPoints(List<CartesianPoint3d> points) {
         writeRandomDoublesToCSV("/home/christopher/test_points.csv", points);
+
         double[] randomX = generateRandomDoubles(
                 500,
                 points.stream().min(Comparator.comparing(CartesianPoint3d::x)).get().x(),
