@@ -4,6 +4,7 @@ dependencies {
     implementation(libs.commons.math)
     implementation(libs.spring.kafka)
     implementation(libs.immutables.value)
+    implementation(libs.jackson)
     annotationProcessor(libs.immutables.value)
 
     // External Test Libs

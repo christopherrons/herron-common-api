@@ -31,11 +31,11 @@ public class KafkaBroadcastProducer {
     private final BlockingQueue<BroadcastMessage> eventQueue = new LinkedBlockingDeque<>();
     private final ExecutorService service;
 
-    public KafkaBroadcastProducer(PartitionKey partitionKey, KafkaTemplate<String, Object> kafkaTemplate, EventLogger eventLogger) {
+    public KafkaBroadcastProducer(PartitionKey partitionKey, KafkaTemplate<String, Object> kafkaTemplate) {
         this.partitionKey = partitionKey;
         this.kafkaTemplate = kafkaTemplate;
-        this.eventLogger = eventLogger;
-        this.service = Executors.newSingleThreadExecutor(new ThreadWrapper("KAFKA-PRODUCER" + "-" + partitionKey.toString()));
+        this.eventLogger = new EventLogger(partitionKey.toString(), LOGGER);
+        this.service = Executors.newSingleThreadExecutor(new ThreadWrapper("KAFKA-PRODUCER" + "-" + partitionKey));
     }
 
     public PartitionKey getPartitionKey() {

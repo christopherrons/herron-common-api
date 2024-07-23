@@ -2,14 +2,13 @@ package com.herron.exchange.common.api.common.logging;
 
 import io.micrometer.common.util.StringUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class EventLogger {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(EventLogger.class);
+    private final Logger logger;
     private static final double MILLI_TO_SEK = 1 / 1000.0;
     private static final int MESSAGE_UPDATE_INTERVAL = 1000;
     private final AtomicLong totalNrOfEvents = new AtomicLong(0);
@@ -19,20 +18,13 @@ public class EventLogger {
     private Instant startTime;
     private Instant lastLogUpdateTime;
 
-    public EventLogger() {
-        this("");
+    public EventLogger(String id, Logger logger) {
+        this(id, logger, MESSAGE_UPDATE_INTERVAL);
     }
 
-    public EventLogger(int messageUpdateInterval) {
-        this("", messageUpdateInterval);
-    }
-
-    public EventLogger(String id) {
-        this(id, MESSAGE_UPDATE_INTERVAL);
-    }
-
-    public EventLogger(String id, int messageUpdateInterval) {
+    public EventLogger(String id, Logger logger, int messageUpdateInterval) {
         this.messageUpdateInterval = messageUpdateInterval;
+        this.logger = logger;
         this.id = StringUtils.isEmpty(id) ? id : id + ":";
     }
 
@@ -45,7 +37,7 @@ public class EventLogger {
             long currentNrOfEvents = totalNrOfEvents.incrementAndGet();
             if (currentNrOfEvents % messageUpdateInterval == 0) {
                 Instant currentTime = Instant.now();
-                LOGGER.info("{} Message count: {}. Current event rate {}/s, average event rate {}/s", id, totalNrOfEvents.get(), (long) getCurrentEventsPerSecond(currentTime), (long) getAverageEventsPerSecond(currentTime));
+                logger.info("{} Message count: {}. Current event rate {}/s, average event rate {}/s", id, totalNrOfEvents.get(), (long) getCurrentEventsPerSecond(currentTime), (long) getAverageEventsPerSecond(currentTime));
                 lastLogUpdateTime = currentTime;
                 lastUpdateTimeNrOfEvents.set(currentNrOfEvents);
             }

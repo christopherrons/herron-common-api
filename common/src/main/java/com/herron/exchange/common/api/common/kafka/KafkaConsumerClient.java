@@ -23,9 +23,8 @@ public class KafkaConsumerClient {
     }
 
     public synchronized KafkaBroadcastSubscription subscribeToBroadcastTopic(KafkaSubscriptionRequest request) {
-        var partitionKey = request.details().partitionKey();
-        return keyToSubscription.computeIfAbsent(partitionKey, k -> {
-            TopicPartition topicPartition = new TopicPartition(partitionKey.topicEnum().getTopicName(), partitionKey.partitionId());
+        return keyToSubscription.computeIfAbsent(request.details().partitionKey(), pk -> {
+            TopicPartition topicPartition = new TopicPartition(pk.topicEnum().getTopicName(), pk.partitionId());
             var subscription = new KafkaBroadcastSubscription(messageFactory, request);
             subscription.run(consumerFactory, topicPartition);
             return subscription;

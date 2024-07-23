@@ -32,8 +32,8 @@ public class NurbsLeastSquaresSurface implements Function3d {
 
         this.xInterval = new Interval(xValueToPoints.firstKey(), xValueToPoints.lastKey());
         this.yInterval = new Interval(yValueToPoints.firstKey(), yValueToPoints.lastKey());
-        this.nrOfControlPointsU = xValueToPoints.size() / 2 + 1;
-        this.nrOfControlPointsV = yValueToPoints.size() / 2 + 1;
+        this.nrOfControlPointsU = xValueToPoints.size() / 2;
+        this.nrOfControlPointsV = yValueToPoints.size() / 2;
         this.knotVectorU = buildKnotVector(nrOfControlPointsU - 1);
         this.knotVectorV = buildKnotVector(nrOfControlPointsV - 1);
         this.controlPoints = buildControlPoints(xValueToPoints, yValueToPoints);

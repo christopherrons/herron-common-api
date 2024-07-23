@@ -5,6 +5,7 @@ import com.herron.exchange.common.api.common.enums.*;
 import com.herron.exchange.common.api.common.messages.common.Participant;
 import com.herron.exchange.common.api.common.messages.common.Price;
 import com.herron.exchange.common.api.common.messages.common.Volume;
+import org.immutables.value.Value;
 
 public interface Order extends OrderbookEvent {
 
@@ -19,6 +20,11 @@ public interface Order extends OrderbookEvent {
     OrderOperationEnum orderOperation();
 
     Volume initialVolume();
+
+    @Value.Default
+    default Volume publicVolume() {
+        return currentVolume();
+    }
 
     Volume currentVolume();
 
