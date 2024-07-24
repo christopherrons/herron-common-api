@@ -31,7 +31,6 @@ public class YieldCurve {
             case CUBIC_SPLINE -> CubicSplineInterpolation.create(points);
             case CONSTANT -> ConstantIntervalCurve.create(points);
             case LINEAR -> LinearInterpolationCurve.create(points);
-            default -> throw new IllegalArgumentException("Other methods are not supported");
         };
     }
 

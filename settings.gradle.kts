@@ -7,12 +7,11 @@ dependencyResolutionManagement {
             library("spring.boot.starter.web", "org.springframework.boot:spring-boot-starter-web:3.0.1")
             library("spring.boot.starter.parent", "org.springframework.boot:spring-boot-starter-parent:3.0.1")
             library("spring.kafka", "org.springframework.kafka:spring-kafka:3.0.1")
-            library("javafaker", "com.github.javafaker:javafaker:1.0.2")
             library("commons.math", "org.apache.commons:commons-math3:3.2")
             library("immutables.value", "org.immutables:value:2.9.0")
             library("immutables.builder", "org.immutables:builder:2.9.0")
             library("immutables.annotations", "org.immutables:value-annotations:2.9.0")
-            library("jackson", "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.13.00")
+            library("jackson", "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.17.2")
         }
 
         create("testlibs") {

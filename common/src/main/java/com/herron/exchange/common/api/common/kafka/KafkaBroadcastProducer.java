@@ -94,7 +94,7 @@ public class KafkaBroadcastProducer {
             kafkaTemplate.send(partitionKey.topicEnum().getTopicName(), partitionKey.partitionId(), broadCast.messageType().getMessageTypeId(), broadCast);
         }
 
-        LOGGER.info("Broadcasting stopped for partition {}. Total messages {}.", partitionKey, eventLogger.totalNrOfEvents());
+        LOGGER.info("Broadcasting stopped for partition {}. Total messages {}.", partitionKey, eventLogger.getTotalNrOfEvents());
         service.shutdown();
     }
 

@@ -60,7 +60,7 @@ public abstract class KafkaTopicSubscription {
         } catch (Exception e) {
             logger.error("Error while creating consumer.", e);
         } finally {
-            logger.info("Stopping kafka subscription {}, total events consumed {}.", details.partitionKey(), eventLogger.totalNrOfEvents());
+            logger.info("Stopping kafka subscription {}, total events consumed {}.", details.partitionKey(), eventLogger.getTotalNrOfEvents());
             service.shutdown();
         }
     }
