@@ -8,17 +8,22 @@ import com.herron.exchange.common.api.common.messages.common.Price;
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import org.junit.jupiter.api.Test;
 
-import static com.herron.exchange.common.api.common.enums.OrderSideEnum.BID;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
-class PriceQuoteTest {
+class TopOfBookTest {
     private final MessageFactory messageFactory = new DefaultMessageFactory();
 
     @Test
     void test_serialization_and_deserialization() {
-        var object = ImmutablePriceQuote.builder()
+        var bidQuote = ImmutablePriceQuote.builder()
                 .price(Price.create(1))
                 .quoteType(QuoteTypeEnum.BID_PRICE)
+                .orderbookId("orderbookid")
+                .eventType(EventType.SYSTEM)
+                .timeOfEvent(Timestamp.now())
+                .build();
+        var object = ImmutableTopOfBook.builder()
+                .bidQuote(bidQuote)
                 .orderbookId("orderbookid")
                 .eventType(EventType.SYSTEM)
                 .timeOfEvent(Timestamp.now())
@@ -27,5 +32,6 @@ class PriceQuoteTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 }
