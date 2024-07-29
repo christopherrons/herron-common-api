@@ -8,7 +8,6 @@ import com.herron.exchange.common.api.common.messages.common.Price;
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import org.junit.jupiter.api.Test;
 
-import static com.herron.exchange.common.api.common.enums.OrderSideEnum.BID;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class PriceQuoteTest {

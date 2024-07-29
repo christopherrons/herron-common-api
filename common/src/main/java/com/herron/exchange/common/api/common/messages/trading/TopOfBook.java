@@ -3,6 +3,7 @@ package com.herron.exchange.common.api.common.messages.trading;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.trading.OrderbookEvent;
 import com.herron.exchange.common.api.common.enums.messagetypes.TradingMessageTypeEnum;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import jakarta.annotation.Nullable;
 import org.immutables.value.Value;
 
@@ -20,6 +21,13 @@ public interface TopOfBook extends OrderbookEvent {
 
     @Nullable
     PriceQuote lastQuote();
+
+    default boolean hasUpdated(TopOfBook topOfBook) {
+        var now = Timestamp.now();
+        var tob1 = ImmutableTopOfBook.builder().from(this).timeOfEvent(now).build();
+        var tob2 = ImmutableTopOfBook.builder().from(topOfBook).timeOfEvent(now).build();
+        return !tob1.equals(tob2);
+    }
 
     @Value.Derived
     default TradingMessageTypeEnum messageType() {
