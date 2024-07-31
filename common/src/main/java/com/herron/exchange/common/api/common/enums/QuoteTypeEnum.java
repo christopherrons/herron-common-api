@@ -11,8 +11,10 @@ import static java.util.stream.Collectors.toMap;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum QuoteTypeEnum {
     BID_PRICE("BID_PRICE"),
+    BID_VOLUME("BID_VOLUME"),
     LAST_PRICE("LAST_PRICE"),
-    ASK_PRICE("ASK_PRICE");
+    ASK_PRICE("ASK_PRICE"),
+    ASK_VOLUME("ASK_VOLUME");
 
     private static final Map<String, QuoteTypeEnum> VALUES_BY_IDENTIFIER = stream(QuoteTypeEnum.values()).collect(toMap(QuoteTypeEnum::getValue, identity()));
     private final String value;

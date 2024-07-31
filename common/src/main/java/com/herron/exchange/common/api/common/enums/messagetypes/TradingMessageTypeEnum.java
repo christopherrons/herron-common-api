@@ -16,6 +16,7 @@ public enum TradingMessageTypeEnum implements MessageType {
     TRADING_CALENDAR("TRCA", TradingCalendar.class),
     LIMIT_ORDER("LIOR", LimitOrder.class),
     PRICE_QUOTE("PRQU", PriceQuote.class),
+    VOLUME_QUOTE("VRQU", VolumeQuote.class),
     TOP_OF_BOOK("TOOB", TopOfBook.class),
     MARKET_ORDER("MAOR", MarketOrder.class),
     TRADE("TRAD", Trade.class),
