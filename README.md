@@ -9,7 +9,7 @@ the `Herron Exchange` ecosystem.
 
 ## Requirements
 
-* Java 17
+* Java 21
 
 
 
