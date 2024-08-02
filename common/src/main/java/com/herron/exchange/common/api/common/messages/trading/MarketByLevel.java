@@ -9,6 +9,7 @@ import jakarta.annotation.Nullable;
 import org.immutables.value.Value;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.herron.exchange.common.api.common.enums.messagetypes.TradingMessageTypeEnum.MARKET_BY_LEVEL;
 
@@ -27,18 +28,28 @@ public interface MarketByLevel extends OrderbookEvent {
     @JsonDeserialize(builder = ImmutableLevelData.Builder.class)
     interface LevelData {
         int level();
-        @Nullable
-        Long nrOfAskOrders();
-        @Nullable
-        Long nrOfBidOrders();
+
         @Nullable
         Price askPrice();
+
         @Nullable
         Price bidPrice();
+
         @Nullable
         Volume bidVolume();
+
         @Nullable
         Volume askVolume();
+
+        @Value.Default
+        default long nrOfAskOrders() {
+            return 0;
+        }
+
+        @Value.Default
+        default long nrOfBidOrders() {
+            return 0;
+        }
 
         @Value.Derived
         default long totalNrOfOrders() {
@@ -47,7 +58,7 @@ public interface MarketByLevel extends OrderbookEvent {
 
         @Value.Derived
         default Volume totalVolume() {
-            return bidVolume().add(askVolume());
+            return Optional.ofNullable(bidVolume()).orElse(Volume.ZERO).add(Optional.ofNullable(askVolume()).orElse(Volume.ZERO));
         }
     }
 }
