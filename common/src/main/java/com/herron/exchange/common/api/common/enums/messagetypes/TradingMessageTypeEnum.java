@@ -18,6 +18,7 @@ public enum TradingMessageTypeEnum implements MessageType {
     PRICE_QUOTE("PRQU", PriceQuote.class),
     VOLUME_QUOTE("VRQU", VolumeQuote.class),
     TOP_OF_BOOK("TOOB", TopOfBook.class),
+    MARKET_BY_LEVEL("MBLE", MarketByLevel.class),
     MARKET_ORDER("MAOR", MarketOrder.class),
     TRADE("TRAD", Trade.class),
     TRADE_EXECUTION("TREX", TradeExecution.class);

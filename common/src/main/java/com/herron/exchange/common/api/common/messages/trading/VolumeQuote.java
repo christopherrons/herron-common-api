@@ -11,7 +11,7 @@ import static com.herron.exchange.common.api.common.enums.messagetypes.TradingMe
 import static com.herron.exchange.common.api.common.enums.messagetypes.TradingMessageTypeEnum.VOLUME_QUOTE;
 
 @Value.Immutable
-@JsonDeserialize(builder = ImmutablePriceQuote.Builder.class)
+@JsonDeserialize(builder = ImmutableVolumeQuote.Builder.class)
 public interface VolumeQuote extends Quote {
     Volume volume();
 
