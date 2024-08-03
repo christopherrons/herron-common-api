@@ -232,6 +232,18 @@ public class HermiteBiCubicSurface implements Function3d {
         return patch.getFunctionValue(x, y);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof HermiteBiCubicSurface that)) return false;
+        return Objects.equals(patches, that.patches);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(patches);
+    }
+
     private static class BiCubicPatch {
         private static final RealMatrix H = new Array2DRowRealMatrix(new double[][]{
                 {2, -2, 1, 1},
@@ -286,17 +298,5 @@ public class HermiteBiCubicSurface implements Function3d {
                     }
             );
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof HermiteBiCubicSurface that)) return false;
-        return Objects.equals(patches, that.patches);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(patches);
     }
 }
