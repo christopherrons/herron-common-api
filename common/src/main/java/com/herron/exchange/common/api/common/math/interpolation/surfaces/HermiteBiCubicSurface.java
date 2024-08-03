@@ -13,10 +13,7 @@ import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.herron.exchange.common.api.common.math.MathUtils.scaleValue;
@@ -289,5 +286,17 @@ public class HermiteBiCubicSurface implements Function3d {
                     }
             );
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof HermiteBiCubicSurface that)) return false;
+        return Objects.equals(patches, that.patches);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(patches);
     }
 }

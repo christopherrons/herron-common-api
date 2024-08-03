@@ -36,5 +36,6 @@ class MarketByLevelTest {
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
         assertEquals(object, messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 }

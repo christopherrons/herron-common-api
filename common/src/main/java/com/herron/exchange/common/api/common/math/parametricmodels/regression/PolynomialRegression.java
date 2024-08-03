@@ -5,6 +5,7 @@ import org.apache.commons.math3.linear.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PolynomialRegression implements FunctionNd {
 
@@ -63,7 +64,7 @@ public class PolynomialRegression implements FunctionNd {
                 }
 
                 double otherPredictors = predictors[j];
-            //    polynomials.add(currentPredictors * otherPredictors);
+                //    polynomials.add(currentPredictors * otherPredictors);
              /*   for (int degree = 1; degree < polynomialDegree; degree++) {
                     polynomials.add(Math.pow(currentPredictors, degree) * otherPredictors);
                 }*/
@@ -76,5 +77,17 @@ public class PolynomialRegression implements FunctionNd {
 
     public int getPolynomialDegree() {
         return polynomialDegree;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PolynomialRegression that)) return false;
+        return nrOfPredictors == that.nrOfPredictors && polynomialDegree == that.polynomialDegree && Objects.equals(coefficients, that.coefficients);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(coefficients, nrOfPredictors, polynomialDegree);
     }
 }

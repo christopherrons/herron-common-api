@@ -23,6 +23,7 @@ class AmountTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 
     @Test

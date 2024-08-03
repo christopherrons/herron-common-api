@@ -8,9 +8,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class EventLogger {
 
-    private final Logger logger;
     private static final double MILLI_TO_SEC = 1 / 1000.0;
     private static final int MESSAGE_UPDATE_INTERVAL = 100000;
+    private final Logger logger;
     private final AtomicLong totalNrOfEvents = new AtomicLong(0);
     private final int messageUpdateInterval;
     private final String id;

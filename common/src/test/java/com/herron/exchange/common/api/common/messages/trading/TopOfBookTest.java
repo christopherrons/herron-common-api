@@ -8,7 +8,8 @@ import com.herron.exchange.common.api.common.messages.common.Price;
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TopOfBookTest {
     private final MessageFactory messageFactory = new DefaultMessageFactory();
@@ -32,6 +33,7 @@ class TopOfBookTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
         assertEquals(object, messageFactory.deserializeMessage(value));
     }
 }

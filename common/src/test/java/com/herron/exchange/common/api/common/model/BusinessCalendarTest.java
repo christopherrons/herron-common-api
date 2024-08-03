@@ -10,8 +10,7 @@ import java.time.LocalDate;
 import java.time.MonthDay;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BusinessCalendarTest {
 
@@ -23,6 +22,7 @@ class BusinessCalendarTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 
     @Test

@@ -9,6 +9,8 @@ import com.herron.exchange.common.api.common.math.interpolation.curves.CubicSpli
 import com.herron.exchange.common.api.common.math.interpolation.curves.LinearInterpolationCurve;
 import com.herron.exchange.common.api.common.math.parametricmodels.forwardcurve.model.ForwardCurveModelParameters;
 
+import java.util.Objects;
+
 public class ForwardPriceCurve {
 
     private final String instrumentId;
@@ -64,4 +66,15 @@ public class ForwardPriceCurve {
         return forwardCurveModelParameters;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ForwardPriceCurve that)) return false;
+        return Objects.equals(instrumentId, that.instrumentId) && Objects.equals(forwardCurveModelParameters, that.forwardCurveModelParameters) && Objects.equals(forwardPriceFunction, that.forwardPriceFunction);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(instrumentId, forwardCurveModelParameters, forwardPriceFunction);
+    }
 }

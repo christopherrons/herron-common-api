@@ -10,6 +10,7 @@ import com.herron.exchange.common.api.common.messages.common.Volume;
 import org.junit.jupiter.api.Test;
 
 import static com.herron.exchange.common.api.common.enums.TradeType.AUTOMATCH;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TradeTest {
@@ -36,5 +37,6 @@ class TradeTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 }

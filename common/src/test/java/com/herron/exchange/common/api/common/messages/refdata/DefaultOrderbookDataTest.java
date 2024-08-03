@@ -4,7 +4,6 @@ import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.OptionSubTypeEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import com.herron.exchange.common.api.common.messages.common.BusinessCalendar;
-import com.herron.exchange.common.api.common.messages.common.Price;
 import com.herron.exchange.common.api.common.messages.common.PureNumber;
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.pricing.ImmutableBlackScholesPriceModelParameters;
@@ -18,6 +17,7 @@ import static com.herron.exchange.common.api.common.enums.MatchingAlgorithmEnum.
 import static com.herron.exchange.common.api.common.enums.OptionExerciseTyleEnum.AMERICAN;
 import static com.herron.exchange.common.api.common.enums.OptionTypeEnum.CALL;
 import static com.herron.exchange.common.api.common.enums.SettlementTypeEnum.PHYSICAL;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class DefaultOrderbookDataTest {
@@ -51,5 +51,6 @@ class DefaultOrderbookDataTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 }

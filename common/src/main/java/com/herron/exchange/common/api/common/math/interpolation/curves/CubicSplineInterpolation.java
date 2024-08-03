@@ -12,6 +12,7 @@ import org.apache.commons.math3.linear.RealVector;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class CubicSplineInterpolation implements Function2d {
 
@@ -108,4 +109,15 @@ public class CubicSplineInterpolation implements Function2d {
         return LinearEquationSolver.solveSystem(A, b);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CubicSplineInterpolation that)) return false;
+        return Objects.equals(polynomials, that.polynomials);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(polynomials);
+    }
 }

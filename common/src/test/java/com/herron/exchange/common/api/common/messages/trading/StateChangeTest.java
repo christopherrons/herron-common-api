@@ -7,6 +7,7 @@ import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import org.junit.jupiter.api.Test;
 
 import static com.herron.exchange.common.api.common.enums.TradingStatesEnum.OPEN_AUCTION_RUN;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class StateChangeTest {
@@ -23,5 +24,6 @@ class StateChangeTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 }

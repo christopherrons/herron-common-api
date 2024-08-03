@@ -3,6 +3,8 @@ package com.herron.exchange.common.api.common.math.parametricmodels.regression;
 import com.herron.exchange.common.api.common.api.math.FunctionNd;
 import org.apache.commons.math3.linear.*;
 
+import java.util.Objects;
+
 public class LinearRegression implements FunctionNd {
 
     private final RealVector coefficients;
@@ -40,5 +42,17 @@ public class LinearRegression implements FunctionNd {
         }
         RealVector x = new ArrayRealVector(predictors);
         return x.dotProduct(coefficients.getSubVector(1, coefficients.getDimension() - 1)) + coefficients.getEntry(0);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LinearRegression that)) return false;
+        return nrOfPredictors == that.nrOfPredictors && Objects.equals(coefficients, that.coefficients);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(coefficients, nrOfPredictors);
     }
 }

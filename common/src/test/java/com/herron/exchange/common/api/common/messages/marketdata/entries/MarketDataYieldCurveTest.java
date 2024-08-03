@@ -4,17 +4,18 @@ import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.DayCountConventionEnum;
 import com.herron.exchange.common.api.common.enums.InterpolationMethod;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
-import com.herron.exchange.common.api.common.messages.common.Timestamp;
-import com.herron.exchange.common.api.common.messages.marketdata.ImmutableDefaultTimeComponentKey;
-import com.herron.exchange.common.api.common.messages.marketdata.statickeys.ImmutableMarketDataYieldCurveStaticKey;
 import com.herron.exchange.common.api.common.math.parametricmodels.yieldcurve.YieldCurve;
 import com.herron.exchange.common.api.common.math.parametricmodels.yieldcurve.model.YieldCurveModelParameters;
 import com.herron.exchange.common.api.common.math.parametricmodels.yieldcurve.model.YieldPoint;
+import com.herron.exchange.common.api.common.messages.common.Timestamp;
+import com.herron.exchange.common.api.common.messages.marketdata.ImmutableDefaultTimeComponentKey;
+import com.herron.exchange.common.api.common.messages.marketdata.statickeys.ImmutableMarketDataYieldCurveStaticKey;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MarketDataYieldCurveTest {
@@ -35,6 +36,7 @@ class MarketDataYieldCurveTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 
 }

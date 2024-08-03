@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import static com.herron.exchange.common.api.common.enums.OrderOperationCauseEnum.FILLED;
 import static com.herron.exchange.common.api.common.enums.OrderOperationEnum.INSERT;
 import static com.herron.exchange.common.api.common.enums.OrderSideEnum.BID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MarketOrderTest {
@@ -35,5 +36,6 @@ class MarketOrderTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 }

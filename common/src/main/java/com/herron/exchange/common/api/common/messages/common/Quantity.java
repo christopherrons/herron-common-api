@@ -53,6 +53,10 @@ public class Quantity extends Amount<Quantity> {
         return ZERO;
     }
 
+    public UnitEnum getUnit() {
+        return unit;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,6 +69,7 @@ public class Quantity extends Amount<Quantity> {
     public int hashCode() {
         return Objects.hash(super.hashCode(), unit);
     }
+
 
     @Override
     public CommonMessageTypesEnum messageType() {

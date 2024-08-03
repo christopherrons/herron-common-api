@@ -39,6 +39,10 @@ public class NurbsLeastSquaresSurface implements Function3d {
         this.controlPoints = buildControlPoints(xValueToPoints, yValueToPoints);
     }
 
+    public static NurbsLeastSquaresSurface create(List<CartesianPoint3d> points, int degree) {
+        return new NurbsLeastSquaresSurface(points, degree);
+    }
+
     private RealVector buildKnotVector(int n) {
         int maxIndex = n + degree + 1;
         RealVector knots = new ArrayRealVector(maxIndex + 1);
@@ -105,10 +109,6 @@ public class NurbsLeastSquaresSurface implements Function3d {
             row++;
         }
         return matrix;
-    }
-
-    public static NurbsLeastSquaresSurface create(List<CartesianPoint3d> points, int degree) {
-        return new NurbsLeastSquaresSurface(points, degree);
     }
 
     @Override

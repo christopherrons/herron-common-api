@@ -4,12 +4,12 @@ import com.herron.exchange.common.api.common.api.MessageFactory;
 import com.herron.exchange.common.api.common.enums.Status;
 import com.herron.exchange.common.api.common.enums.SurfaceConstructionMethod;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
+import com.herron.exchange.common.api.common.math.parametricmodels.impliedvolsurface.ImpliedVolatilitySurface;
+import com.herron.exchange.common.api.common.math.parametricmodels.impliedvolsurface.model.ImpliedVolatilitySurfaceModelParameters;
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.marketdata.ImmutableDefaultTimeComponentKey;
 import com.herron.exchange.common.api.common.messages.marketdata.entries.ImmutableMarketDataImpliedVolatilitySurface;
 import com.herron.exchange.common.api.common.messages.marketdata.statickeys.ImmutableMarketDataImpliedVolatilitySurfaceStaticKey;
-import com.herron.exchange.common.api.common.math.parametricmodels.impliedvolsurface.ImpliedVolatilitySurface;
-import com.herron.exchange.common.api.common.math.parametricmodels.impliedvolsurface.model.ImpliedVolatilitySurfaceModelParameters;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -36,6 +36,7 @@ class MarketDataImpliedVolatilitySurfaceResponseTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
         var value2 = messageFactory.deserializeMessage(value, MarketDataImpliedVolatilitySurfaceResponse.class).impliedVolatilitySurfaceEntry().impliedVolatilitySurface().getImpliedVolatility(0, 0);
         assertEquals(value1, value2);
     }

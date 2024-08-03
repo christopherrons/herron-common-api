@@ -8,6 +8,7 @@ import com.herron.exchange.common.api.common.messages.marketdata.ImmutableDefaul
 import com.herron.exchange.common.api.common.messages.marketdata.statickeys.ImmutableMarketDataYieldCurveStaticKey;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class MarketDataYieldCurveRequestTest {
@@ -24,5 +25,6 @@ class MarketDataYieldCurveRequestTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 }

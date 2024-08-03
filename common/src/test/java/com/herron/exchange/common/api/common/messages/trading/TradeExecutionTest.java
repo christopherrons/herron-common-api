@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static com.herron.exchange.common.api.common.enums.TradeType.AUTOMATCH;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TradeExecutionTest {
@@ -44,5 +45,6 @@ class TradeExecutionTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 }

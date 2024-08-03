@@ -6,6 +6,8 @@ import com.herron.exchange.common.api.common.api.math.Function3d;
 import com.herron.exchange.common.api.common.math.interpolation.surfaces.HermiteBiCubicSurface;
 import com.herron.exchange.common.api.common.math.parametricmodels.impliedvolsurface.model.ImpliedVolatilitySurfaceModelParameters;
 
+import java.util.Objects;
+
 public class ImpliedVolatilitySurface {
 
     private final String id;
@@ -45,5 +47,17 @@ public class ImpliedVolatilitySurface {
 
     public double getSpotPrice() {
         return underlyingPrice;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ImpliedVolatilitySurface that)) return false;
+        return Double.compare(underlyingPrice, that.underlyingPrice) == 0 && Objects.equals(id, that.id) && Objects.equals(parameters, that.parameters) && Objects.equals(impliedVolFunction, that.impliedVolFunction);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, underlyingPrice, parameters, impliedVolFunction);
     }
 }

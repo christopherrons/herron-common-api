@@ -9,6 +9,8 @@ import com.herron.exchange.common.api.common.math.interpolation.curves.CubicSpli
 import com.herron.exchange.common.api.common.math.interpolation.curves.LinearInterpolationCurve;
 import com.herron.exchange.common.api.common.math.parametricmodels.yieldcurve.model.YieldCurveModelParameters;
 
+import java.util.Objects;
+
 public class YieldCurve {
 
     private final YieldCurveModelParameters yieldCurveModelParameters;
@@ -60,5 +62,17 @@ public class YieldCurve {
 
     public YieldCurveModelParameters getYieldCurveModelParameters() {
         return yieldCurveModelParameters;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof YieldCurve that)) return false;
+        return Objects.equals(yieldCurveModelParameters, that.yieldCurveModelParameters) && Objects.equals(id, that.id) && Objects.equals(yieldFunction, that.yieldFunction);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(yieldCurveModelParameters, id, yieldFunction);
     }
 }

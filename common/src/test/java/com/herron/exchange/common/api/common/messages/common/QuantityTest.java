@@ -5,6 +5,7 @@ import com.herron.exchange.common.api.common.enums.UnitEnum;
 import com.herron.exchange.common.api.common.mapping.DefaultMessageFactory;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class QuantityTest {
@@ -12,10 +13,11 @@ class QuantityTest {
 
     @Test
     void test_serialization_and_deserialization() {
-        var quantity = Quantity.create(100, UnitEnum.MW);
-        var value = messageFactory.serialize(quantity);
+        var object = Quantity.create(100, UnitEnum.MW);
+        var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 
 }

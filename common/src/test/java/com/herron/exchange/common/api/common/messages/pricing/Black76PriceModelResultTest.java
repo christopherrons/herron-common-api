@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import static com.herron.exchange.common.api.common.enums.EventType.SYSTEM;
 import static com.herron.exchange.common.api.common.enums.Status.OK;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class Black76PriceModelResultTest {
     private final MessageFactory messageFactory = new DefaultMessageFactory();
@@ -33,5 +34,6 @@ class Black76PriceModelResultTest {
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
+        assertEquals(object, messageFactory.deserializeMessage(value));
     }
 }

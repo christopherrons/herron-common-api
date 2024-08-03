@@ -7,6 +7,7 @@ import com.herron.exchange.common.api.common.math.model.Interval2d;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class ConstantIntervalCurve implements Function2d {
@@ -55,5 +56,17 @@ public class ConstantIntervalCurve implements Function2d {
             return getStartBoundaryX();
         }
         return Math.min(x, getEndBoundaryX());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ConstantIntervalCurve that)) return false;
+        return Objects.equals(intervals, that.intervals);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(intervals);
     }
 }
