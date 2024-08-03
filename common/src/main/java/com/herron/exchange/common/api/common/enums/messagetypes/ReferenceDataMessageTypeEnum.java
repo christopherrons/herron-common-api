@@ -17,7 +17,7 @@ public enum ReferenceDataMessageTypeEnum implements MessageType {
 
     BUSINESS_CALENDAR("BUCA", BusinessCalendar.class),
 
-    INSTRUMENT_HIERARCHY_GROUP("INHI", InstrumentHierarchyGroup.class),
+    INSTRUMENT_HIERARCHY("INHI", InstrumentHierarchy.class),
 
     PRODUCT("PROD", Product.class),
 
