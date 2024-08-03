@@ -12,7 +12,7 @@ class PriceTest {
 
     @Test
     void test_serialization_and_deserialization() {
-        var object = Price.create(100);
+        var object = Price.create(0.0);
         var value = messageFactory.serialize(object);
         assertNotNull(value);
         assertNotNull(messageFactory.deserializeMessage(value));
