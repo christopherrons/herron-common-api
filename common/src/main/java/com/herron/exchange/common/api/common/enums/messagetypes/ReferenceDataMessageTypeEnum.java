@@ -24,6 +24,7 @@ public enum ReferenceDataMessageTypeEnum implements MessageType {
     DEFAULT_ORDERBOOK_DATA("DFOB", DefaultOrderbookData.class),
 
     DEFAULT_EQUITY_INSTRUMENT("DFSI", DefaultEquityInstrument.class),
+    CRYPTO_EQUITY_INSTRUMENT("CREI", CryptoEquityInstrument.class),
 
     DEFAULT_BOND_INSTRUMENT("DFBI", DefaultBondInstrument.class),
 
