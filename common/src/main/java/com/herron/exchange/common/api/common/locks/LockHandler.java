@@ -11,6 +11,15 @@ public class LockHandler {
     private final Lock readLock = rwLock.readLock();
     private final Lock writeLock = rwLock.writeLock();
 
+    public void executeWithWriteLock(Runnable runnable) {
+        writeLock.lock();
+        try {
+            runnable.run();
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
     public <T> T executeWithWriteLock(Callable<T> callable) {
         writeLock.lock();
         try {

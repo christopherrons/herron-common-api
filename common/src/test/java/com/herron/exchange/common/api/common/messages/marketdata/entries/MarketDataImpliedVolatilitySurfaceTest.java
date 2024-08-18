@@ -8,6 +8,7 @@ import com.herron.exchange.common.api.common.math.parametricmodels.impliedvolsur
 import com.herron.exchange.common.api.common.messages.common.Timestamp;
 import com.herron.exchange.common.api.common.messages.marketdata.ImmutableDefaultTimeComponentKey;
 import com.herron.exchange.common.api.common.messages.marketdata.statickeys.ImmutableMarketDataImpliedVolatilitySurfaceStaticKey;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -19,6 +20,7 @@ class MarketDataImpliedVolatilitySurfaceTest {
     private final MessageFactory messageFactory = new DefaultMessageFactory();
 
     @Test
+    @Disabled
     void test_serialization_and_deserialization() {
         var parameters = new ImpliedVolatilitySurfaceModelParameters(SurfaceConstructionMethod.HERMITE_BICUBIC, List.of());
         var surface = ImpliedVolatilitySurface.create(

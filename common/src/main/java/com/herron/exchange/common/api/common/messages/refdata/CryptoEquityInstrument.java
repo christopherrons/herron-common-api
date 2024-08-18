@@ -13,7 +13,10 @@ public interface CryptoEquityInstrument extends EquityInstrument {
 
     String token();
 
-    String counterCurrency();
+    @Value.Default
+    default String counterCurrency() {
+        return currency();
+    }
 
     @Value.Derived
     default ReferenceDataMessageTypeEnum messageType() {

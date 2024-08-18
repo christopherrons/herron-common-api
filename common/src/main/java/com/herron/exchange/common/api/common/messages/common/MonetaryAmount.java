@@ -14,12 +14,12 @@ public class MonetaryAmount extends Amount<MonetaryAmount> {
 
     private MonetaryAmount(double value, String currency) {
         super(value);
-        this.currency = currency;
+        this.currency = currency.toLowerCase();
     }
 
     private MonetaryAmount(@JsonProperty("value") BigDecimal value, @JsonProperty("currency") String currency) {
         super(value);
-        this.currency = currency;
+        this.currency = currency.toLowerCase();
     }
 
     public static MonetaryAmount create(double value, String currency) {

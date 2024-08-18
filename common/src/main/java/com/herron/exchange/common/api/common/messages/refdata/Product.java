@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.herron.exchange.common.api.common.api.Message;
 import com.herron.exchange.common.api.common.enums.messagetypes.ReferenceDataMessageTypeEnum;
 import com.herron.exchange.common.api.common.messages.common.BusinessCalendar;
+import jakarta.annotation.Nullable;
 import org.immutables.value.Value;
 
 import static com.herron.exchange.common.api.common.enums.messagetypes.ReferenceDataMessageTypeEnum.PRODUCT;
@@ -20,6 +21,7 @@ public interface Product extends Message {
 
     Market market();
 
+    @Nullable
     String currency();
 
     @Value.Default
